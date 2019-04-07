@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>词库APP下载</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<style>
+	* {
+		padding: 0px;
+		margin: 0px;
+	}
+
+	html {
+		height: 100%;
+	}
+
+	body {
+		min-height: 100%;
+		position: relative;
+		overflow-x: hidden;
+	}
+
+	.clearfix:before,
+	.clearfix:after {
+		content: "";
+		display: table;
+	}
+
+	.mobile-til {
+		width: 100%;
+		height: 100%;
+		z-index:1;
+		
+	}
+
+	.mobile-til img {
+		width: 100%;
+		z-index:1;
+	}
+	
+	.mobile-con{
+		width: 100%;
+		z-index:5;
+		margin-top: -250px;
+	}
+	
+	.mobile-con img{
+		width: 80%;
+		z-index:5;
+  		margin: 0px 45px; 
+	}
+
+	.weixin-tip {
+		margin: 10px 10px 0;
+		background: #8ccdef;
+		font: 14px/20px "microsoft yahei";
+		border-radius: 10px;
+		color: #248ec6;
+		padding: 5px 10px;
+		position: absolute;
+		display: none;
+		margin-top: 10px;
+	}
+	img{max-width: 100%; height: auto;}
+	.test{height: 600px; max-width: 600px; font-size: 40px;}
+</style>
+</head>
+
+<body class="clearfix">
+<div class="mobile-til">
+<img src="/img/download/bg.png" alt="词库学习">
+
+</div>
+<div class="mobile-con">
+	<a th:href="${url}" href="">
+	<img src="/img/download/bnt_android.png"></a>
+</div>
+
+
+<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+<script src="/js/jquery.min.js?v=2.1.4" th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6" th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+<script>
+	function is_weixin() {
+	    var ua = navigator.userAgent.toLowerCase();
+	    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+	var isWeixin = is_weixin();
+	var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+	function loadHtml(){
+		var div = document.createElement('div');
+		div.id = 'weixin-tip';
+		div.innerHTML = '<p><img src="/img/download/live_weixin.png" alt="微信打开"/></p>';
+		document.body.appendChild(div);
+	}
+	
+	function loadStyleText(cssText) {
+        var style = document.createElement('style');
+        style.rel = 'stylesheet';
+        style.type = 'text/css';
+        try {
+            style.appendChild(document.createTextNode(cssText));
+        } catch (e) {
+            style.styleSheet.cssText = cssText; //ie9以下
+        }
+        var head=document.getElementsByTagName("head")[0]; //head标签之间加上style样式
+        head.appendChild(style); 
+    }
+    var cssText = "#weixin-tip{position: fixed; left:0; top:0; background: rgba(0,0,0,0.8); filter:alpha(opacity=80); width: 100%; height:100%; z-index: 100;} #weixin-tip p{text-align: center; margin-top: 10%; padding:0 5%;}";
+	if(isWeixin){
+		loadHtml();
+		loadStyleText(cssText);
+	}
+    </script>
+
+</body></html>

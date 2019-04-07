@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.system.dao.AppDao">
+
+	<select id="get" resultType="com.bootdo.system.domain.AppDO">
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app where id = #{value}
+	</select>
+	
+	<select id="getlast" resultType="com.bootdo.system.domain.AppDO">
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app where enable = 1 order by id desc limit 1
+	</select>
+
+	<select id="list" resultType="com.bootdo.system.domain.AppDO">
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="ver != null and ver != ''"> and ver = #{ver} </if>
+		  		  <if test="update != null and update != ''"> and update = #{update} </if>
+		  		  <if test="enable != null and enable != ''"> and enable = #{enable} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="utime != null and utime != ''"> and utime = #{utime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from yw_app
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="ver != null and ver != ''"> and ver = #{ver} </if>
+		  		  <if test="update != null and update != ''"> and update = #{update} </if>
+		  		  <if test="enable != null and enable != ''"> and enable = #{enable} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="utime != null and utime != ''"> and utime = #{utime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.system.domain.AppDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yw_app
+		(
+			`ver`, 
+			`update`, 
+			`enable`, 
+			`url`, 
+			`info`, 
+			`utime`
+		)
+		values
+		(
+			#{ver}, 
+			#{update}, 
+			#{enable}, 
+			#{url}, 
+			#{info}, 
+			#{utime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.system.domain.AppDO">
+		update yw_app 
+		<set>
+			<if test="ver != null">`ver` = #{ver}, </if>
+			<if test="update != null">`update` = #{update}, </if>
+			<if test="enable != null">`enable` = #{enable}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="info != null">`info` = #{info}, </if>
+			<if test="utime != null">`utime` = #{utime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from yw_app where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from yw_app where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
