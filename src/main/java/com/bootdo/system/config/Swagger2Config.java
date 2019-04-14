@@ -30,7 +30,7 @@ public class Swagger2Config {
                 //为当前包路径
                 .apis(RequestHandlerSelectors.any())
 //                .paths(PathSelectors.any())
-                .paths(PathSelectors.regex("/learns/publish/.*"))//过滤的接口
+                .paths(PathSelectors.regex("/welcome/publish/.*"))//过滤的接口
                 .build();
     }
 
