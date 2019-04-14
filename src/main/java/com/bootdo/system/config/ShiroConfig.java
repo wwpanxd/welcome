@@ -72,7 +72,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/learns/swagger/**");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/welcome/swagger/**");
 //        shiroFilterFactoryBean.setUnauthorizedUrl("/v2/**");
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/v2/**","anon");
