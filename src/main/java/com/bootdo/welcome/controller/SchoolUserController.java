@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/wel/user")
-public class ClientUserController extends BaseController {
+public class SchoolUserController extends BaseController {
 	UserDO createUserDoModel() {
 		UserDO userDO = new UserDO();
 		userDO.setUserId(1L);
