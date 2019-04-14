@@ -32,7 +32,7 @@ public class SchoolRoleController extends BaseController {
 		map.put("data", list);
 		return R.ok(map);
 	}
-
+	
 	@Log("更新角色")
 	@ResponseBody
 	@PostMapping(value = "updaterole")
