@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.controller;
+package com.bootdo.welcome.publish.school.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/welcome/publish/user")
+@RequestMapping("/welcome/publish/school/user")
 public class PSchoolUserController extends BaseController {
 	UserDO createUserDoModel() {
 		UserDO userDO = new UserDO();

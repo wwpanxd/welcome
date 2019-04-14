@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.controller;
+package com.bootdo.welcome.publish.school.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 
 @Controller
-@RequestMapping("/welcome/publish/userrole")
+@RequestMapping("/welcome/publish/school/userrole")
 public class PSchoolRoleController extends BaseController {
 	@Log("获取所有的角色")
 	@GetMapping(value = "/allrole")
