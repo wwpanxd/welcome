@@ -11,6 +11,8 @@ public class SchoolOrganizationDO implements Serializable {
 	private String name;
 	@ApiModelProperty(value = "机构类型")
 	private long type;
+	@ApiModelProperty(value = "机构父id")
+	private long parentId;
 
 	public long getId() {
 		return id;
@@ -34,5 +36,13 @@ public class SchoolOrganizationDO implements Serializable {
 
 	public void setType(long type) {
 		this.type = type;
+	}
+
+	public long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(long parentId) {
+		this.parentId = parentId;
 	}
 }

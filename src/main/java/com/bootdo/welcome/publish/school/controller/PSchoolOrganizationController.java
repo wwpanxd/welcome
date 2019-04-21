@@ -37,6 +37,7 @@ public class PSchoolOrganizationController extends BaseController {
 			schoolOrganizationDO.setName("机构名字" + i);
 			schoolOrganizationDO.setType(i);
 			schoolOrganizationDO.setId(i);
+			schoolOrganizationDO.setParentId(10*i);
 			list.add(schoolOrganizationDO);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -56,6 +57,7 @@ public class PSchoolOrganizationController extends BaseController {
 		schoolOrganizationDO.setName("机构名字");
 		schoolOrganizationDO.setType(1);
 		schoolOrganizationDO.setId(1);
+		schoolOrganizationDO.setParentId(10);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("data", schoolOrganizationDO);
 		return R.ok(map);
@@ -66,9 +68,10 @@ public class PSchoolOrganizationController extends BaseController {
 	@ApiOperation(value = "增加一个机构", notes = "增加一个机构")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "name", value = "机构名称", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "type", value = "机构类型", required = true, dataType = "Long", paramType = "query") })
+			@ApiImplicitParam(name = "type", value = "机构类型", required = true, dataType = "Long", paramType = "query"),
+			@ApiImplicitParam(name = "parentId", value = "机构父id", required = true, dataType = "Long", paramType = "query")})
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R add(@RequestParam("name") String name, @RequestParam("type") Long type) {
+	public R add(@RequestParam("name") String name, @RequestParam("type") Long type, @RequestParam("parentId") Long parentId) {
 		return R.ok();
 	}
 
@@ -78,9 +81,10 @@ public class PSchoolOrganizationController extends BaseController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "oid", value = "机构id", required = true, dataType = "Long", paramType = "query"),
 			@ApiImplicitParam(name = "name", value = "机构名称", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "type", value = "机构类型", required = true, dataType = "Long", paramType = "query") })
+			@ApiImplicitParam(name = "type", value = "机构类型", required = true, dataType = "Long", paramType = "query"),
+			@ApiImplicitParam(name = "parentId", value = "机构父id", required = true, dataType = "Long", paramType = "query")})
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R update(@RequestParam("oid") Long oid, @RequestParam("name") String name, @RequestParam("type") Long type) {
+	public R update(@RequestParam("oid") Long oid, @RequestParam("name") String name, @RequestParam("type") Long type, @RequestParam("parentId") Long parentId) {
 		return R.ok();
 	}
 
