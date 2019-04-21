@@ -53,7 +53,7 @@ public class PSchoolDistrictController extends BaseController {
 	@GetMapping(value = "/get")
 	@ApiOperation(value = "获取某个校区", notes = "提交校区编号来获取某个校区")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"),})
+			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = SchoolDistrictDO.class, code = 200, message = "返回结构:SchoolDistrictDO") })
 	public R get(@RequestParam("schoolcode") String schoolcode) {
 		SchoolDistrictDO schoolDistrictDO = new SchoolDistrictDO();
