@@ -6,14 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.welcome.vo.FindIdVO;
+import com.bootdo.welcome.vo.SchoolDepartmentVO;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.utils.R;
+import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolDepartmentDO;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -48,11 +51,9 @@ public class PSchoolDepartmentController {
 	@GetMapping("get")
 	@ResponseBody
 	@ApiOperation(value = "获取某个院系", notes = "获取某个院系")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "departmentcode", value = "院系编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({
 			@ApiResponse(response = SchoolDepartmentDO.class, code = 200, message = "返回结构:SchoolDepartmentDO的对象") })
-	public R find(@RequestParam("departmentcode") String departmentcode) {
+	public R find(FindIdVO findId) {
 		SchoolDepartmentDO schoolDepartmentDO = new SchoolDepartmentDO();
 		schoolDepartmentDO.setDepartmentCode("院系编码");
 		schoolDepartmentDO.setSchoolCode("学校编码");
@@ -66,29 +67,16 @@ public class PSchoolDepartmentController {
 	@PostMapping("add")
 	@ResponseBody
 	@ApiOperation(value = "新增一个院系", notes = "新增一个院系")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "departmentcode", value = "院系编号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "schoolcode", value = "学校编码", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "departmentname", value = "院系名称", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "departmentphone", value = "院系电话", required = false, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R add(@RequestParam("departmentcode") String departmentcode, @RequestParam("schoolcode") String schoolcode,
-			@RequestParam("departmentname") String departmentname,
-			@RequestParam("departmentphone") String departmentphone) {
+	public R add(SchoolDepartmentVO schoolDepartmentVO) {
 		return R.ok();
 	}
 
 	@PostMapping("update")
 	@ResponseBody
 	@ApiOperation(value = "更新某个院系", notes = "更新某个院系")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "departmentcode", value = "院系编号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "departmentname", value = "院系名称", required = false, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "departmentphone", value = "院系电话", required = false, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R update(@RequestParam("departmentcode") String departmentcode,
-			@RequestParam("departmentname") String departmentname,
-			@RequestParam("departmentphone") String departmentphone) {
+	public R update(SchoolDepartmentDO schoolDepartmentDO) {
 		return R.ok();
 	}
 
@@ -98,7 +86,7 @@ public class PSchoolDepartmentController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "departmentcode", value = "院系编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R delete(@RequestParam("departmentcode") String departmentcode) {
+	public R delete(DeletedIdVO deletedIdVO) {
 		return R.ok();
 	}
 }

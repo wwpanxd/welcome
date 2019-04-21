@@ -3,6 +3,7 @@ package com.bootdo.welcome.publish.school.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
+import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.UserDO;
 
 import org.springframework.stereotype.Controller;
@@ -67,7 +68,7 @@ public class PSchoolUserController extends BaseController {
 	@Log("删除用户")
 	@ResponseBody
 	@PostMapping("/deleteUser")
-	public R deleteUser(@RequestParam("userId") Long userId) {
+	public R deleteUser(DeletedIdVO deletedIdVO) {
 		return R.ok();
 	}
 }
