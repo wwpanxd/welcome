@@ -3,11 +3,9 @@ package com.bootdo.welcome.publish.school.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
-import com.bootdo.welcome.domain.UserDO;
-
+import com.bootdo.system.domain.UserDO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;

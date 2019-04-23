@@ -3,13 +3,13 @@
 
 <mapper namespace="com.bootdo.system.dao.DeptDao">
 
-	<select id="get" resultType="com.bootdo.system.domain.DeptDO">
+	<select id="findOneById" resultType="com.bootdo.system.domain.DeptDO">
 		select
 		`dept_id`,`parent_id`,`name`,`sname`,`order_num`,`del_flag` from sys_dept
 		where dept_id = #{value}
 	</select>
 
-	<select id="list" resultType="com.bootdo.system.domain.DeptDO">
+	<select id="findPageListByMap" resultType="com.bootdo.system.domain.DeptDO">
 <!-- 	   <bind name="name_like" value="'%' + _parameter.name + '%'" />  -->
 		select `dept_id`,`parent_id`,`name`,`sname`,`order_num`,`del_flag` from
 		sys_dept
@@ -34,7 +34,7 @@
 		</if>
 	</select>
 
-	<select id="count" resultType="int" >
+	<select id="countByMap" resultType="int" >
 	
 		select count(*) from sys_dept
 		<where>
@@ -66,7 +66,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.bootdo.system.domain.DeptDO">
+	<update id="updateById" parameterType="com.bootdo.system.domain.DeptDO">
 		update sys_dept
 		<set>
 			<if test="parentId != null">`parent_id` = #{parentId}, </if>
@@ -78,11 +78,11 @@
 		where dept_id = #{deptId}
 	</update>
 
-	<delete id="remove">
+	<delete id="removeById">
 		delete from sys_dept where dept_id = #{value}
 	</delete>
 
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from sys_dept where dept_id in
 		<foreach item="deptId" collection="array" open="(" separator=","
 			close=")">

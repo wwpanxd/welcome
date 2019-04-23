@@ -9,26 +9,26 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 文件数据表
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2019-01-20 01:50:52
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
 @Mapper
 public interface FileDataDao {
 
-	FileDataDO get(Integer id);
+	FileDataDO findOneById(Long id);
 	
 	FileDataDO getbyfname(String fname);
 	
-	List<FileDataDO> list(Map<String,Object> map);
+	List<FileDataDO> findPageListByMap(Map<String,Object> map);
 	
-	int count(Map<String,Object> map);
+	int countByMap(Map<String,Object> map);
 	
 	int save(FileDataDO fileData);
 	
-	int update(FileDataDO fileData);
+	int updateById(FileDataDO fileData);
 	
-	int remove(Integer id);
+	int removeById(Long id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemoveByIds(Long[] ids);
 }

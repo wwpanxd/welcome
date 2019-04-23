@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.common.dao.LogDao">
 
-	<select id="get" resultType="com.bootdo.common.domain.LogDO">
+	<select id="findOneById" resultType="com.bootdo.common.domain.LogDO">
 		select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.bootdo.common.domain.LogDO">
+	<select id="findPageListByMap" resultType="com.bootdo.common.domain.LogDO">
 		select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -33,7 +33,7 @@
 		</if>
 	</select>
 	
- 	<select id="count" resultType="int">
+ 	<select id="countByMap" resultType="int">
 		select count(*) from sys_log
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -73,7 +73,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.bootdo.common.domain.LogDO">
+	<update id="updateById" parameterType="com.bootdo.common.domain.LogDO">
 		update sys_log 
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>
@@ -88,11 +88,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="remove">
+	<delete id="removeById">
 		delete from sys_log where id = #{value}
 	</delete>
 	
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from sys_log where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}

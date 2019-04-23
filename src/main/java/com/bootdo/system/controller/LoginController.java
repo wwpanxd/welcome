@@ -10,7 +10,6 @@ import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -47,7 +46,7 @@ public class LoginController extends BaseController {
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
-		FileDO fileDO = fileService.get(getUser().getPicId());
+		FileDO fileDO = fileService.findOneById(getUser().getPicId());
 		if(fileDO!=null&&fileDO.getUrl()!=null){
 			if(fileService.isExist(fileDO.getUrl())){
 				model.addAttribute("picUrl",fileDO.getUrl());

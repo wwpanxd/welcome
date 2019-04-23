@@ -57,8 +57,8 @@ public class UserService  {
 //    @Cacheable(key = "#id")
     public UserDO get(Long id) {
         List<Long> roleIds = userRoleMapper.listRoleId(id);
-        UserDO user = userMapper.get(id);
-        DeptDO depd=deptMapper.get(user.getDeptId());
+        UserDO user = userMapper.findOneById(id);
+        DeptDO depd=deptMapper.findOneById(user.getDeptId());
         if(depd!=null)
         user.setDeptName(depd.getName());
         user.setRoleIds(roleIds);
@@ -67,7 +67,7 @@ public class UserService  {
 
     
     public List<UserDO> list(Map<String, Object> map) {
-        return userMapper.list(map);
+        return userMapper.findPageListByMap(map);
     }
     
 	
@@ -78,7 +78,7 @@ public class UserService  {
 
     
     public int count(Map<String, Object> map) {
-        return userMapper.count(map);
+        return userMapper.countByMap(map);
     }
 
     @Transactional
@@ -104,7 +104,7 @@ public class UserService  {
 
     
     public int update(UserDO user) {
-        int r = userMapper.update(user);
+        int r = userMapper.updateById(user);
         Long userId = user.getUserId();
         List<Long> roles = user.getRoleIds();
         userRoleMapper.removeByUserId(userId);
@@ -126,13 +126,13 @@ public class UserService  {
     
     public int remove(Long userId) {
         userRoleMapper.removeByUserId(userId);
-        return userMapper.remove(userId);
+        return userMapper.removeById(userId);
     }
 
     
     public boolean exit(Map<String, Object> params) {
         boolean exit;
-        exit = userMapper.list(params).size() > 0;
+        exit = userMapper.findPageListByMap(params).size() > 0;
         return exit;
     }
 
@@ -153,7 +153,7 @@ public class UserService  {
     public int resetPwd(UserVO userVO, UserDO userDO) throws Exception {
             if (Objects.equals(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdOld()), userDO.getPassword())) {
                 userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
-                return userMapper.update(userDO);
+                return userMapper.updateById(userDO);
             } else {
             	ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.LOGIN_ERROR));
                 throw new Exception("输入的旧密码有误！");
@@ -166,14 +166,14 @@ public class UserService  {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
         userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
-        return userMapper.update(userDO);
+        return userMapper.updateById(userDO);
 
 
     }
 
     @Transactional
     public int batchremove(Long[] userIds) {
-        int count = userMapper.batchRemove(userIds);
+        int count = userMapper.batchRemoveByIds(userIds);
         userRoleMapper.batchRemoveByUserId(userIds);
         return count;
     }
@@ -181,7 +181,7 @@ public class UserService  {
     
     public Tree<DeptDO> getTree() {
         List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
-        List<DeptDO> depts = deptMapper.list(new HashMap<String, Object>(16));
+        List<DeptDO> depts = deptMapper.findPageListByMap(new HashMap<String, Object>(16));
         Long[] pDepts = deptMapper.listParentDept();
         Long[] uDepts = userMapper.listAllDept();
         Long[] allDepts = (Long[]) ArrayUtils.addAll(pDepts, uDepts);
@@ -199,7 +199,7 @@ public class UserService  {
             tree.setState(state);
             trees.add(tree);
         }
-        List<UserDO> users = userMapper.list(new HashMap<String, Object>(16));
+        List<UserDO> users = userMapper.findPageListByMap(new HashMap<String, Object>(16));
         for (UserDO user : users) {
             Tree<DeptDO> tree = new Tree<DeptDO>();
             tree.setId(user.getUserId().toString());
@@ -218,7 +218,7 @@ public class UserService  {
 
     
     public int updatePersonal(UserDO userDO) {
-        return userMapper.update(userDO);
+        return userMapper.updateById(userDO);
     }
 
     
@@ -255,7 +255,7 @@ public class UserService  {
             UserDO userDO = new UserDO();
             userDO.setUserId(userId);
             userDO.setPicId(sysFile.getId());
-            if (userMapper.update(userDO) > 0) {
+            if (userMapper.updateById(userDO) > 0) {
                 result.put("url", sysFile.getUrl());
             }
         }

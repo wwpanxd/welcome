@@ -23,8 +23,8 @@ public class LogService {
 
 	
 	public PageDO<LogDO> queryList(Query query) {
-		int total = logMapper.count(query);
-		List<LogDO> logs = logMapper.list(query);
+		int total = logMapper.countByMap(query);
+		List<LogDO> logs = logMapper.findPageListByMap(query);
 		PageDO<LogDO> page = new PageDO<>();
 		page.setTotal(total);
 		page.setRows(logs);
@@ -32,13 +32,13 @@ public class LogService {
 	}
 
 	
-	public int remove(Long id) {
-		int count = logMapper.remove(id);
+	public int removeById(Long id) {
+		int count = logMapper.removeById(id);
 		return count;
 	}
 
 	
-	public int batchRemove(Long[] ids){
-		return logMapper.batchRemove(ids);
+	public int batchRemoveByIds(Long[] ids){
+		return logMapper.batchRemoveByIds(ids);
 	}
 }

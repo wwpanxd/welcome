@@ -3,11 +3,11 @@
 
 <mapper namespace="${package}.dao.${className}Dao">
 
-	<select id="get" resultType="${package}.domain.${className}DO">
+	<select id="findOneById" resultType="${package}.domain.${className}DO">
 		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName} where ${pk.columnName} = #{value}
 	</select>
 
-	<select id="list" resultType="${package}.domain.${className}DO">
+	<select id="findPageListByMap" resultType="${package}.domain.${className}DO">
 		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName}
         <where>  
 		  #foreach($column in $columns)
@@ -27,7 +27,7 @@
 		</if>
 	</select>
 	
- 	<select id="count" resultType="int">
+ 	<select id="countByMap" resultType="int">
 		select count(*) from ${tableName}
 		 <where>  
 		  #foreach($column in $columns)
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="${package}.domain.${className}DO">
+	<update id="updateById" parameterType="${package}.domain.${className}DO">
 		update ${tableName} 
 		<set>
 #foreach($column in $columns)
@@ -69,11 +69,11 @@
 		where ${pk.columnName} = #{${pk.attrname}}
 	</update>
 	
-	<delete id="remove">
+	<delete id="removeById">
 		delete from ${tableName} where ${pk.columnName} = #{value}
 	</delete>
 	
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from ${tableName} where ${pk.columnName} in 
 		<foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
 			#{${pk.attrname}}

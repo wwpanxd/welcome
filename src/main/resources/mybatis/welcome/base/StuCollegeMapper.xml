@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuCollegeDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuCollegeDO">
+		select `id`,`uv_code`,`s_id`,`c_id`,`c_level`,`c_xq`,`c_yx`,`c_zy`,`c_class` from yx_stu_college where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuCollegeDO">
+		select `id`,`uv_code`,`s_id`,`c_id`,`c_level`,`c_xq`,`c_yx`,`c_zy`,`c_class` from yx_stu_college
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="cId != null and cId != ''"> and c_id = #{cId} </if>
+		  		  <if test="cLevel != null and cLevel != ''"> and c_level = #{cLevel} </if>
+		  		  <if test="cXq != null and cXq != ''"> and c_xq = #{cXq} </if>
+		  		  <if test="cYx != null and cYx != ''"> and c_yx = #{cYx} </if>
+		  		  <if test="cZy != null and cZy != ''"> and c_zy = #{cZy} </if>
+		  		  <if test="cClass != null and cClass != ''"> and c_class = #{cClass} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_college
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="cId != null and cId != ''"> and c_id = #{cId} </if>
+		  		  <if test="cLevel != null and cLevel != ''"> and c_level = #{cLevel} </if>
+		  		  <if test="cXq != null and cXq != ''"> and c_xq = #{cXq} </if>
+		  		  <if test="cYx != null and cYx != ''"> and c_yx = #{cYx} </if>
+		  		  <if test="cZy != null and cZy != ''"> and c_zy = #{cZy} </if>
+		  		  <if test="cClass != null and cClass != ''"> and c_class = #{cClass} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuCollegeDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_stu_college
+		(
+			`uv_code`, 
+			`s_id`, 
+			`c_id`, 
+			`c_level`, 
+			`c_xq`, 
+			`c_yx`, 
+			`c_zy`, 
+			`c_class`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{sId}, 
+			#{cId}, 
+			#{cLevel}, 
+			#{cXq}, 
+			#{cYx}, 
+			#{cZy}, 
+			#{cClass}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuCollegeDO">
+		update yx_stu_college 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sId != null">`s_id` = #{sId}, </if>
+			<if test="cId != null">`c_id` = #{cId}, </if>
+			<if test="cLevel != null">`c_level` = #{cLevel}, </if>
+			<if test="cXq != null">`c_xq` = #{cXq}, </if>
+			<if test="cYx != null">`c_yx` = #{cYx}, </if>
+			<if test="cZy != null">`c_zy` = #{cZy}, </if>
+			<if test="cClass != null">`c_class` = #{cClass}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_college where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_college where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -17,18 +17,18 @@ public class FileDataService {
 	private FileDataDao fileDataDao;
 	
 	
-	public FileDataDO get(Integer id){
-		return fileDataDao.get(id);
+	public FileDataDO get(Long id){
+		return fileDataDao.findOneById(id);
 	}
 	
 	
 	public List<FileDataDO> list(Map<String, Object> map){
-		return fileDataDao.list(map);
+		return fileDataDao.findPageListByMap(map);
 	}
 	
 	
 	public int count(Map<String, Object> map){
-		return fileDataDao.count(map);
+		return fileDataDao.countByMap(map);
 	}
 	
 	
@@ -38,17 +38,17 @@ public class FileDataService {
 	
 	
 	public int update(FileDataDO fileData){
-		return fileDataDao.update(fileData);
+		return fileDataDao.updateById(fileData);
 	}
 	
 	
-	public int remove(Integer id){
-		return fileDataDao.remove(id);
+	public int remove(Long id){
+		return fileDataDao.removeById(id);
 	}
 	
 	
-	public int batchRemove(Integer[] ids){
-		return fileDataDao.batchRemove(ids);
+	public int batchRemove(Long[] ids){
+		return fileDataDao.batchRemoveByIds(ids);
 	}
 
 	

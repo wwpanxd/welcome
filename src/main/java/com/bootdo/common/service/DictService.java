@@ -17,18 +17,18 @@ public class DictService {
     private DictDao dictDao;
 
     
-    public DictDO get(Long id) {
-        return dictDao.get(id);
+    public DictDO findOneById(Long id) {
+        return dictDao.findOneById(id);
     }
 
     
-    public List<DictDO> list(Map<String, Object> map) {
-        return dictDao.list(map);
+    public List<DictDO> findPageListByMap(Map<String, Object> map) {
+        return dictDao.findPageListByMap(map);
     }
 
     
-    public int count(Map<String, Object> map) {
-        return dictDao.count(map);
+    public int countByMap(Map<String, Object> map) {
+        return dictDao.countByMap(map);
     }
 
     
@@ -37,18 +37,18 @@ public class DictService {
     }
 
     
-    public int update(DictDO dict) {
-        return dictDao.update(dict);
+    public int updateById(DictDO dict) {
+        return dictDao.updateById(dict);
     }
 
     
-    public int remove(Long id) {
-        return dictDao.remove(id);
+    public int removeById(Long id) {
+        return dictDao.removeById(id);
     }
 
     
-    public int batchRemove(Long[] ids) {
-        return dictDao.batchRemove(ids);
+    public int batchRemoveByIds(Long[] ids) {
+        return dictDao.batchRemoveByIds(ids);
     }
 
     
@@ -62,7 +62,7 @@ public class DictService {
         Map<String, Object> param = new HashMap<String, Object>(16);
         param.put("type", type);
         param.put("value", value);
-        String rString = dictDao.list(param).get(0).getName();
+        String rString = dictDao.findPageListByMap(param).get(0).getName();
         return rString;
     }
 
@@ -70,7 +70,7 @@ public class DictService {
     public List<DictDO> getHobbyList(UserDO userDO) {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", "hobby");
-        List<DictDO> hobbyList = dictDao.list(param);
+        List<DictDO> hobbyList = dictDao.findPageListByMap(param);
 
         return hobbyList;
     }
@@ -78,13 +78,13 @@ public class DictService {
     public List<DictDO> getSexList() {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", "sex");
-        return dictDao.list(param);
+        return dictDao.findPageListByMap(param);
     }
 
     public List<DictDO> listByType(String type) {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", type);
-        return dictDao.list(param);
+        return dictDao.findPageListByMap(param);
     }
 	
 	public List<DictDO> list2(Map<String, Object> map) {

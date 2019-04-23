@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.common.dao.FileDao">
 
-	<select id="get" resultType="com.bootdo.common.domain.FileDO">
+	<select id="findOneById" resultType="com.bootdo.common.domain.FileDO">
 		select `id`,`type`,`url`,`create_date` from sys_file where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.bootdo.common.domain.FileDO">
+	<select id="findPageListByMap" resultType="com.bootdo.common.domain.FileDO">
 		select `id`,`type`,`url`,`create_date` from sys_file
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -28,7 +28,7 @@
 		</if>
 	</select>
 	
- 	<select id="count" resultType="int">
+ 	<select id="countByMap" resultType="int">
 		select count(*) from sys_file
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -53,7 +53,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.bootdo.common.domain.FileDO">
+	<update id="updateById" parameterType="com.bootdo.common.domain.FileDO">
 		update sys_file 
 		<set>
 			<if test="type != null">`type` = #{type}, </if>
@@ -63,11 +63,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="remove">
+	<delete id="removeById">
 		delete from sys_file where id = #{value}
 	</delete>
 	
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from sys_file where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}

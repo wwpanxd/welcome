@@ -1,30 +1,39 @@
 package com.bootdo.system.domain;
 
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 
 /**
  * 部门管理
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-09-27 14:28:36
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
+@ApiModel(value = "DeptDO", description = "部门管理") 
 public class DeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
+	@ApiModelProperty(value = "")
 	private Long deptId;
 	//上级部门ID，一级部门为0
+	@ApiModelProperty(value = "上级部门ID，一级部门为0")
 	private Long parentId;
 	//部门名称
+	@ApiModelProperty(value = "部门名称")
 	private String name;
 	//部门简称
+	@ApiModelProperty(value = "部门简称")
 	private String sname;
 	//排序
+	@ApiModelProperty(value = "排序")
 	private Integer orderNum;
 	//是否删除  -1：已删除  0：正常
+	@ApiModelProperty(value = "是否删除  -1：已删除  0：正常")
 	private Integer delFlag;
 
 	/**
@@ -64,6 +73,18 @@ public class DeptDO implements Serializable {
 		return name;
 	}
 	/**
+	 * 设置：部门简称
+	 */
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	/**
+	 * 获取：部门简称
+	 */
+	public String getSname() {
+		return sname;
+	}
+	/**
 	 * 设置：排序
 	 */
 	public void setOrderNum(Integer orderNum) {
@@ -87,29 +108,4 @@ public class DeptDO implements Serializable {
 	public Integer getDelFlag() {
 		return delFlag;
 	}
-
-	@Override
-	public String toString() {
-		return "DeptDO{" +
-				"deptId=" + deptId +
-				", parentId=" + parentId +
-				", name='" + name + '\'' +
-				", sname='" + sname + '\'' +
-				", orderNum=" + orderNum +
-				", delFlag=" + delFlag +
-				'}';
-	}
-	public String getSname() {
-		return sname;
-	}
-	public void setSname(String sname) {
-		this.sname = sname;
-	}
-//	@Override
-//	public String toString() {
-//		return "DeptDO [deptId=" + deptId + ", parentId=" + parentId + ", name=" + name + ", sname=" + sname
-//				+ ", orderNum=" + orderNum + ", delFlag=" + delFlag + "]";
-//	}
-
-	
 }

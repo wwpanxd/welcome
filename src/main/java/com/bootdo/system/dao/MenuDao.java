@@ -9,28 +9,28 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 菜单管理
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-03 09:45:09
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
 @Mapper
 public interface MenuDao {
 
-	MenuDO get(Long menuId);
+	MenuDO findOneById(Long menuId);
 	
-	List<MenuDO> list(Map<String,Object> map);
+	List<MenuDO> findPageListByMap(Map<String,Object> map);
 	
 	List<MenuDO> list2(Map<String,Object> map);
 	
-	int count(Map<String,Object> map);
+	int countByMap(Map<String,Object> map);
 	
 	int save(MenuDO menu);
 	
-	int update(MenuDO menu);
+	int updateById(MenuDO menu);
 	
-	int remove(Long menuId);
+	int removeById(Long menuId);
 	
-	int batchRemove(Long[] menuIds);
+	int batchRemoveByIds(Long[] menuIds);
 	
 	List<MenuDO> listMenuByUserId(Long id);
 	

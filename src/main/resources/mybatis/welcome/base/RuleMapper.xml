@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.RuleDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.RuleDO">
+		select `id`,`uv_code`,`r_name`,`r_code`,`r_type`,`r_description`,`r_flag`,`r_rule` from yx_rule where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.RuleDO">
+		select `id`,`uv_code`,`r_name`,`r_code`,`r_type`,`r_description`,`r_flag`,`r_rule` from yx_rule
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="rName != null and rName != ''"> and r_name = #{rName} </if>
+		  		  <if test="rCode != null and rCode != ''"> and r_code = #{rCode} </if>
+		  		  <if test="rType != null and rType != ''"> and r_type = #{rType} </if>
+		  		  <if test="rDescription != null and rDescription != ''"> and r_description = #{rDescription} </if>
+		  		  <if test="rFlag != null and rFlag != ''"> and r_flag = #{rFlag} </if>
+		  		  <if test="rRule != null and rRule != ''"> and r_rule = #{rRule} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_rule
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="rName != null and rName != ''"> and r_name = #{rName} </if>
+		  		  <if test="rCode != null and rCode != ''"> and r_code = #{rCode} </if>
+		  		  <if test="rType != null and rType != ''"> and r_type = #{rType} </if>
+		  		  <if test="rDescription != null and rDescription != ''"> and r_description = #{rDescription} </if>
+		  		  <if test="rFlag != null and rFlag != ''"> and r_flag = #{rFlag} </if>
+		  		  <if test="rRule != null and rRule != ''"> and r_rule = #{rRule} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.RuleDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_rule
+		(
+			`uv_code`, 
+			`r_name`, 
+			`r_code`, 
+			`r_type`, 
+			`r_description`, 
+			`r_flag`, 
+			`r_rule`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{rName}, 
+			#{rCode}, 
+			#{rType}, 
+			#{rDescription}, 
+			#{rFlag}, 
+			#{rRule}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.RuleDO">
+		update yx_rule 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="rName != null">`r_name` = #{rName}, </if>
+			<if test="rCode != null">`r_code` = #{rCode}, </if>
+			<if test="rType != null">`r_type` = #{rType}, </if>
+			<if test="rDescription != null">`r_description` = #{rDescription}, </if>
+			<if test="rFlag != null">`r_flag` = #{rFlag}, </if>
+			<if test="rRule != null">`r_rule` = #{rRule}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_rule where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_rule where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

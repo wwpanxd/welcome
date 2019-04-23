@@ -2,6 +2,8 @@ package ${package}.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -15,11 +17,13 @@ import java.math.BigDecimal;
  * @email ${email}
  * @date ${datetime}
  */
+@ApiModel(value = "${className}DO", description = "${comments}") 
 public class ${className}DO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 #foreach ($column in $columns)
 	//$column.comments
+	@ApiModelProperty(value = "$column.comments")
 	private $column.attrType $column.attrname;
 #end
 

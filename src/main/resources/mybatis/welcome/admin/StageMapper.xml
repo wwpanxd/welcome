@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StageDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StageDO">
+		select `id` from yx_stage where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StageDO">
+		select `id` from yx_stage
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stage
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StageDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_stage
+		(
+		)
+		values
+		(
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StageDO">
+		update yx_stage 
+		<set>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stage where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stage where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

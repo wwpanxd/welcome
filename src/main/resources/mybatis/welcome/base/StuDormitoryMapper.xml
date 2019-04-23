@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuDormitoryDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuDormitoryDO">
+		select `id`,`uv_code`,`s_id`,`b_id`,`b_level` from yx_stu_dormitory where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuDormitoryDO">
+		select `id`,`uv_code`,`s_id`,`b_id`,`b_level` from yx_stu_dormitory
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="bId != null and bId != ''"> and b_id = #{bId} </if>
+		  		  <if test="bLevel != null and bLevel != ''"> and b_level = #{bLevel} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_dormitory
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="bId != null and bId != ''"> and b_id = #{bId} </if>
+		  		  <if test="bLevel != null and bLevel != ''"> and b_level = #{bLevel} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuDormitoryDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_stu_dormitory
+		(
+			`uv_code`, 
+			`s_id`, 
+			`b_id`, 
+			`b_level`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{sId}, 
+			#{bId}, 
+			#{bLevel}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuDormitoryDO">
+		update yx_stu_dormitory 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sId != null">`s_id` = #{sId}, </if>
+			<if test="bId != null">`b_id` = #{bId}, </if>
+			<if test="bLevel != null">`b_level` = #{bLevel}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_dormitory where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_dormitory where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

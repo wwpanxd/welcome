@@ -2,7 +2,6 @@ package com.bootdo.system.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.bootdo.system.domain.AppDO;
 import com.bootdo.system.service.AppService;
 import com.bootdo.common.controller.BaseController;
@@ -71,7 +69,7 @@ public class AppController extends BaseController{
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("system:app:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
+	String edit(@PathVariable("id") Long id,Model model){
 		AppDO app = appService.get(id);
 		model.addAttribute("app", app);
 	    return "system/app/edit";
@@ -106,7 +104,7 @@ public class AppController extends BaseController{
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:app:remove")
-	public R remove( Integer id){
+	public R remove( Long id){
 		if(appService.remove(id)>0){
 		return R.ok();
 		}
@@ -119,7 +117,7 @@ public class AppController extends BaseController{
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:app:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
+	public R remove(@RequestParam("ids[]") Long[] ids){
 		appService.batchRemove(ids);
 		return R.ok();
 	}

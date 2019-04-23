@@ -9,24 +9,24 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 角色
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-02 20:24:47
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
 @Mapper
 public interface RoleDao {
 
-	RoleDO get(Long roleId);
+	RoleDO findOneById(Long roleId);
 	
-	List<RoleDO> list(Map<String,Object> map);
+	List<RoleDO> findPageListByMap(Map<String,Object> map);
 	
-	int count(Map<String,Object> map);
+	int countByMap(Map<String,Object> map);
 	
 	int save(RoleDO role);
 	
-	int update(RoleDO role);
+	int updateById(RoleDO role);
 	
-	int remove(Long roleId);
+	int removeById(Long roleId);
 	
-	int batchRemove(Long[] roleIds);
+	int batchRemoveByIds(Long[] roleIds);
 }

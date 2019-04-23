@@ -43,7 +43,7 @@ public class LogController {
 	@ResponseBody
 	@PostMapping("/remove")
 	R remove(Long id) {
-		if (logService.remove(id)>0) {
+		if (logService.removeById(id)>0) {
 			return R.ok();
 		}
 		return R.error();
@@ -52,7 +52,7 @@ public class LogController {
 	@ResponseBody
 	@PostMapping("/batchRemove")
 	R batchRemove(@RequestParam("ids[]") Long[] ids) {
-		int r = logService.batchRemove(ids);
+		int r = logService.batchRemoveByIds(ids);
 		if (r > 0) {
 			return R.ok();
 		}

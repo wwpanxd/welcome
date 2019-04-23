@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiResponses;
 
 
 @RestController
-@RequestMapping("welcome/publish/user")
+@RequestMapping("welcome/publish/yw/user")
 @Api(value="用户相关",description="用户相关")
 public class PUserController extends BaseController{
 	

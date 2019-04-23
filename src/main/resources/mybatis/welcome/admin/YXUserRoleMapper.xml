@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+		select `id`,`user_id`,`role_id`,`uv_code` from yx_user_role where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+		select `id`,`user_id`,`role_id`,`uv_code` from yx_user_role
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_user_role
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXUserRoleDao" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_user_role
+		(
+			`user_id`, 
+			`role_id`, 
+			`uv_code`
+		)
+		values
+		(
+			#{userId}, 
+			#{roleId}, 
+			#{uvCode}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+		update yx_user_role 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="roleId != null">`role_id` = #{roleId}, </if>
+			<if test="uvCode != null">`uv_code` = #{uvCode}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_user_role where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_user_role where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

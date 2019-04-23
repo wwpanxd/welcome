@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("welcome/publish/login")
+@RequestMapping("welcome/publish/yw/login")
 @Api(value="系统登录相关",description="系统登录相关")
 public class PLoginController extends BaseController{
 	

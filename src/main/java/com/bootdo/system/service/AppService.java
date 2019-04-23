@@ -17,18 +17,18 @@ public class AppService {
 	private AppDao appDao;
 	
 	
-	public AppDO get(Integer id){
-		return appDao.get(id);
+	public AppDO get(Long id){
+		return appDao.findOneById(id);
 	}
 	
 	
 	public List<AppDO> list(Map<String, Object> map){
-		return appDao.list(map);
+		return appDao.findPageListByMap(map);
 	}
 	
 	
 	public int count(Map<String, Object> map){
-		return appDao.count(map);
+		return appDao.countByMap(map);
 	}
 	
 	
@@ -38,23 +38,23 @@ public class AppService {
 	
 	
 	public int update(AppDO app){
-		return appDao.update(app);
+		return appDao.updateById(app);
 	}
 	
 	
-	public int remove(Integer id){
-		return appDao.remove(id);
+	public int remove(Long id){
+		return appDao.removeById(id);
 	}
 	
 	
-	public int batchRemove(Integer[] ids){
-		return appDao.batchRemove(ids);
+	public int batchRemove(Long[] ids){
+		return appDao.batchRemoveByIds(ids);
 	}
 
 	
 	public AppDO getlast() {
 		// TODO Auto-generated method stub
-		return appDao.getlast();
+		return appDao.findlastOne();
 	}
 	
 }

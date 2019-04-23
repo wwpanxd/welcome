@@ -23,18 +23,18 @@ public class FileService {
 	@Autowired
 	private BootdoConfig bootdoConfig;
 	
-	public FileDO get(Long id){
-		return sysFileMapper.get(id);
+	public FileDO findOneById(Long id){
+		return sysFileMapper.findOneById(id);
 	}
 	
 	
-	public List<FileDO> list(Map<String, Object> map){
-		return sysFileMapper.list(map);
+	public List<FileDO> findPageListByMap(Map<String, Object> map){
+		return sysFileMapper.findPageListByMap(map);
 	}
 	
 	
-	public int count(Map<String, Object> map){
-		return sysFileMapper.count(map);
+	public int countByMap(Map<String, Object> map){
+		return sysFileMapper.countByMap(map);
 	}
 	
 	
@@ -43,18 +43,18 @@ public class FileService {
 	}
 	
 	
-	public int update(FileDO sysFile){
-		return sysFileMapper.update(sysFile);
+	public int updateById(FileDO sysFile){
+		return sysFileMapper.updateById(sysFile);
 	}
 	
 	
-	public int remove(Long id){
-		return sysFileMapper.remove(id);
+	public int removeById(Long id){
+		return sysFileMapper.removeById(id);
 	}
 	
 	
-	public int batchRemove(Long[] ids){
-		return sysFileMapper.batchRemove(ids);
+	public int batchRemoveByIds(Long[] ids){
+		return sysFileMapper.batchRemoveByIds(ids);
 	}
 
     

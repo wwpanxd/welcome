@@ -18,7 +18,7 @@ public class UserRoleService{
 	
 	public List<UserRoleDO> list(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return userRoleMapper.list(map);
+		return userRoleMapper.findPageListByMap(map);
 	}
 
 	
@@ -30,7 +30,7 @@ public class UserRoleService{
 	
 	public int remove(Long id) {
 		// TODO Auto-generated method stub
-		return userRoleMapper.remove(id);
+		return userRoleMapper.removeById(id);
 	}
 
 	

@@ -8,31 +8,31 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-03 09:45:11
+ * 用户
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
 @Mapper
 public interface UserDao {
 
-	UserDO get(Long userId);
+	UserDO findOneById(Long userId);
 	
-	List<UserDO> list(Map<String,Object> map);
+	List<UserDO> findPageListByMap(Map<String,Object> map);
 	
 	List<UserDO> list2(Map<String,Object> map);
 	
-	int count(Map<String,Object> map);
+	int countByMap(Map<String,Object> map);
 	
 	int count2(Map<String,Object> map);
 	
 	int save(UserDO user);
 	
-	int update(UserDO user);
+	int updateById(UserDO user);
 	
-	int remove(Long userId);
+	int removeById(Long userId);
 	
-	int batchRemove(Long[] userIds);
+	int batchRemoveByIds(Long[] userIds);
 	
 	Long[] listAllDept();
 

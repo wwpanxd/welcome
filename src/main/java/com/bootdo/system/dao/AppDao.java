@@ -9,26 +9,26 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * app版本更新表
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2019-01-20 01:50:52
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
 @Mapper
 public interface AppDao {
 
-	AppDO get(Integer id);
+	AppDO findOneById(Long id);
 	
-	AppDO getlast();
+	AppDO findlastOne();
 	
-	List<AppDO> list(Map<String,Object> map);
+	List<AppDO> findPageListByMap(Map<String,Object> map);
 	
-	int count(Map<String,Object> map);
+	int countByMap(Map<String,Object> map);
 	
 	int save(AppDO app);
 	
-	int update(AppDO app);
+	int updateById(AppDO app);
 	
-	int remove(Integer id);
+	int removeById(Long id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemoveByIds(Long[] ids);
 }

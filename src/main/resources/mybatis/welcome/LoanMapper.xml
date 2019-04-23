@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.LoanDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.LoanDO">
+		select `id`,`s_code`,`uv_code`,`l_cost`,`l_status` from yx_loan where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.LoanDO">
+		select `id`,`s_code`,`uv_code`,`l_cost`,`l_status` from yx_loan
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sCode != null and sCode != ''"> and s_code = #{sCode} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="lCost != null and lCost != ''"> and l_cost = #{lCost} </if>
+		  		  <if test="lStatus != null and lStatus != ''"> and l_status = #{lStatus} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_loan
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sCode != null and sCode != ''"> and s_code = #{sCode} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="lCost != null and lCost != ''"> and l_cost = #{lCost} </if>
+		  		  <if test="lStatus != null and lStatus != ''"> and l_status = #{lStatus} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.LoanDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_loan
+		(
+			`s_code`, 
+			`uv_code`, 
+			`l_cost`, 
+			`l_status`
+		)
+		values
+		(
+			#{sCode}, 
+			#{uvCode}, 
+			#{lCost}, 
+			#{lStatus}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.LoanDO">
+		update yx_loan 
+		<set>
+			<if test="sCode != null">`s_code` = #{sCode}, </if>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="lCost != null">`l_cost` = #{lCost}, </if>
+			<if test="lStatus != null">`l_status` = #{lStatus}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_loan where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_loan where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

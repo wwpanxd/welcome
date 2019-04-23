@@ -48,7 +48,7 @@ public class MenuService {
 
 	
 	public List<MenuDO> list(Map<String, Object> params) {
-		List<MenuDO> menus = menuMapper.list(params);
+		List<MenuDO> menus = menuMapper.findPageListByMap(params);
 		return menus;
 	}
 	
@@ -60,7 +60,7 @@ public class MenuService {
 
 	@Transactional(readOnly = false,rollbackFor = Exception.class)
 	public int remove(Long id) {
-		int result = menuMapper.remove(id);
+		int result = menuMapper.removeById(id);
 		return result;
 	}
 	
@@ -72,20 +72,20 @@ public class MenuService {
 
 	@Transactional(readOnly = false,rollbackFor = Exception.class)
 	public int update(MenuDO menu) {
-		int r = menuMapper.update(menu);
+		int r = menuMapper.updateById(menu);
 		return r;
 	}
 
 	
 	public MenuDO get(Long id) {
-		MenuDO menuDO = menuMapper.get(id);
+		MenuDO menuDO = menuMapper.findOneById(id);
 		return menuDO;
 	}
 
 	
 	public Tree<MenuDO> getTree() {
 		List<Tree<MenuDO>> trees = new ArrayList<Tree<MenuDO>>();
-		List<MenuDO> menuDOs = menuMapper.list(new HashMap<>(16));
+		List<MenuDO> menuDOs = menuMapper.findPageListByMap(new HashMap<>(16));
 		for (MenuDO sysMenuDO : menuDOs) {
 			Tree<MenuDO> tree = new Tree<MenuDO>();
 			tree.setId(sysMenuDO.getMenuId().toString());
@@ -101,7 +101,7 @@ public class MenuService {
 	
 	public Tree<MenuDO> getTree(Long id) {
 		// 根据roleId查询权限
-		List<MenuDO> menus = menuMapper.list(new HashMap<String, Object>(16));
+		List<MenuDO> menus = menuMapper.findPageListByMap(new HashMap<String, Object>(16));
 		List<Long> menuIds = roleMenuMapper.listMenuIdByRoleId(id);
 		List<Long> temp = menuIds;
 		//父权限去除，用子权限来显示是否 已选择
@@ -111,7 +111,7 @@ public class MenuService {
 			}
 		}
 		List<Tree<MenuDO>> trees = new ArrayList<Tree<MenuDO>>();
-		List<MenuDO> menuDOs = menuMapper.list(new HashMap<String, Object>(16));
+		List<MenuDO> menuDOs = menuMapper.findPageListByMap(new HashMap<String, Object>(16));
 		for (MenuDO sysMenuDO : menuDOs) {
 			Tree<MenuDO> tree = new Tree<MenuDO>();
 			tree.setId(sysMenuDO.getMenuId().toString());

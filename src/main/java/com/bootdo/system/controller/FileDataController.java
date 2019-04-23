@@ -62,7 +62,7 @@ public class FileDataController extends BaseController{
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("system:fileData:edit")
-	String edit(@PathVariable("id") Integer id,Model model){
+	String edit(@PathVariable("id") Long id,Model model){
 		FileDataDO fileData = fileDataService.get(id);
 		model.addAttribute("fileData", fileData);
 	    return "system/fileData/edit";
@@ -97,7 +97,7 @@ public class FileDataController extends BaseController{
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:fileData:remove")
-	public R remove( Integer id){
+	public R remove( Long id){
 		if(fileDataService.remove(id)>0){
 		return R.ok();
 		}
@@ -110,7 +110,7 @@ public class FileDataController extends BaseController{
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:fileData:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
+	public R remove(@RequestParam("ids[]") Long[] ids){
 		fileDataService.batchRemove(ids);
 		return R.ok();
 	}

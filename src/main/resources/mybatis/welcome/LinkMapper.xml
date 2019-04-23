@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.LinkDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.LinkDO">
+		select `id`,`uv_code`,`lk_name`,`lk_description`,`lk_code` from yx_link where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.LinkDO">
+		select `id`,`uv_code`,`lk_name`,`lk_description`,`lk_code` from yx_link
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="lkName != null and lkName != ''"> and lk_name = #{lkName} </if>
+		  		  <if test="lkDescription != null and lkDescription != ''"> and lk_description = #{lkDescription} </if>
+		  		  <if test="lkCode != null and lkCode != ''"> and lk_code = #{lkCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_link
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="lkName != null and lkName != ''"> and lk_name = #{lkName} </if>
+		  		  <if test="lkDescription != null and lkDescription != ''"> and lk_description = #{lkDescription} </if>
+		  		  <if test="lkCode != null and lkCode != ''"> and lk_code = #{lkCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.LinkDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_link
+		(
+			`uv_code`, 
+			`lk_name`, 
+			`lk_description`, 
+			`lk_code`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{lkName}, 
+			#{lkDescription}, 
+			#{lkCode}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.LinkDO">
+		update yx_link 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="lkName != null">`lk_name` = #{lkName}, </if>
+			<if test="lkDescription != null">`lk_description` = #{lkDescription}, </if>
+			<if test="lkCode != null">`lk_code` = #{lkCode}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_link where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_link where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.ExpendsSubjectsDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.ExpendsSubjectsDO">
+		select `id`,`uv_code`,`sub_name`,`sub_description`,`sub_code`,`cl_zy`,`sub_cost`,`sub_flag`,`del_flag` from yx_expends_subjects where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.ExpendsSubjectsDO">
+		select `id`,`uv_code`,`sub_name`,`sub_description`,`sub_code`,`cl_zy`,`sub_cost`,`sub_flag`,`del_flag` from yx_expends_subjects
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="subName != null and subName != ''"> and sub_name = #{subName} </if>
+		  		  <if test="subDescription != null and subDescription != ''"> and sub_description = #{subDescription} </if>
+		  		  <if test="subCode != null and subCode != ''"> and sub_code = #{subCode} </if>
+		  		  <if test="clZy != null and clZy != ''"> and cl_zy = #{clZy} </if>
+		  		  <if test="subCost != null and subCost != ''"> and sub_cost = #{subCost} </if>
+		  		  <if test="subFlag != null and subFlag != ''"> and sub_flag = #{subFlag} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_expends_subjects
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="subName != null and subName != ''"> and sub_name = #{subName} </if>
+		  		  <if test="subDescription != null and subDescription != ''"> and sub_description = #{subDescription} </if>
+		  		  <if test="subCode != null and subCode != ''"> and sub_code = #{subCode} </if>
+		  		  <if test="clZy != null and clZy != ''"> and cl_zy = #{clZy} </if>
+		  		  <if test="subCost != null and subCost != ''"> and sub_cost = #{subCost} </if>
+		  		  <if test="subFlag != null and subFlag != ''"> and sub_flag = #{subFlag} </if>
+		  		  <if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.ExpendsSubjectsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_expends_subjects
+		(
+			`uv_code`, 
+			`sub_name`, 
+			`sub_description`, 
+			`sub_code`, 
+			`cl_zy`, 
+			`sub_cost`, 
+			`sub_flag`, 
+			`del_flag`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{subName}, 
+			#{subDescription}, 
+			#{subCode}, 
+			#{clZy}, 
+			#{subCost}, 
+			#{subFlag}, 
+			#{delFlag}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.ExpendsSubjectsDO">
+		update yx_expends_subjects 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="subName != null">`sub_name` = #{subName}, </if>
+			<if test="subDescription != null">`sub_description` = #{subDescription}, </if>
+			<if test="subCode != null">`sub_code` = #{subCode}, </if>
+			<if test="clZy != null">`cl_zy` = #{clZy}, </if>
+			<if test="subCost != null">`sub_cost` = #{subCost}, </if>
+			<if test="subFlag != null">`sub_flag` = #{subFlag}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_expends_subjects where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_expends_subjects where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

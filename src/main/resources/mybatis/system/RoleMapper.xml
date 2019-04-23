@@ -3,13 +3,13 @@
 
 <mapper namespace="com.bootdo.system.dao.RoleDao">
 
-	<select id="get" resultType="com.bootdo.system.domain.RoleDO">
+	<select id="findOneById" resultType="com.bootdo.system.domain.RoleDO">
 		select
 		`role_id`,`role_name`,`role_sign`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
 		from sys_role where role_id = #{value}
 	</select>
 
-	<select id="list" resultType="com.bootdo.system.domain.RoleDO">
+	<select id="findPageListByMap" resultType="com.bootdo.system.domain.RoleDO">
 		select
 		`role_id`,`role_name`,`role_sign`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
 		from sys_role
@@ -35,7 +35,7 @@
 		</if>
 	</select>
 
-	<select id="count" resultType="int">
+	<select id="countByMap" resultType="int">
 		select count(*) from sys_role
 		<where>
 			<if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
@@ -70,7 +70,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.bootdo.system.domain.RoleDO">
+	<update id="updateById" parameterType="com.bootdo.system.domain.RoleDO">
 		update sys_role
 		<set>
 			<if test="roleName != null">`role_name` = #{roleName}, </if>
@@ -83,11 +83,11 @@
 		where role_id = #{roleId}
 	</update>
 
-	<delete id="remove">
+	<delete id="removeById">
 		delete from sys_role where role_id = #{value}
 	</delete>
 
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from sys_role where role_id in
 		<foreach item="roleId" collection="array" open="(" separator=","
 			close=")">

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.admin.YXDeptDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXDeptDao">
+		select `id`,`uv_code`,`parent_id`,`d_name`,`d_order`,`d_flag` from yx_dept where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXDeptDao">
+		select `id`,`uv_code`,`parent_id`,`d_name`,`d_order`,`d_flag` from yx_dept
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+		  		  <if test="dName != null and dName != ''"> and d_name = #{dName} </if>
+		  		  <if test="dOrder != null and dOrder != ''"> and d_order = #{dOrder} </if>
+		  		  <if test="dFlag != null and dFlag != ''"> and d_flag = #{dFlag} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_dept
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+		  		  <if test="dName != null and dName != ''"> and d_name = #{dName} </if>
+		  		  <if test="dOrder != null and dOrder != ''"> and d_order = #{dOrder} </if>
+		  		  <if test="dFlag != null and dFlag != ''"> and d_flag = #{dFlag} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXDeptDao" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_dept
+		(
+			`uv_code`, 
+			`parent_id`, 
+			`d_name`, 
+			`d_order`, 
+			`d_flag`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{parentId}, 
+			#{dName}, 
+			#{dOrder}, 
+			#{dFlag}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXDeptDao">
+		update yx_dept 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="parentId != null">`parent_id` = #{parentId}, </if>
+			<if test="dName != null">`d_name` = #{dName}, </if>
+			<if test="dOrder != null">`d_order` = #{dOrder}, </if>
+			<if test="dFlag != null">`d_flag` = #{dFlag}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_dept where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_dept where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

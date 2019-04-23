@@ -3,12 +3,12 @@
 
 <mapper namespace="com.bootdo.system.dao.RoleMenuDao">
 
-	<select id="get" resultType="com.bootdo.system.domain.RoleMenuDO">
+	<select id="findOneById" resultType="com.bootdo.system.domain.RoleMenuDO">
 		select `id`,`role_id`,`menu_id` from
 		sys_role_menu where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.bootdo.system.domain.RoleMenuDO">
+	<select id="findPageListByMap" resultType="com.bootdo.system.domain.RoleMenuDO">
 		select `id`,`role_id`,`menu_id` from sys_role_menu
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -28,7 +28,7 @@
 		</if>
 	</select>
 
-	<select id="count" resultType="int">
+	<select id="countByMap" resultType="int">
 		select count(*) from sys_role_menu
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -51,7 +51,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.bootdo.system.domain.RoleMenuDO">
+	<update id="updateById" parameterType="com.bootdo.system.domain.RoleMenuDO">
 		update sys_role_menu
 		<set>
 			<if test="roleId != null">`role_id` = #{roleId}, </if>
@@ -60,11 +60,11 @@
 		where id = #{id}
 	</update>
 
-	<delete id="remove">
+	<delete id="removeById">
 		delete from sys_role_menu where id = #{value}
 	</delete>
 
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from sys_role_menu where id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">

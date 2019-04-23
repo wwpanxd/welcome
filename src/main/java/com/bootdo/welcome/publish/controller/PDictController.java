@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("welcome/publish/dict")
+@RequestMapping("welcome/publish/yw/dict")
 @Api(value="字典枚举相关",description="字典枚举相关")
 public class PDictController extends BaseController{
 

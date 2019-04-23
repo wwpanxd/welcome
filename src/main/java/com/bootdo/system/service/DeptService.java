@@ -22,17 +22,17 @@ public class DeptService {
 
 	
 	public DeptDO get(Long deptId){
-		return sysDeptMapper.get(deptId);
+		return sysDeptMapper.findOneById(deptId);
 	}
 
 	
 	public List<DeptDO> list(Map<String, Object> map){
-		return sysDeptMapper.list(map);
+		return sysDeptMapper.findPageListByMap(map);
 	}
 
 	
 	public int count(Map<String, Object> map){
-		return sysDeptMapper.count(map);
+		return sysDeptMapper.countByMap(map);
 	}
 
 	
@@ -42,23 +42,23 @@ public class DeptService {
 
 	
 	public int update(DeptDO sysDept){
-		return sysDeptMapper.update(sysDept);
+		return sysDeptMapper.updateById(sysDept);
 	}
 
 	
 	public int remove(Long deptId){
-		return sysDeptMapper.remove(deptId);
+		return sysDeptMapper.removeById(deptId);
 	}
 
 	
 	public int batchRemove(Long[] deptIds){
-		return sysDeptMapper.batchRemove(deptIds);
+		return sysDeptMapper.batchRemoveByIds(deptIds);
 	}
 
 	
 	public Tree<DeptDO> getTree() {
 		List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
-		List<DeptDO> sysDepts = sysDeptMapper.list(new HashMap<String,Object>(16));
+		List<DeptDO> sysDepts = sysDeptMapper.findPageListByMap(new HashMap<String,Object>(16));
 		for (DeptDO sysDept : sysDepts) {
 			Tree<DeptDO> tree = new Tree<DeptDO>();
 			tree.setId(sysDept.getDeptId().toString());

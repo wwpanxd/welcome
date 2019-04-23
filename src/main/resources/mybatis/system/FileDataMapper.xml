@@ -3,7 +3,7 @@
 
 <mapper namespace="com.bootdo.system.dao.FileDataDao">
 
-	<select id="get" resultType="com.bootdo.system.domain.FileDataDO">
+	<select id="findOneById" resultType="com.bootdo.system.domain.FileDataDO">
 		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data where id = #{value}
 	</select>
 	
@@ -11,7 +11,7 @@
 		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data where fname = #{value} limit 1
 	</select>
 
-	<select id="list" resultType="com.bootdo.system.domain.FileDataDO">
+	<select id="findPageListByMap" resultType="com.bootdo.system.domain.FileDataDO">
 		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -35,7 +35,7 @@
 		</if>
 	</select>
 	
- 	<select id="count" resultType="int">
+ 	<select id="countByMap" resultType="int">
 		select count(*) from yw_file_data
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -69,7 +69,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.bootdo.system.domain.FileDataDO">
+	<update id="updateById" parameterType="com.bootdo.system.domain.FileDataDO">
 		update yw_file_data 
 		<set>
 			<if test="fname != null">`fname` = #{fname}, </if>
@@ -82,11 +82,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="remove">
+	<delete id="removeById">
 		delete from yw_file_data where id = #{value}
 	</delete>
 	
-	<delete id="batchRemove">
+	<delete id="batchRemoveByIds">
 		delete from yw_file_data where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}

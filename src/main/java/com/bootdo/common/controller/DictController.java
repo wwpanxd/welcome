@@ -41,8 +41,8 @@ public class DictController extends BaseController {
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		Query query = new Query(params);
-		List<DictDO> dictList = dictService.list(query);
-		int total = dictService.count(query);
+		List<DictDO> dictList = dictService.findPageListByMap(query);
+		int total = dictService.countByMap(query);
 		PageUtils pageUtils = new PageUtils(dictList, total);
 		return pageUtils;
 	}
@@ -56,7 +56,7 @@ public class DictController extends BaseController {
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("common:dict:edit")
 	String edit(@PathVariable("id") Long id, Model model) {
-		DictDO dict = dictService.get(id);
+		DictDO dict = dictService.findOneById(id);
 		model.addAttribute("dict", dict);
 		return "common/dict/edit";
 	}
@@ -87,7 +87,7 @@ public class DictController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		dictService.update(dict);
+		dictService.updateById(dict);
 		return R.ok();
 	}
 
@@ -101,7 +101,7 @@ public class DictController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		if (dictService.remove(id) > 0) {
+		if (dictService.removeById(id) > 0) {
 			return R.ok();
 		}
 		return R.error();
@@ -117,7 +117,7 @@ public class DictController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		dictService.batchRemove(ids);
+		dictService.batchRemoveByIds(ids);
 		return R.ok();
 	}
 
@@ -142,7 +142,7 @@ public class DictController extends BaseController {
 		// 查询列表数据
 		Map<String, Object> map = new HashMap<>(16);
 		map.put("type", type);
-		List<DictDO> dictList = dictService.list(map);
+		List<DictDO> dictList = dictService.findPageListByMap(map);
 		return dictList;
 	}
 }

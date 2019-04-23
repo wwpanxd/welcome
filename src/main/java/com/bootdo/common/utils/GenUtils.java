@@ -33,7 +33,7 @@ public class GenUtils {
         templates.add("templates/common/generator/Dao.java.vm");
         //templates.add("templates/common/generator/Mapper.java.vm");
         templates.add("templates/common/generator/Mapper.xml.vm");
-        templates.add("templates/common/generator/Service.java.vm");
+//        templates.add("templates/common/generator/Service.java.vm");
         templates.add("templates/common/generator/ServiceImpl.java.vm");
         templates.add("templates/common/generator/Controller.java.vm");
         templates.add("templates/common/generator/list.html.vm");
@@ -191,12 +191,13 @@ public class GenUtils {
 //			return packagePath + "dao" + File.separator + className + "Mapper.java";
 //		}
 
-        if (template.contains("Service.java.vm")) {
-            return packagePath + "service" + File.separator + className + "Service.java";
-        }
+//        if (template.contains("Service.java.vm")) {
+//            return packagePath + "service" + File.separator + className + "Service.java";
+//        }
 
         if (template.contains("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+//            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+            return packagePath + "service" + File.separator  + className + "Service.java";
         }
 
         if (template.contains("Controller.java.vm")) {

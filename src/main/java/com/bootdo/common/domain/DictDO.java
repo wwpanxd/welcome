@@ -1,9 +1,7 @@
 package com.bootdo.common.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,39 +9,58 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 字典表
+ * 
+ * @author wwpan
+ * @email wwpan.xd@163.com
+ * @date 2019-04-22 11:52:54
  */
-@ApiModel(value="DictDO",description="字典表字段")
+@ApiModel(value = "DictDO", description = "字典表") 
 public class DictDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//编号
+	@ApiModelProperty(value = "编号")
 	private Long id;
-	@ApiModelProperty(value="标签名")
+	//标签名
+	@ApiModelProperty(value = "标签名")
 	private String name;
-	@ApiModelProperty(value="数据值")
+	//数据值
+	@ApiModelProperty(value = "数据值")
 	private String value;
-	@ApiModelProperty(value="标签类型")
+	//类型
+	@ApiModelProperty(value = "类型")
 	private String type;
-	@ApiModelProperty(value="标签描述")
+	//描述
+	@ApiModelProperty(value = "描述")
 	private String description;
-	@ApiModelProperty(value="标签排序")
-	private BigDecimal sort;
-	@ApiModelProperty(value="父级编号")
+	//排序（升序）
+	@ApiModelProperty(value = "排序（升序）")
+	private Integer sort;
+	//父级编号
+	@ApiModelProperty(value = "父级编号")
 	private Long parentId;
 	//创建者
+	@ApiModelProperty(value = "创建者")
 	private Integer createBy;
 	//创建时间
+	@ApiModelProperty(value = "创建时间")
 	private Date createDate;
 	//更新者
+	@ApiModelProperty(value = "更新者")
 	private Long updateBy;
 	//更新时间
+	@ApiModelProperty(value = "更新时间")
 	private Date updateDate;
 	//备注信息
+	@ApiModelProperty(value = "备注信息")
 	private String remarks;
-	@ApiModelProperty(value="删除标记")
+	//删除标记
+	@ApiModelProperty(value = "删除标记")
 	private String delFlag;
-	@ApiModelProperty(value="隐藏类型：1-前端显示，0-前端隐藏")
+	//类型区分(1-给客户展示的字段，0-隐藏的字段)
+	@ApiModelProperty(value = "类型区分(1-给客户展示的字段，0-隐藏的字段)")
 	private Integer dmode;
+
 	/**
 	 * 设置：编号
 	 */
@@ -107,13 +124,13 @@ public class DictDO implements Serializable {
 	/**
 	 * 设置：排序（升序）
 	 */
-	public void setSort(BigDecimal sort) {
+	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
 	/**
 	 * 获取：排序（升序）
 	 */
-	public BigDecimal getSort() {
+	public Integer getSort() {
 		return sort;
 	}
 	/**
@@ -200,29 +217,16 @@ public class DictDO implements Serializable {
 	public String getDelFlag() {
 		return delFlag;
 	}
-
-	@Override
-	public String toString() {
-		return "DictDO{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", value='" + value + '\'' +
-				", type='" + type + '\'' +
-				", description='" + description + '\'' +
-				", sort=" + sort +
-				", parentId=" + parentId +
-				", createBy=" + createBy +
-				", createDate=" + createDate +
-				", updateBy=" + updateBy +
-				", updateDate=" + updateDate +
-				", remarks='" + remarks + '\'' +
-				", delFlag='" + delFlag + '\'' +
-				'}';
-	}
-	public Integer getDmode() {
-		return dmode;
-	}
+	/**
+	 * 设置：类型区分(1-给客户展示的字段，0-隐藏的字段)
+	 */
 	public void setDmode(Integer dmode) {
 		this.dmode = dmode;
+	}
+	/**
+	 * 获取：类型区分(1-给客户展示的字段，0-隐藏的字段)
+	 */
+	public Integer getDmode() {
+		return dmode;
 	}
 }

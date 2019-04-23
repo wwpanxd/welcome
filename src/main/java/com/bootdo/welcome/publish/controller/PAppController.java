@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Controller
-@RequestMapping("welcome/publish/app")
+@RequestMapping("welcome/publish/yw/app")
 @Api(value="app更新检查",description="app更新检查")
 public class PAppController {
 	

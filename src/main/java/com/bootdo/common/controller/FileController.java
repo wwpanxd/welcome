@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +46,8 @@ public class FileController extends BaseController {
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		Query query = new Query(params);
-		List<FileDO> sysFileList = sysFileService.list(query);
-		int total = sysFileService.count(query);
+		List<FileDO> sysFileList = sysFileService.findPageListByMap(query);
+		int total = sysFileService.countByMap(query);
 		PageUtils pageUtils = new PageUtils(sysFileList, total);
 		return pageUtils;
 	}
@@ -62,7 +61,7 @@ public class FileController extends BaseController {
 	@GetMapping("/edit")
 	// @RequiresPermissions("common:bComments")
 	String edit(Long id, Model model) {
-		FileDO sysFile = sysFileService.get(id);
+		FileDO sysFile = sysFileService.findOneById(id);
 		model.addAttribute("sysFile", sysFile);
 		return "common/sysFile/edit";
 	}
@@ -73,7 +72,7 @@ public class FileController extends BaseController {
 	@RequestMapping("/info/{id}")
 	@RequiresPermissions("common:info")
 	public R info(@PathVariable("id") Long id) {
-		FileDO sysFile = sysFileService.get(id);
+		FileDO sysFile = sysFileService.findOneById(id);
 		return R.ok().put("sysFile", sysFile);
 	}
 
@@ -96,7 +95,7 @@ public class FileController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("common:update")
 	public R update(@RequestBody FileDO sysFile) {
-		sysFileService.update(sysFile);
+		sysFileService.updateById(sysFile);
 
 		return R.ok();
 	}
@@ -111,8 +110,8 @@ public class FileController extends BaseController {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
-		if (sysFileService.remove(id) > 0) {
+		String fileName = bootdoConfig.getUploadPath() + sysFileService.findOneById(id).getUrl().replace("/files/", "");
+		if (sysFileService.removeById(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
 				return R.error("数据库记录删除成功，文件删除失败");
@@ -133,7 +132,7 @@ public class FileController extends BaseController {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		sysFileService.batchRemove(ids);
+		sysFileService.batchRemoveByIds(ids);
 		return R.ok();
 	}
 
