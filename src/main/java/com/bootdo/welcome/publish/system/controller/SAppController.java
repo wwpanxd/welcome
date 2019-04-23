@@ -1,4 +1,4 @@
-package com.bootdo.system.publish.controller;
+package com.bootdo.welcome.publish.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

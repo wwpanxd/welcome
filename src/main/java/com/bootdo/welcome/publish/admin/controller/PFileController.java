@@ -1,4 +1,4 @@
-package com.bootdo.system.publish.controller;
+package com.bootdo.welcome.publish.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ import io.swagger.annotations.ApiOperation;
 
 
 @Controller
-@RequestMapping("welcome/publish/sys/file")
+@RequestMapping("welcome/publish/yw/file")
 @Api(value="文件上传下载",description="文件上传下载")
-public class SFileController {
+public class PFileController {
 
 	@Autowired
 	FileDataService filedataservice;

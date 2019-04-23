@@ -1,4 +1,4 @@
-package com.bootdo.system.publish.controller;
+package com.bootdo.welcome.publish.system.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +27,7 @@ import com.bootdo.system.service.MenuService;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
 import com.bootdo.system.vo.UserVO;
-import com.bootdo.welcome.publish.controller.PUserController;
+import com.bootdo.welcome.publish.admin.controller.PUserController;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;

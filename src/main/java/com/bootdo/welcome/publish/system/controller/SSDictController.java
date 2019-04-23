@@ -1,4 +1,4 @@
-package com.bootdo.system.publish.controller;
+package com.bootdo.welcome.publish.system.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.system.domain.DeptDO;
-import com.bootdo.system.service.DeptService;
+import com.bootdo.common.service.DictService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
@@ -28,25 +27,26 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import com.bootdo.common.annotation.Log;
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
- * 部门管理 相关服务
+ * 字典表 相关服务
  * @author wwpan
  * @email wwpan.xd@163.com
  * @date 2019-04-23 16:05:45
  */
  
 @RestController
-@RequestMapping("/welcome/dept")
-@Api(value="部门管理相关服务",description="部门管理相关服务")
-public class SDeptController {
+@RequestMapping("/welcome/dict")
+@Api(value="字典表相关服务",description="字典表相关服务")
+public class SSDictController {
 
-	static Logger log = LoggerFactory.getLogger(SDeptController.class);
+	static Logger log = LoggerFactory.getLogger(SSDictController.class);
 	
 	@Autowired
-	private DeptService deptService;
+	private DictService dictService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
@@ -58,14 +58,14 @@ public class SDeptController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({
-		@ApiResponse( response = DeptDO.class, code = 200, message = "返回结构:DeptDO的list")
+		@ApiResponse( response = DictDO.class, code = 200, message = "返回结构:DictDO的list")
 	})
-	public List<DeptDO> getList(@RequestParam DeptDO condition){
+	public List<DictDO> getList(@RequestParam DictDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
        
-		return deptService.list(params);
+		return dictService.findPageListByMap(params);
 	}
 	
 	@Log("获取xxx分页列表")
@@ -78,7 +78,7 @@ public class SDeptController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam DeptDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam DictDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -88,8 +88,8 @@ public class SDeptController {
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
 		
 		PQuery query = new PQuery(params);
-		int total = deptService.count(query);		
-		PPageUtils pageUtil = new PPageUtils(deptService.list(query), total,page,size);
+		int total = dictService.countByMap(query);		
+		PPageUtils pageUtil = new PPageUtils(dictService.findPageListByMap(query), total,page,size);
 		return pageUtil;
 	}
 	
@@ -97,15 +97,15 @@ public class SDeptController {
 	@Log("添加XXX")
 	@PostMapping("/save")
 	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Dept，是DeptDO(XXX类)")
+			+ "入参Dict，是DictDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  DeptDO dept) {
+	public PR save(@RequestBody  DictDO dict) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if(deptService.save(dept)>0){
+		if(dictService.save(dict)>0){
 			return PR.ok("添加XXX成功");
 		}
 		return PR.error("添加XXX失败");
@@ -114,16 +114,16 @@ public class SDeptController {
 	@Log("修改XXX信息")
 	@PostMapping("/update")
 	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Dept，是DeptDO(XXX类)")
+		+ "入参Dict，是DictDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody DeptDO dept) {
+	public PR update(@RequestBody DictDO dict) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if (deptService.update(dept) > 0) {
+		if (dictService.updateById(dict) > 0) {
 			
 			return PR.ok("修改XXX成功");
 		}
@@ -140,7 +140,7 @@ public class SDeptController {
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(deptService.remove(vid.getId())>0){
+		if(dictService.removeById(vid.getId())>0){
 			return PR.ok("删除XXX成功");
 		}
 		return PR.error("删除XXX失败");
@@ -155,7 +155,7 @@ public class SDeptController {
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
-		if(deptService.batchRemove(bids.getIds())>0){
+		if(dictService.batchRemoveByIds(bids.getIds())>0){
 			return PR.ok("批量删除XXX成功");
 		}
 		return PR.error("批量删除XXX失败");

@@ -1,4 +1,4 @@
-package com.bootdo.system.publish.controller;
+package com.bootdo.welcome.publish.admin.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.system.domain.MenuDO;
-import com.bootdo.system.service.MenuService;
+import com.bootdo.welcome.domain.admin.YXUniversityDO;
+import com.bootdo.welcome.service.admin.YXUniversityService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
@@ -32,21 +32,21 @@ import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
- * 菜单管理 相关服务
+ * 迎新学校基础信息表 相关服务
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-23 16:05:46
+ * @date 2019-04-23 16:08:26
  */
  
 @RestController
-@RequestMapping("/welcome/menu")
-@Api(value="菜单管理相关服务",description="菜单管理相关服务")
-public class SMenuController {
+@RequestMapping("/welcome/university")
+@Api(value="迎新学校基础信息表相关服务",description="迎新学校基础信息表相关服务")
+public class UniversityController {
 
-	static Logger log = LoggerFactory.getLogger(SMenuController.class);
+	static Logger log = LoggerFactory.getLogger(UniversityController.class);
 	
 	@Autowired
-	private MenuService menuService;
+	private YXUniversityService universityService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
@@ -58,54 +58,54 @@ public class SMenuController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({
-		@ApiResponse( response = MenuDO.class, code = 200, message = "返回结构:MenuDO的list")
+		@ApiResponse( response = YXUniversityDO.class, code = 200, message = "返回结构:YXUniversityDO的list")
 	})
-	public List<MenuDO> getList(@RequestParam MenuDO condition){
+	public List<YXUniversityDO> getList(@RequestParam YXUniversityDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
        
-		return menuService.list(params);
+		return universityService.list(params);
 	}
 	
-//	@Log("获取xxx分页列表")
-//	@GetMapping("/list/page")
-//	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
-//    @ApiImplicitParams({
-//		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
-//		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
-//    })
-//	@ApiResponses({
-//		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
-//	})
-//	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam MenuDO condition){
-//		//查询列表数据
-//		Map<String,Object> params = new HashMap<String,Object>();
-//		params.put("page", page);//数据偏移量
-//		params.put("size", size);//每页条数
-//		params.put("sort", "id");//每页条数
-//		params.put("order", "asc");//每页条数
-////     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
-//		
-//		PQuery query = new PQuery(params);
-//		int total = menuService.count(query);		
-//		PPageUtils pageUtil = new PPageUtils(menuService.list(query), total,page,size);
-//		return pageUtil;
-//	}
+	@Log("获取xxx分页列表")
+	@GetMapping("/list/page")
+	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+    @ApiImplicitParams({
+		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
+		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
+    })
+	@ApiResponses({
+		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
+	})
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam YXUniversityDO condition){
+		//查询列表数据
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("page", page);//数据偏移量
+		params.put("size", size);//每页条数
+		params.put("sort", "id");//每页条数
+		params.put("order", "asc");//每页条数
+//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
+		
+		PQuery query = new PQuery(params);
+		int total = universityService.count(query);		
+		PPageUtils pageUtil = new PPageUtils(universityService.list(query), total,page,size);
+		return pageUtil;
+	}
 	
 	
 	@Log("添加XXX")
 	@PostMapping("/save")
 	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Menu，是MenuDO(XXX类)")
+			+ "入参University，是YXUniversityDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  MenuDO menu) {
+	public PR save(@RequestBody  YXUniversityDO university) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if(menuService.save(menu)>0){
+		if(universityService.save(university)>0){
 			return PR.ok("添加XXX成功");
 		}
 		return PR.error("添加XXX失败");
@@ -114,16 +114,16 @@ public class SMenuController {
 	@Log("修改XXX信息")
 	@PostMapping("/update")
 	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Menu，是MenuDO(XXX类)")
+		+ "入参University，是YXUniversityDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody MenuDO menu) {
+	public PR update(@RequestBody YXUniversityDO university) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if (menuService.update(menu) > 0) {
+		if (universityService.update(university) > 0) {
 			
 			return PR.ok("修改XXX成功");
 		}
@@ -140,25 +140,25 @@ public class SMenuController {
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(menuService.remove(vid.getId())>0){
+		if(universityService.remove(vid.getId())>0){
 			return PR.ok("删除XXX成功");
 		}
 		return PR.error("删除XXX失败");
 		
 	}
 	
-//	@Log("批量删除XXX信息")
-//	@PostMapping("/batchRemove")
-//	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
-//	@ApiResponses({
-//		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
-//	})
-//	public PR remove(@RequestBody BatchRemoveInput bids) {
-//		
-//		if(menuService.batchRemove(bids.getIds())>0){
-//			return PR.ok("批量删除XXX成功");
-//		}
-//		return PR.error("批量删除XXX失败");
-//	}
+	@Log("批量删除XXX信息")
+	@PostMapping("/batchRemove")
+	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiResponses({
+		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
+	})
+	public PR remove(@RequestBody BatchRemoveInput bids) {
+		
+		if(universityService.batchRemove(bids.getIds())>0){
+			return PR.ok("批量删除XXX成功");
+		}
+		return PR.error("批量删除XXX失败");
+	}
 	
 }

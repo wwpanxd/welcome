@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.controller;
+package com.bootdo.welcome.publish.admin.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.welcome.domain.admin.YXMenuDO;
-import com.bootdo.welcome.service.admin.YXMenuService;
+import com.bootdo.welcome.domain.admin.YXEnterpriseDO;
+import com.bootdo.welcome.service.admin.YXEnterpriseService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,21 +32,21 @@ import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
- * 菜单管理 相关服务
+ * 注册企业学校表 相关服务
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-23 16:07:27
+ * @date 2019-04-23 15:42:34
  */
  
 @RestController
-@RequestMapping("/welcome/pp/menu")
-@Api(value="菜单管理相关服务",description="菜单管理相关服务")
-public class PMenuController {
+@RequestMapping("/welcome/enterprise")
+@Api(value="注册企业学校表相关服务",description="注册企业学校表相关服务")
+public class PEnterpriseController {
 
-	static Logger log = LoggerFactory.getLogger(PMenuController.class);
+	static Logger log = LoggerFactory.getLogger(PEnterpriseController.class);
 	
 	@Autowired
-	private YXMenuService menuService;
+	private YXEnterpriseService enterpriseService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
@@ -58,14 +58,14 @@ public class PMenuController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({
-		@ApiResponse( response = YXMenuDO.class, code = 200, message = "返回结构:YXMenuDO的list")
+		@ApiResponse( response = YXEnterpriseDO.class, code = 200, message = "返回结构:YXEnterpriseDO的list")
 	})
-	public List<YXMenuDO> getList(@RequestParam YXMenuDO condition){
+	public List<YXEnterpriseDO> getList(@RequestParam YXEnterpriseDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
        
-		return menuService.list(params);
+		return enterpriseService.list(params);
 	}
 	
 	@Log("获取xxx分页列表")
@@ -78,7 +78,7 @@ public class PMenuController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam YXMenuDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam YXEnterpriseDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -88,8 +88,8 @@ public class PMenuController {
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
 		
 		PQuery query = new PQuery(params);
-		int total = menuService.count(query);		
-		PPageUtils pageUtil = new PPageUtils(menuService.list(query), total,page,size);
+		int total = enterpriseService.count(query);		
+		PPageUtils pageUtil = new PPageUtils(enterpriseService.list(query), total,page,size);
 		return pageUtil;
 	}
 	
@@ -97,15 +97,15 @@ public class PMenuController {
 	@Log("添加XXX")
 	@PostMapping("/save")
 	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Menu，是YXMenuDO(XXX类)")
+			+ "入参Enterprise，是YXEnterpriseDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  YXMenuDO menu) {
+	public PR save(@RequestBody  YXEnterpriseDO enterprise) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if(menuService.save(menu)>0){
+		if(enterpriseService.save(enterprise)>0){
 			return PR.ok("添加XXX成功");
 		}
 		return PR.error("添加XXX失败");
@@ -114,16 +114,16 @@ public class PMenuController {
 	@Log("修改XXX信息")
 	@PostMapping("/update")
 	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Menu，是YXMenuDO(XXX类)")
+		+ "入参Enterprise，是YXEnterpriseDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody YXMenuDO menu) {
+	public PR update(@RequestBody YXEnterpriseDO enterprise) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if (menuService.update(menu) > 0) {
+		if (enterpriseService.update(enterprise) > 0) {
 			
 			return PR.ok("修改XXX成功");
 		}
@@ -140,7 +140,7 @@ public class PMenuController {
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(menuService.remove(vid.getId())>0){
+		if(enterpriseService.remove(vid.getId())>0){
 			return PR.ok("删除XXX成功");
 		}
 		return PR.error("删除XXX失败");
@@ -155,7 +155,7 @@ public class PMenuController {
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
-		if(menuService.batchRemove(bids.getIds())>0){
+		if(enterpriseService.batchRemove(bids.getIds())>0){
 			return PR.ok("批量删除XXX成功");
 		}
 		return PR.error("批量删除XXX失败");

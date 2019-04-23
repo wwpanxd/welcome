@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.controller;
+package com.bootdo.welcome.publish.system.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.welcome.domain.admin.YXDeptDO;
-import com.bootdo.welcome.service.admin.YXDeptService;
+import com.bootdo.system.domain.DeptDO;
+import com.bootdo.system.service.DeptService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
@@ -32,21 +32,21 @@ import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
- *  学校组织机构相关服务
+ * 部门管理 相关服务
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-23 16:06:36
+ * @date 2019-04-23 16:05:45
  */
  
 @RestController
-@RequestMapping("/welcome/pp/dept")
-@Api(value="学校组织机构相关服务",description="学校组织机构相关服务")
-public class PDeptController {
+@RequestMapping("/welcome/dept")
+@Api(value="部门管理相关服务",description="部门管理相关服务")
+public class SDeptController {
 
-	static Logger log = LoggerFactory.getLogger(PDeptController.class);
+	static Logger log = LoggerFactory.getLogger(SDeptController.class);
 	
 	@Autowired
-	private YXDeptService deptService;
+	private DeptService deptService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
@@ -58,9 +58,9 @@ public class PDeptController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({
-		@ApiResponse( response = YXDeptDO.class, code = 200, message = "返回结构:YXDeptDO的list")
+		@ApiResponse( response = DeptDO.class, code = 200, message = "返回结构:DeptDO的list")
 	})
-	public List<YXDeptDO> getList(@RequestParam YXDeptDO condition){
+	public List<DeptDO> getList(@RequestParam DeptDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -78,7 +78,7 @@ public class PDeptController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam YXDeptDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam DeptDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -97,11 +97,11 @@ public class PDeptController {
 	@Log("添加XXX")
 	@PostMapping("/save")
 	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Dept，是YXDeptDO(XXX类)")
+			+ "入参Dept，是DeptDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  YXDeptDO dept) {
+	public PR save(@RequestBody  DeptDO dept) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
@@ -114,11 +114,11 @@ public class PDeptController {
 	@Log("修改XXX信息")
 	@PostMapping("/update")
 	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Dept，是YXDeptDO(XXX类)")
+		+ "入参Dept，是DeptDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody YXDeptDO dept) {
+	public PR update(@RequestBody DeptDO dept) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
@@ -134,7 +134,7 @@ public class PDeptController {
 	@PostMapping("/remove")
 	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "YXDeptDO",paramType="body" ,example= "{'id':165}")
+		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")

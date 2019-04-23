@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.controller;
+package com.bootdo.welcome.publish.admin.controller;
 
 
 import java.util.ArrayList;
