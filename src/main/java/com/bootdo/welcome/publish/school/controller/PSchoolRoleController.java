@@ -1,5 +1,7 @@
 package com.bootdo.welcome.publish.school.controller;
 
+import com.bootdo.welcome.vo.SchoolUserRoleVO;
+
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -10,12 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
+import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolUserRoleDo;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -53,10 +55,10 @@ public class PSchoolRoleController extends BaseController {
 	@PostMapping(value = "updaterole")
 	@ApiOperation(value = "更新角色", notes = "提交角色id和角色名称")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "角色id", required = true, dataType = "long", paramType = "query"),
+			@ApiImplicitParam(name = "id", value = "角色id", required = true, dataType = "int", paramType = "query"),
 			@ApiImplicitParam(name = "name", value = "角色名称", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R update(@RequestParam("id") long id, @RequestParam("name") String roleName) {
+	public R update(SchoolUserRoleVO schoolUserRoleVO) {
 		return R.ok();
 	}
 
@@ -64,10 +66,8 @@ public class PSchoolRoleController extends BaseController {
 	@ResponseBody
 	@PostMapping(value = "deleterole")
 	@ApiOperation(value = "删除角色", notes = "提交角色id")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "角色id", required = true, dataType = "long", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R delete(@RequestParam("id") long id) {
+	public R delete(DeletedIdVO deletedIdVO) {
 		return R.ok();
 	}
 }

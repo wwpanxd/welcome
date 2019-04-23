@@ -1,5 +1,6 @@
 package com.bootdo.welcome.publish.school.controller;
 
+import com.bootdo.welcome.vo.SchoolDistrictVO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 import com.bootdo.welcome.domain.SchoolDistrictDO;
+import com.bootdo.welcome.vo.DeletedStringIdVO;
+import com.bootdo.welcome.vo.FindStringIdVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -55,7 +57,7 @@ public class PSchoolDistrictController extends BaseController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = SchoolDistrictDO.class, code = 200, message = "返回结构:SchoolDistrictDO") })
-	public R get(@RequestParam("schoolcode") String schoolcode) {
+	public R get(FindStringIdVO findStringId) {
 		SchoolDistrictDO schoolDistrictDO = new SchoolDistrictDO();
 		schoolDistrictDO.setId(1);
 		schoolDistrictDO.setSchoolName("学校名称");
@@ -71,13 +73,8 @@ public class PSchoolDistrictController extends BaseController {
 	@ResponseBody
 	@PostMapping(value = "/add")
 	@ApiOperation(value = "新增某个校区", notes = "提交校区编号、校区名字、校区地址来更新校区")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "schoolname", value = "校区名字", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "schooladdress", value = "校区地址", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R add(@RequestParam("schoolcode") String schoolcode, @RequestParam("schoolname") String schoolname,
-			@RequestParam("schooladdress") String schooladdress) {
+	public R add(SchoolDistrictVO schoolDistrictVO) {
 		return R.ok();
 	}
 
@@ -85,13 +82,8 @@ public class PSchoolDistrictController extends BaseController {
 	@ResponseBody
 	@PostMapping(value = "update")
 	@ApiOperation(value = "更新某个校区", notes = "提交校区编号、校区名字、校区地址来更新校区")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "schoolname", value = "校区名字", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "schooladdress", value = "校区地址", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R update(@RequestParam("schoolcode") String schoolcode, @RequestParam("schoolname") String schoolname,
-			@RequestParam("schooladdress") String schooladdress) {
+	public R update(SchoolDistrictDO schoolDistrictDO) {
 		return R.ok();
 	}
 
@@ -102,7 +94,7 @@ public class PSchoolDistrictController extends BaseController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R delete(@RequestParam("schoolcode") String schoolcode) {
+	public R delete(DeletedStringIdVO deletedStringIdVO) {
 		return R.ok();
 	}
 }

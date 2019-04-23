@@ -3,7 +3,7 @@ package com.bootdo.welcome.publish.school.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
-import com.bootdo.system.vo.DeletedIdVO;
+import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.vo.DeletedIdVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

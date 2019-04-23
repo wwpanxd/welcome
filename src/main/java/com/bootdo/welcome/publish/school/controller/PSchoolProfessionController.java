@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
+import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolDepartmentDO;
 import com.bootdo.welcome.domain.SchoolProfessionDO;
+import com.bootdo.welcome.vo.FindIdVO;
+import com.bootdo.welcome.vo.SchoolProfessionVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -47,10 +50,8 @@ public class PSchoolProfessionController extends BaseController {
 	@ResponseBody
 	@ApiOperation(value = "获取某个专业", notes = "获取某个专业")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "professionid", value = "专业id", required = true, dataType = "Long", paramType = "query"), })
-	@ApiResponses({
-			@ApiResponse(response = SchoolDepartmentDO.class, code = 200, message = "返回结构:SchoolDepartmentDO的对象") })
-	public R find(@RequestParam("professionid") Long professionid) {
+			@ApiImplicitParam(name = "professionid", value = "专业id", required = true, dataType = "int", paramType = "query"), })
+	public R find(FindIdVO findIdVO) {
 		SchoolProfessionDO schoolProfessionDO = new SchoolProfessionDO();
 		schoolProfessionDO.setProfessionName("主页名称");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -61,32 +62,24 @@ public class PSchoolProfessionController extends BaseController {
 	@PostMapping("add")
 	@ResponseBody
 	@ApiOperation(value = "增加一个专业", notes = "增加一个专业")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "professionname", value = "专业名称", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R add(@RequestParam("professionname") String professionname) {
+	public R add(SchoolProfessionVO schoolProfessionVO) {
 		return R.ok();
 	}
 
 	@PostMapping("update")
 	@ResponseBody
 	@ApiOperation(value = "更新某个专业", notes = "更新某个专业")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "professionname", value = "专业名称", required = true, dataType = "String", paramType = "query"),
-			@ApiImplicitParam(name = "professionid", value = "专业id", required = true, dataType = "Long", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R update(@RequestParam("professionname") String professionname,
-			@RequestParam("professionid") Long professionid) {
+	public R update(SchoolProfessionDO schoolProfessionDO) {
 		return R.ok();
 	}
 
 	@PostMapping("delete")
 	@ResponseBody
 	@ApiOperation(value = "删除某个专业", notes = "删除某个专业")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "professionid", value = "专业id", required = true, dataType = "Long", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
-	public R delete(@RequestParam("professionid") Long professionid) {
+	public R delete(DeletedIdVO deletedIdVO) {
 		return R.ok();
 	}
 }
