@@ -36,6 +36,7 @@ public class GenUtils {
 //        templates.add("templates/common/generator/Service.java.vm");
         templates.add("templates/common/generator/ServiceImpl.java.vm");
         templates.add("templates/common/generator/Controller.java.vm");
+        templates.add("templates/common/generator/PController.java.vm");
         templates.add("templates/common/generator/list.html.vm");
         templates.add("templates/common/generator/add.html.vm");
         templates.add("templates/common/generator/edit.html.vm");
@@ -200,10 +201,14 @@ public class GenUtils {
             return packagePath + "service" + File.separator  + className + "Service.java";
         }
 
+        if (template.contains("PController.java.vm")) {
+        	return packagePath + "controller" + File.separator  + "publish" + File.separator+ className + "Controller.java";
+        }
+        
         if (template.contains("Controller.java.vm")) {
             return packagePath + "controller" + File.separator + className + "Controller.java";
         }
-
+        
         if (template.contains("Mapper.xml.vm")) {
             return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + packageName + File.separator + className + "Mapper.xml";
         }

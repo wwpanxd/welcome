@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.admin.YXEnterpriseDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXEnterpriseDO">
+		select `uv_id`,`uv_code`,`uv_name`,`uv_sname`,`uv_city`,`uv_type`,`uv_flag`,`uv_manage`,`uv_phone` from mange_enterprise where uv_id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXEnterpriseDO">
+		select `uv_id`,`uv_code`,`uv_name`,`uv_sname`,`uv_city`,`uv_type`,`uv_flag`,`uv_manage`,`uv_phone` from mange_enterprise
+        <where>  
+		  		  <if test="uvId != null and uvId != ''"> and uv_id = #{uvId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="uvName != null and uvName != ''"> and uv_name = #{uvName} </if>
+		  		  <if test="uvSname != null and uvSname != ''"> and uv_sname = #{uvSname} </if>
+		  		  <if test="uvCity != null and uvCity != ''"> and uv_city = #{uvCity} </if>
+		  		  <if test="uvType != null and uvType != ''"> and uv_type = #{uvType} </if>
+		  		  <if test="uvFlag != null and uvFlag != ''"> and uv_flag = #{uvFlag} </if>
+		  		  <if test="uvManage != null and uvManage != ''"> and uv_manage = #{uvManage} </if>
+		  		  <if test="uvPhone != null and uvPhone != ''"> and uv_phone = #{uvPhone} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by uv_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from mange_enterprise
+		 <where>  
+		  		  <if test="uvId != null and uvId != ''"> and uv_id = #{uvId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="uvName != null and uvName != ''"> and uv_name = #{uvName} </if>
+		  		  <if test="uvSname != null and uvSname != ''"> and uv_sname = #{uvSname} </if>
+		  		  <if test="uvCity != null and uvCity != ''"> and uv_city = #{uvCity} </if>
+		  		  <if test="uvType != null and uvType != ''"> and uv_type = #{uvType} </if>
+		  		  <if test="uvFlag != null and uvFlag != ''"> and uv_flag = #{uvFlag} </if>
+		  		  <if test="uvManage != null and uvManage != ''"> and uv_manage = #{uvManage} </if>
+		  		  <if test="uvPhone != null and uvPhone != ''"> and uv_phone = #{uvPhone} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXEnterpriseDO" useGeneratedKeys="true" keyProperty="uvId">
+		insert into mange_enterprise
+		(
+			`uv_code`, 
+			`uv_name`, 
+			`uv_sname`, 
+			`uv_city`, 
+			`uv_type`, 
+			`uv_flag`, 
+			`uv_manage`, 
+			`uv_phone`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{uvName}, 
+			#{uvSname}, 
+			#{uvCity}, 
+			#{uvType}, 
+			#{uvFlag}, 
+			#{uvManage}, 
+			#{uvPhone}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXEnterpriseDO">
+		update mange_enterprise 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="uvName != null">`uv_name` = #{uvName}, </if>
+			<if test="uvSname != null">`uv_sname` = #{uvSname}, </if>
+			<if test="uvCity != null">`uv_city` = #{uvCity}, </if>
+			<if test="uvType != null">`uv_type` = #{uvType}, </if>
+			<if test="uvFlag != null">`uv_flag` = #{uvFlag}, </if>
+			<if test="uvManage != null">`uv_manage` = #{uvManage}, </if>
+			<if test="uvPhone != null">`uv_phone` = #{uvPhone}</if>
+		</set>
+		where uv_id = #{uvId}
+	</update>
+	
+	<delete id="removeById">
+		delete from mange_enterprise where uv_id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from mange_enterprise where uv_id in 
+		<foreach item="uvId" collection="array" open="(" separator="," close=")">
+			#{uvId}
+		</foreach>
+	</delete>
+
+</mapper>

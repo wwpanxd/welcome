@@ -2,13 +2,17 @@ package com.bootdo.system.publish.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootdo.common.annotation.Log;
@@ -23,9 +27,16 @@ import com.bootdo.system.service.MenuService;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
 import com.bootdo.system.vo.UserVO;
+import com.bootdo.welcome.publish.controller.PUserController;
+import com.bootdo.welcome.utils.PPageUtils;
+import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
+import com.bootdo.welcome.vo.BatchRemoveInput;
+import com.bootdo.welcome.vo.DeletedIdVO;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,6 +46,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("welcome/publish/sys/user")
 @Api(value="用户相关",description="用户相关")
 public class SUserController extends BaseController{
+	
+	static Logger log = LoggerFactory.getLogger(SUserController.class);
 	
 	@Autowired
 	UserService userService;
@@ -46,9 +59,52 @@ public class SUserController extends BaseController{
 	MenuService menuService;	
 	@Autowired
 	ValidateMessage validateMessage;
+
+	
+	
+	@Log("获取xxx列表")
+	@GetMapping("/list")
+	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+//  @ApiImplicitParams({
+//		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
+//  })
+	@ApiResponses({
+		@ApiResponse( response = UserDO.class, code = 200, message = "返回结构:UserDO的list")
+	})
+	public List<UserDO> getList(@RequestParam UserDO condition){
+		//查询列表数据
+       Map<String,Object> params = new HashMap<String,Object>();
+//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
+       
+		return userService.list(params);
+	}
+	
+	@Log("获取xxx分页列表")
+	@GetMapping("/list/page")
+	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+    @ApiImplicitParams({
+		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
+		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
+    })
+	@ApiResponses({
+		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
+	})
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam UserDO condition){
+		//查询列表数据
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("page", page);//数据偏移量
+		params.put("size", size);//每页条数
+		params.put("sort", "id");//每页条数
+		params.put("order", "asc");//每页条数
+//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
+		
+		PQuery query = new PQuery(params);
+		int total = userService.count(query);		
+		PPageUtils pageUtil = new PPageUtils(userService.list(query), total,page,size);
+		return pageUtil;
+	}
 	
 
-//	@RequiresPermissions("sys:user:add")
 	@Log("用户注册添加")
 	@PostMapping("/save")
 	@ApiOperation(value="用户注册添加", notes="用户注册添加,"
@@ -65,8 +121,7 @@ public class SUserController extends BaseController{
 		return PR.error("添加用户失败");
 	}
 
-//	@RequiresPermissions("sys:user:edit")
-	@Log("更新用户")
+	@Log("更新用户信息")
 	@PostMapping("/update")
 	@ApiOperation(value="更新用户", notes="更新用户,"
 			+ "入参user，是UserDO(用户类)")
@@ -115,6 +170,37 @@ public class SUserController extends BaseController{
 		}catch (Exception e){
 			return PR.error("admin修改密码失败");
 		}
+	}
 
+	
+	@Log("删除XXX信息")
+	@PostMapping("/remove")
+	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
+  	})
+	@ApiResponses({
+		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
+	})
+	public PR remove(@RequestBody DeletedIdVO vid) {
+		if(userService.remove(vid.getId())>0){
+			return PR.ok("删除XXX成功");
+		}
+		return PR.error("删除XXX失败");
+		
+	}
+	
+	@Log("批量删除XXX信息")
+	@PostMapping("/batchRemove")
+	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiResponses({
+		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
+	})
+	public PR remove(@RequestBody BatchRemoveInput bids) {
+		
+		if(userService.batchRemove(bids.getIds())>0){
+			return PR.ok("批量删除XXX成功");
+		}
+		return PR.error("批量删除XXX失败");
 	}
 }

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.DictDO;
-import com.bootdo.common.service.DictService;
+import com.bootdo.welcome.domain.admin.YXDictDO;
+import com.bootdo.welcome.service.admin.YXDictService;
 import com.bootdo.welcome.vo.disasterVO;
 
 import io.swagger.annotations.Api;
@@ -29,34 +29,34 @@ public class PDictController extends BaseController{
 
 	
 	@Autowired
-	private DictService dictService;
+	private YXDictService dictService;
 
-	@Log("获取字典类型")
-	@GetMapping("/type")
-	@ApiOperation(value="获取字典类型", notes="获取字典类型")
-	@ApiResponses({
-		@ApiResponse( response = DictDO.class, code = 200, message = "返回结构:DictDO的list")
-	})
-	public List<DictDO> listType() {
-		return dictService.listType();
-	}
-	
-	@Log("获取具体类型的字典数据")
-	@GetMapping("/type/list")
-	@ApiOperation(value="获取具体字典、词库分类等", notes="获取具体类型的字典数据")
-    @ApiImplicitParams({
-		@ApiImplicitParam(name = "type", value = "字典类型：90001:词库分类", required = true, dataType = "int",paramType="query"),
-  	})
-	@ApiResponses({
-		@ApiResponse( response = DictDO.class, code = 200, message = "返回结构:DictDO的list")
-	})
-	public List<DictDO> getTypeLists(String type) {
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("dmode",1);//强制前端只显示类型1的字典
-		params.put("type",type);//
-		params.put("sort","sort");
-		params.put("order","asc");
-		// 查询列表数据
-		return dictService.list2(params);
-	}
+//	@Log("获取字典类型")
+//	@GetMapping("/type")
+//	@ApiOperation(value="获取字典类型", notes="获取字典类型")
+//	@ApiResponses({
+//		@ApiResponse( response = YXDictDO.class, code = 200, message = "返回结构:YXDictDO的list")
+//	})
+//	public List<YXDictDO> listType() {
+//		return dictService.listType();
+//	}
+//	
+//	@Log("获取具体类型的字典数据")
+//	@GetMapping("/type/list")
+//	@ApiOperation(value="获取具体字典、词库分类等", notes="获取具体类型的字典数据")
+//    @ApiImplicitParams({
+//		@ApiImplicitParam(name = "type", value = "字典类型：90001:词库分类", required = true, dataType = "int",paramType="query"),
+//  	})
+//	@ApiResponses({
+//		@ApiResponse( response = YXDictDO.class, code = 200, message = "返回结构:YXDictDO的list")
+//	})
+//	public List<YXDictDO> getTypeLists(String type) {
+//		Map<String,Object> params = new HashMap<String,Object>();
+//		params.put("dmode",1);//强制前端只显示类型1的字典
+//		params.put("type",type);//
+//		params.put("sort","sort");
+//		params.put("order","asc");
+//		// 查询列表数据
+//		return dictService.list2(params);
+//	}
 }

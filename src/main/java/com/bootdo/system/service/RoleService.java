@@ -3,6 +3,7 @@ package com.bootdo.system.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,10 @@ public class RoleService {
         List<RoleDO> roles = roleMapper.findPageListByMap(new HashMap<>(16));
         return roles;
     }
-
+    public List<RoleDO> list(Map<String, Object> map) {
+        List<RoleDO> roles = roleMapper.findPageListByMap(map);
+        return roles;
+    }
     public List<RoleDO> list(Long userId) {
         List<Long> rolesIds = userRoleMapper.listRoleId(userId);
         List<RoleDO> roles = roleMapper.findPageListByMap(new HashMap<>(16));

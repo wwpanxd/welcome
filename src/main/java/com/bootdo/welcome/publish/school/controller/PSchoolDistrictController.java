@@ -16,7 +16,7 @@ import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 import com.bootdo.welcome.domain.SchoolDistrictDO;
-import com.bootdo.welcome.vo.DeletedStringIdVO;
+import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.FindStringIdVO;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -94,7 +94,7 @@ public class PSchoolDistrictController extends BaseController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "schoolcode", value = "校区编号", required = true, dataType = "String", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "true为成功，false为失败") })
-	public R delete(DeletedStringIdVO deletedStringIdVO) {
+	public R delete(DeletedIdVO deletedStringIdVO) {
 		return R.ok();
 	}
 }

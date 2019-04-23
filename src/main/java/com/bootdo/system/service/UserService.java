@@ -172,7 +172,7 @@ public class UserService  {
     }
 
     @Transactional
-    public int batchremove(Long[] userIds) {
+    public int batchRemove(Long[] userIds) {
         int count = userMapper.batchRemoveByIds(userIds);
         userRoleMapper.batchRemoveByUserId(userIds);
         return count;
