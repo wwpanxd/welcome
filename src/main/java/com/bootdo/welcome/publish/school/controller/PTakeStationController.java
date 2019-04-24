@@ -106,6 +106,6 @@ public class PTakeStationController {
 	@ApiOperation(value = "修改某学生接站信息配置信息", notes = "修改某学生接站信息配置信息" + "入参stuTakeStationDO，是StuTakeStationDO类")
 	@ApiResponses({ @ApiResponse(response = PR.class, code = 200, message = "返回结构:PR.class") })
 	public PR update(@RequestBody StuTakeStationDO stuTakeStationDO) {
-		return PR.ok("修改某学生健康信息成功");
+		return PR.ok("修改某学生接站信息配置信息成功");
 	}
 }
