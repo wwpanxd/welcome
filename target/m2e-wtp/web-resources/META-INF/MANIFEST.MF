@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: welcome
 Implementation-Version: 1.0.0
-Built-By: dell
+Built-By: niuhongfei
 Implementation-Vendor-Id: com.bootdo
-Build-Jdk: 1.8.0_162
+Build-Jdk: 1.8.0_131
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/welcome
 Created-By: Maven Integration for Eclipse
