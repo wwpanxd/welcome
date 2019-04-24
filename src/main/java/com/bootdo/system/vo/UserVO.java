@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="UserVO",description="修改用户密码使用")
 public class UserVO {
-    /**
-     * 更新的用户对象
-     */
-//    private UserDO userDO = new UserDO();
+
     /**
      * 旧密码
      */
@@ -22,14 +19,6 @@ public class UserVO {
 	
 	@ApiModelProperty(value="要修改用户的用户id")
 	private Long userid;
-
-//    public UserDO getUserDO() {
-//        return userDO;
-//    }
-//
-//    public void setUserDO(UserDO userDO) {
-//        this.userDO = userDO;
-//    }
 
     public String getPwdOld() {
         return pwdOld;

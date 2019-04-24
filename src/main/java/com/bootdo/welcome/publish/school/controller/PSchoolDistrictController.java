@@ -1,6 +1,5 @@
 package com.bootdo.welcome.publish.school.controller;
 
-import com.bootdo.welcome.vo.SchoolDistrictVO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +17,7 @@ import com.bootdo.common.utils.R;
 import com.bootdo.welcome.domain.SchoolDistrictDO;
 import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.FindStringIdVO;
+import com.bootdo.welcome.vo.SchoolDistrictVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

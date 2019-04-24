@@ -18,15 +18,14 @@ import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolOrganizationDO;
+import com.bootdo.welcome.vo.FindIdVO;
+import com.bootdo.welcome.vo.SchoolOrganizationVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
-import com.bootdo.welcome.vo.FindIdVO;
-import com.bootdo.welcome.vo.SchoolOrganizationVO;
 
 @Controller
 @RequestMapping("/welcome/publish/school/organization")

@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.welcome.vo.FindIdVO;
-import com.bootdo.welcome.vo.SchoolGradesVO;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +18,8 @@ import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolDepartmentDO;
 import com.bootdo.welcome.domain.SchoolGradesDO;
 import com.bootdo.welcome.domain.SchoolProfessionDO;
+import com.bootdo.welcome.vo.FindIdVO;
+import com.bootdo.welcome.vo.SchoolGradesVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

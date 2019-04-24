@@ -20,6 +20,9 @@ import com.bootdo.welcome.service.admin.YXRoleService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
+import com.bootdo.welcome.vo.BatchRemoveInput;
+import com.bootdo.welcome.vo.DeletedIdVO;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -27,8 +30,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import com.bootdo.common.annotation.Log;
-import com.bootdo.welcome.vo.DeletedIdVO;
-import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
  * 角色 相关服务

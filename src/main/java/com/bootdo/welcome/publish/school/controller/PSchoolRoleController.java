@@ -1,7 +1,5 @@
 package com.bootdo.welcome.publish.school.controller;
 
-import com.bootdo.welcome.vo.SchoolUserRoleVO;
-
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -19,6 +17,7 @@ import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 import com.bootdo.system.vo.DeletedIdVO;
 import com.bootdo.welcome.domain.SchoolUserRoleDo;
+import com.bootdo.welcome.vo.SchoolUserRoleVO;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
