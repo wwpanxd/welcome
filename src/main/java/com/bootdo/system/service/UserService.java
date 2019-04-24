@@ -54,7 +54,6 @@ public class UserService  {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     
-//    @Cacheable(key = "#id")
     public UserDO get(Long id) {
         List<Long> roleIds = userRoleMapper.listRoleId(id);
         UserDO user = userMapper.findOneById(id);

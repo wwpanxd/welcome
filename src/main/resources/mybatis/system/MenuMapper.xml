@@ -38,7 +38,7 @@
 		</if>
 	</select>
 	
-	<select id="list2" resultType="com.bootdo.system.domain.MenuDO">
+	<select id="findListByIsshowAndType" resultType="com.bootdo.system.domain.MenuDO">
 		select
 		`menu_id`,`name`,`perms`,`order_num`
 		from sys_menu

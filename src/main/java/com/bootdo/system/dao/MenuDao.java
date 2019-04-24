@@ -20,7 +20,7 @@ public interface MenuDao {
 	
 	List<MenuDO> findPageListByMap(Map<String,Object> map);
 	
-	List<MenuDO> list2(Map<String,Object> map);
+	List<MenuDO> findListByIsshowAndType(Map<String,Object> map);
 	
 	int countByMap(Map<String,Object> map);
 	

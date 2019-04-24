@@ -53,8 +53,8 @@ public class MenuService {
 	}
 	
 	
-	public List<MenuDO> list2(Map<String, Object> params) {
-		List<MenuDO> menus = menuMapper.list2(params);
+	public List<MenuDO> listByIsshowAndType(Map<String, Object> params) {
+		List<MenuDO> menus = menuMapper.findListByIsshowAndType(params);
 		return menus;
 	}
 
@@ -136,7 +136,7 @@ public class MenuService {
 	public List<MenuDO> getList(Long id) {
 		// 根据roleId查询权限,给web端单级权限使用
 				List<Long> menuIds = roleMenuMapper.listMenuIdByRoleId(id);
-				List<MenuDO> menuDOs = menuMapper.list2(new HashMap<String, Object>(16));
+				List<MenuDO> menuDOs = menuMapper.findListByIsshowAndType(new HashMap<String, Object>(16));
 				for (MenuDO sysMenuDO : menuDOs) {
 					Long menuId = sysMenuDO.getMenuId();
 					if (menuIds.contains(menuId)) {

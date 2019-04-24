@@ -32,7 +32,7 @@ public class MenuDO implements Serializable {
 	@ApiModelProperty(value = "菜单URL")
 	private String url;
 	//授权(多个用逗号分隔，如：user:list,user:create)
-	@ApiModelProperty(value = "授权(多个用逗号分隔，如：user:list,user:create)")
+	@ApiModelProperty(value = "授权字符串")
 	private String perms;
 	//类型   0：目录   1：菜单   2：按钮
 	@ApiModelProperty(value = "类型   0：目录   1：菜单   2：按钮")

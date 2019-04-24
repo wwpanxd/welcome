@@ -118,7 +118,20 @@ public class SUserController extends BaseController{
 		return pageUtil;
 	}
 	
-
+	@Log("获取系统用户详细信息")
+	@GetMapping("/getone")
+	@ApiOperation(value="获取系统用户详细信息", notes="获取系统用户详细信息")
+  @ApiImplicitParams({
+		@ApiImplicitParam(name = "id", value = "系统用户ID", required = true, dataType = "long",paramType="query"),
+  })
+	@ApiResponses({
+		@ApiResponse( response = UserDO.class, code = 200, message = "返回结构:UserDO")
+	})
+	public UserDO getOneDetails(@RequestParam Long id){
+       
+		return userService.get(id);
+	}
+	
 	@Log("用户注册添加")
 	@PostMapping("/save")
 	@ApiOperation(value="用户注册添加", notes="用户注册添加,"

@@ -12,17 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.bootdo.common.exception.ExceptionHandler;
-import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.service.DeptService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
-import com.bootdo.welcome.vo.BatchRemoveInput;
 import com.bootdo.welcome.vo.DeletedIdVO;
+import com.bootdo.welcome.vo.system.DeptScanVO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -40,8 +37,8 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/dept")
-@Api(value="部门管理相关服务",description="部门管理相关服务")
+@RequestMapping("welcome/publish/system/dept")
+@Api(value="系统部门管理相关服务",description="系统部门管理相关服务")
 public class SDeptController {
 
 	static Logger log = LoggerFactory.getLogger(SDeptController.class);
@@ -52,26 +49,27 @@ public class SDeptController {
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取系统部门列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
-//  @ApiImplicitParams({
-//		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
-//  })
+	@ApiOperation(value="获取系统部门列表", notes="获取系统部门列表")
 	@ApiResponses({
 		@ApiResponse( response = DeptDO.class, code = 200, message = "返回结构:DeptDO的list")
 	})
-	public List<DeptDO> getList(@RequestParam DeptDO condition){
+	public List<DeptDO> getList(@RequestParam DeptScanVO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
-//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
-       
+       if(condition!=null&&condition.getName()!=null) params.put("name",condition.getName());//业务的筛选条件
+       if(condition!=null&&condition.getSname()!=null) params.put("sname",condition.getSname());//业务的筛选条件
+       if(condition!=null&&condition.getParentId()!=null) params.put("parentId",condition.getParentId());//业务的筛选条件
+       if(condition!=null&&condition.getDeptId()!=null) params.put("deptId",condition.getDeptId());//业务的筛选条件
+       if(condition!=null&&condition.getDelFlag()!=null) params.put("delFlag",condition.getDelFlag());//业务的筛选条件
+         
 		return deptService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取系统部门分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取系统部门分页列表", notes="获取系统部门分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -86,7 +84,12 @@ public class SDeptController {
 		params.put("size", size);//每页条数
 		params.put("sort", "id");//每页条数
 		params.put("order", "asc");//每页条数
-//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
+		 if(condition!=null&&condition.getName()!=null) params.put("name",condition.getName());//业务的筛选条件
+	       if(condition!=null&&condition.getSname()!=null) params.put("sname",condition.getSname());//业务的筛选条件
+	       if(condition!=null&&condition.getParentId()!=null) params.put("parentId",condition.getParentId());//业务的筛选条件
+	       if(condition!=null&&condition.getDeptId()!=null) params.put("deptId",condition.getDeptId());//业务的筛选条件
+	       if(condition!=null&&condition.getDelFlag()!=null) params.put("delFlag",condition.getDelFlag());//业务的筛选条件
+	        
 		
 		PQuery query = new PQuery(params);
 		int total = deptService.count(query);		
@@ -95,10 +98,10 @@ public class SDeptController {
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加系统部门")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Dept，是DeptDO(XXX类)")
+	@ApiOperation(value="添加系统部门", notes="添加系统部门"
+			+ "入参Dept，是DeptDO(系统部门类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -107,15 +110,15 @@ public class SDeptController {
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
 		if(deptService.save(dept)>0){
-			return PR.ok("添加XXX成功");
+			return PR.ok("添加系统部门成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加系统部门失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改系统部门信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Dept，是DeptDO(XXX类)")
+	@ApiOperation(value="修改系统部门", notes="修改系统部门"
+		+ "入参Dept，是DeptDO(系统部门类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -126,14 +129,14 @@ public class SDeptController {
 		
 		if (deptService.update(dept) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改系统部门成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改系统部门失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除系统部门信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除系统部门", notes="删除系统部门,入参是系统部门Id")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
@@ -141,25 +144,35 @@ public class SDeptController {
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(deptService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
-		}
-		return PR.error("删除XXX失败");
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("parentId", vid.getId());
+		if(deptService.count(map)>0) {
+			return PR.error("包含下级部门,不允许修改");
+		}
+		
+		if(deptService.checkDeptHasUser(vid.getId())) {
+			if (deptService.remove(vid.getId()) > 0) {
+				return PR.ok("删除系统部门成功");
+			}
+		}else {
+			return PR.error("部门包含用户,不允许修改");
+		}
+		return PR.error("删除系统部门失败");
 	}
 	
-	@Log("批量删除XXX信息")
-	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
-	@ApiResponses({
-		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
-	})
-	public PR remove(@RequestBody BatchRemoveInput bids) {
-		
-		if(deptService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
-		}
-		return PR.error("批量删除XXX失败");
-	}
+//	@Log("批量删除系统部门信息")
+//	@PostMapping("/batchRemove")
+//	@ApiOperation(value="批量删除系统部门", notes="批量删除系统部门")
+//	@ApiResponses({
+//		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
+//	})
+//	public PR remove(@RequestBody BatchRemoveInput bids) {
+//		
+//		if(deptService.batchRemove(bids.getIds())>0){
+//			return PR.ok("批量删除系统部门成功");
+//		}
+//		return PR.error("批量删除系统部门失败");
+//	}
 	
 }
