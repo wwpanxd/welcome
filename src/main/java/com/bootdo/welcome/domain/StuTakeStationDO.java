@@ -2,8 +2,10 @@ package com.bootdo.welcome.domain;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "StuTakeStationDO", description = "学生成绩表")
 public class StuTakeStationDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "")
