@@ -1,4 +1,4 @@
-package com.bootdo.welcome.publish.school.controller;
+package com.bootdo.welcome.publish.admin.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.welcome.domain.StageDO;
-import com.bootdo.welcome.service.StageService;
+import com.bootdo.welcome.domain.StageFileDO;
+import com.bootdo.welcome.service.StageFileService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
@@ -33,21 +33,21 @@ import io.swagger.annotations.ApiResponses;
 import com.bootdo.common.annotation.Log;
 
 /**
- * 迎新阶段表 相关服务
+ * 迎新阶段文件表 相关服务,阶段附件映射
  * @author wwpan
  * @email wwpan.xd@163.com
  * @date 2019-04-23 16:08:26
  */
  
 @RestController
-@RequestMapping("/welcome/stage")
-@Api(value="迎新阶段表相关服务",description="迎新阶段表相关服务")
-public class StageController {
+@RequestMapping("/welcome/stageFile")
+@Api(value="迎新阶段文件表相关服务",description="迎新阶段文件表相关服务")
+public class StageFileController {
 
-	static Logger log = LoggerFactory.getLogger(StageController.class);
+	static Logger log = LoggerFactory.getLogger(StageFileController.class);
 	
 	@Autowired
-	private StageService stageService;
+	private StageFileService stageFileService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
@@ -59,14 +59,14 @@ public class StageController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({
-		@ApiResponse( response = StageDO.class, code = 200, message = "返回结构:StageDO的list")
+		@ApiResponse( response = StageFileDO.class, code = 200, message = "返回结构:StageFileDO的list")
 	})
-	public List<StageDO> getList(@RequestParam StageDO condition){
+	public List<StageFileDO> getList(@RequestParam StageFileDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
        
-		return stageService.list(params);
+		return stageFileService.list(params);
 	}
 	
 	@Log("获取xxx分页列表")
@@ -79,7 +79,7 @@ public class StageController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StageDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StageFileDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -89,8 +89,8 @@ public class StageController {
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
 		
 		PQuery query = new PQuery(params);
-		int total = stageService.count(query);		
-		PPageUtils pageUtil = new PPageUtils(stageService.list(query), total,page,size);
+		int total = stageFileService.count(query);		
+		PPageUtils pageUtil = new PPageUtils(stageFileService.list(query), total,page,size);
 		return pageUtil;
 	}
 	
@@ -98,15 +98,15 @@ public class StageController {
 	@Log("添加XXX")
 	@PostMapping("/save")
 	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Stage，是StageDO(XXX类)")
+			+ "入参StageFile，是StageFileDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  StageDO stage) {
+	public PR save(@RequestBody  StageFileDO stageFile) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if(stageService.save(stage)>0){
+		if(stageFileService.save(stageFile)>0){
 			return PR.ok("添加XXX成功");
 		}
 		return PR.error("添加XXX失败");
@@ -115,16 +115,16 @@ public class StageController {
 	@Log("修改XXX信息")
 	@PostMapping("/update")
 	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Stage，是StageDO(XXX类)")
+		+ "入参StageFile，是StageFileDO(XXX类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody StageDO stage) {
+	public PR update(@RequestBody StageFileDO stageFile) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if (stageService.update(stage) > 0) {
+		if (stageFileService.update(stageFile) > 0) {
 			
 			return PR.ok("修改XXX成功");
 		}
@@ -141,7 +141,7 @@ public class StageController {
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(stageService.remove(vid.getId())>0){
+		if(stageFileService.remove(vid.getId())>0){
 			return PR.ok("删除XXX成功");
 		}
 		return PR.error("删除XXX失败");
@@ -156,7 +156,7 @@ public class StageController {
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
-		if(stageService.batchRemove(bids.getIds())>0){
+		if(stageFileService.batchRemove(bids.getIds())>0){
 			return PR.ok("批量删除XXX成功");
 		}
 		return PR.error("批量删除XXX失败");

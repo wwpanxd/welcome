@@ -1,6 +1,5 @@
 package com.bootdo.welcome.publish.admin.controller;
 
-import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,25 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.Tree;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
 import com.bootdo.common.utils.MD5Utils;
 import com.bootdo.common.utils.ShiroUtils;
-import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
 import com.bootdo.welcome.utils.PR;
 import com.bootdo.welcome.vo.LoginVO;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("welcome/publish/yw/login")
-@Api(value="系统登录相关",description="系统登录相关")
+@RequestMapping("/welcome/publish/admin/login")
+@Api(value="学校用户登录相关",description="学校用户登录相关")
 public class PLoginController extends BaseController{
 	
 	@Autowired
@@ -41,9 +37,9 @@ public class PLoginController extends BaseController{
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("登录")
+	@Log("学校用户登录")
 	@PostMapping("/login")
-	@ApiOperation(value="系统登录", notes="统一登录接口")
+	@ApiOperation(value="学校用户登录", notes="统一学校用户登录接口")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -62,7 +58,7 @@ public class PLoginController extends BaseController{
 	}
 	
 	@GetMapping("/logout")
-	@ApiOperation(value="系统退出", notes="统一退出接口")
+	@ApiOperation(value="学校用户退出", notes="统一学校用户退出接口")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -71,12 +67,4 @@ public class PLoginController extends BaseController{
 		return PR.ok("系统退出成功");
 	}
 	
-	
-//	@Log("获取用户菜单")
-//	@PostMapping("/menu")
-//	@ApiOperation(value="获取用户菜单", notes="获取用户菜单")
-//	List<Tree<MenuDO>> getUserMenu() {
-//		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
-//		return menus;
-//	}
 }

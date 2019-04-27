@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/build")
+@RequestMapping("/welcome/publish/school/build")
 @Api(value="宿舍楼宇信息表相关服务",description="宿舍楼宇信息表相关服务")
 public class BuildController {
 

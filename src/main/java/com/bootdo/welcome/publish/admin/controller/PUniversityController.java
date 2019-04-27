@@ -42,9 +42,9 @@ import com.bootdo.common.annotation.Log;
 @RestController
 @RequestMapping("/welcome/university")
 @Api(value="迎新学校基础信息表相关服务",description="迎新学校基础信息表相关服务")
-public class UniversityController {
+public class PUniversityController {
 
-	static Logger log = LoggerFactory.getLogger(UniversityController.class);
+	static Logger log = LoggerFactory.getLogger(PUniversityController.class);
 	
 	@Autowired
 	private YXUniversityService universityService;

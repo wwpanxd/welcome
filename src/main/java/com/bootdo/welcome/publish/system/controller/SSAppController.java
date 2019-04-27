@@ -127,9 +127,6 @@ public class SSAppController {
 	@Log("删除app版本信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除app版本", notes="删除app版本,入参是app版本Id")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

@@ -21,6 +21,7 @@ import com.bootdo.welcome.domain.LoanDO;
 import com.bootdo.welcome.domain.StageDO;
 import com.bootdo.welcome.domain.StuCollegeDO;
 import com.bootdo.welcome.domain.StuHealthyDO;
+import com.bootdo.welcome.publish.admin.controller.StageFileController;
 import com.bootdo.welcome.service.StageFileService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
