@@ -31,8 +31,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("welcome/publish/sys/login")
-@Api(value="系统登录相关",description="系统登录相关")
+@RequestMapping("welcome/publish/system/login")
+@Api(value="系统用户登录相关",description="系统用户登录相关")
 public class SLoginController extends BaseController{
 	
 	@Autowired
@@ -41,9 +41,9 @@ public class SLoginController extends BaseController{
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("登录")
+	@Log("系统用户登录")
 	@PostMapping("/login")
-	@ApiOperation(value="系统登录", notes="统一登录接口")
+	@ApiOperation(value="系统用户登录", notes="统一系统用户登录接口")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -54,29 +54,29 @@ public class SLoginController extends BaseController{
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
-			return PR.ok("用户登录成功");
+			return PR.ok("系统用户登录成功");
 		} catch (AuthenticationException e) {
 			ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.LOGIN_ERROR));
-			return PR.error("用户或密码错误");
+			return PR.error("系统用户或密码错误");
 		}
 	}
 	
 	@GetMapping("/logout")
-	@ApiOperation(value="系统退出", notes="统一退出接口")
+	@ApiOperation(value="系统用户退出", notes="统一退出接口")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	PR logout() {
 		ShiroUtils.logout();
-		return PR.ok("系统退出成功");
+		return PR.ok("系统用户退出成功");
 	}
 	
 	
-//	@Log("获取用户菜单")
-//	@PostMapping("/menu")
-//	@ApiOperation(value="获取用户菜单", notes="获取用户菜单")
-//	List<Tree<MenuDO>> getUserMenu() {
-//		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
-//		return menus;
-//	}
+	@Log("获取系统用户菜单")
+	@PostMapping("/menu")
+	@ApiOperation(value="获取系统用户菜单", notes="获取系统用户菜单")
+	List<Tree<MenuDO>> getUserMenu() {
+		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
+		return menus;
+	}
 }

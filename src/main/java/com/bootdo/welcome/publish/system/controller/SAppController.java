@@ -15,8 +15,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Controller
-@RequestMapping("welcome/publish/sys/app")
-@Api(value="app更新检查",description="app更新检查")
+@RequestMapping("welcome/publish/system/app/downlaod")
+@Api(value="app更新检查",description="app更新检查,下载界面")
 public class SAppController {
 	
 	@Autowired
@@ -24,7 +24,7 @@ public class SAppController {
 	
 	@Log("APP更新检查")
 	@ResponseBody
-	@GetMapping("/app/update")
+	@GetMapping("/version/last")
 	@ApiOperation(value="APP更新检查", notes="APP更新检查")
 	@ApiResponses({
 		@ApiResponse( response = AppDO.class, code = 200, message = "返回结构:AppInfoDO.class")
@@ -38,8 +38,8 @@ public class SAppController {
 	}
 	
 	
-	@Log("APP更新检查")
-	@GetMapping("/download")
+	@Log("APP下载界面")
+	@GetMapping("/page")
 	@ApiOperation(value="APP下载界面", notes="APP下载界面")
 	String edit(Model model){
 		

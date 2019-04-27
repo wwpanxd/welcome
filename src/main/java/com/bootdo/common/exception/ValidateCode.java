@@ -21,6 +21,7 @@ public interface ValidateCode {
 	String LOGIN_ERROR 						= "200001"; //登录，用户或密码错误
 	String USER_ADD_NO_PASSWORD 			= "200002"; //注册用户时,密码不能为空
 	String SCORE_ADD_NULL_INPUT 			= "300001"; //请输入要保存的考核数据
-	
+	String ROLE_UPDATE_ADMIN 			= "200007"; //超级管理员角色只能后台修改
+	String ROLE_DELETE_ADMIN 			= "200006"; //超级管理员角色不能删除
 	
 }

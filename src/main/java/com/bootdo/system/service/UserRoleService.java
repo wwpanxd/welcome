@@ -50,6 +50,11 @@ public class UserRoleService{
 		// TODO Auto-generated method stub
 		return userRoleMapper.batchSave(list);
 	}
+	
+	public int count(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return userRoleMapper.countByMap(map);
+	}
     
     
 }

@@ -60,7 +60,7 @@ public class ${className}Controller {
 	@ApiResponses({
 		@ApiResponse( response = ${className}DO.class, code = 200, message = "返回结构:${className}DO的list")
 	})
-	public List<${className}DO> getList(@RequestParam ${className}DO condition){
+	public List<${className}DO> getList( ${className}DO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -78,7 +78,7 @@ public class ${className}Controller {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam ${className}DO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  ${className}DO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
