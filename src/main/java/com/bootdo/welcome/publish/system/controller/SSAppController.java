@@ -72,7 +72,7 @@ public class SSAppController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam AppDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  AppDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量

@@ -61,7 +61,7 @@ public class LinkController {
 	@ApiResponses({
 		@ApiResponse( response = LinkDO.class, code = 200, message = "返回结构:LinkDO的list")
 	})
-	public List<LinkDO> getList(@RequestParam LinkDO condition){
+	public List<LinkDO> getList( LinkDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class LinkController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam LinkDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, LinkDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -134,9 +134,6 @@ public class LinkController {
 	@Log("删除迎新环节信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除迎新环节", notes="删除迎新环节,入参是迎新环节Id")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

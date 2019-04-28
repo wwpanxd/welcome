@@ -61,7 +61,7 @@ public class StageController {
 	@ApiResponses({
 		@ApiResponse( response = StageDO.class, code = 200, message = "返回结构:StageDO的list")
 	})
-	public List<StageDO> getList(@RequestParam StageDO condition){
+	public List<StageDO> getList( StageDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class StageController {
 //	@ApiResponses({
 //		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 //	})
-//	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StageDO condition){
+//	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  StageDO condition){
 //		//查询列表数据
 //		Map<String,Object> params = new HashMap<String,Object>();
 //		params.put("page", page);//数据偏移量

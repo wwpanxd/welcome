@@ -61,7 +61,7 @@ public class SLogController {
 //	@ApiResponses({
 //		@ApiResponse( response = LogDO.class, code = 200, message = "返回结构:LogDO的list")
 //	})
-//	public List<LogDO> getList(@RequestParam LogDO condition){
+//	public List<LogDO> getList( LogDO condition){
 //		//查询列表数据
 //       Map<String,Object> params = new HashMap<String,Object>();
 ////     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class SLogController {
 //	@ApiResponses({
 //		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 //	})
-//	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam LogDO condition){
+//	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  LogDO condition){
 //		//查询列表数据
 //		Map<String,Object> params = new HashMap<String,Object>();
 //		params.put("page", page);//数据偏移量

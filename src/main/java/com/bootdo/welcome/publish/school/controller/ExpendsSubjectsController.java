@@ -61,7 +61,7 @@ public class ExpendsSubjectsController {
 	@ApiResponses({
 		@ApiResponse( response = ExpendsSubjectsDO.class, code = 200, message = "返回结构:ExpendsSubjectsDO的list")
 	})
-	public List<ExpendsSubjectsDO> getList(@RequestParam ExpendsSubjectsDO condition){
+	public List<ExpendsSubjectsDO> getList( ExpendsSubjectsDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class ExpendsSubjectsController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam ExpendsSubjectsDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, ExpendsSubjectsDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -134,9 +134,6 @@ public class ExpendsSubjectsController {
 	@Log("删除缴费科目信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除缴费科目", notes="删除缴费科目,入参是缴费科目Id")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

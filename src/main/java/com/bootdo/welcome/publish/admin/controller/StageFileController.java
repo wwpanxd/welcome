@@ -61,7 +61,7 @@ public class StageFileController {
 	@ApiResponses({
 		@ApiResponse( response = StageFileDO.class, code = 200, message = "返回结构:StageFileDO的list")
 	})
-	public List<StageFileDO> getList(@RequestParam StageFileDO condition){
+	public List<StageFileDO> getList( StageFileDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class StageFileController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StageFileDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, StageFileDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -134,9 +134,6 @@ public class StageFileController {
 	@Log("删除XXX信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

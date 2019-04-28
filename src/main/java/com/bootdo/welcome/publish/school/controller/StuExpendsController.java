@@ -61,7 +61,7 @@ public class StuExpendsController {
 	@ApiResponses({
 		@ApiResponse( response = StuExpendsDO.class, code = 200, message = "返回结构:StuExpendsDO的list")
 	})
-	public List<StuExpendsDO> getList(@RequestParam StuExpendsDO condition){
+	public List<StuExpendsDO> getList( StuExpendsDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -79,7 +79,7 @@ public class StuExpendsController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StuExpendsDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, StuExpendsDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -134,9 +134,6 @@ public class StuExpendsController {
 	@Log("删除新生缴费信息信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除新生缴费信息", notes="删除新生缴费信息,入参是新生缴费信息Id")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

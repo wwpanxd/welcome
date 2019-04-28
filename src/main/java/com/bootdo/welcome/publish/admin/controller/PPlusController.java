@@ -60,7 +60,7 @@ public class PPlusController {
 	@ApiResponses({
 		@ApiResponse( response = YXPlusDO.class, code = 200, message = "返回结构:YXPlusDO的list")
 	})
-	public List<YXPlusDO> getList(@RequestParam YXPlusDO condition){
+	public List<YXPlusDO> getList( YXPlusDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -78,7 +78,7 @@ public class PPlusController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam YXPlusDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, YXPlusDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -133,9 +133,6 @@ public class PPlusController {
 	@Log("删除XXX信息")
 	@PostMapping("/remove")
 	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
-  	})
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})

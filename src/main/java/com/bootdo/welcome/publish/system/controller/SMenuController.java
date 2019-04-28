@@ -59,7 +59,7 @@ public class SMenuController {
 	@ApiResponses({
 		@ApiResponse( response = MenuDO.class, code = 200, message = "返回结构:MenuDO的list")
 	})
-	public List<MenuDO> getList(@RequestParam MenuDO condition){
+	public List<MenuDO> getList( MenuDO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
 		params.put("isshow",1);//获取给前端展示的全部菜单

@@ -55,7 +55,7 @@ public class SDeptController {
 	@ApiResponses({
 		@ApiResponse( response = DeptDO.class, code = 200, message = "返回结构:DeptDO的list")
 	})
-	public List<DeptDO> getList(@RequestParam DeptScanVO condition){
+	public List<DeptDO> getList( DeptScanVO condition){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
        if(condition!=null&&condition.getName()!=null) params.put("name",condition.getName());//业务的筛选条件
@@ -77,7 +77,7 @@ public class SDeptController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam DeptDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, DeptDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
