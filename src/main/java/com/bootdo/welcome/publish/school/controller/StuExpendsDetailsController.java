@@ -52,9 +52,9 @@ public class StuExpendsDetailsController {
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取新生缴费明细列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+	@ApiOperation(value="获取新生缴费明细列表", notes="获取新生缴费明细列表")
 //  @ApiImplicitParams({
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
@@ -69,9 +69,9 @@ public class StuExpendsDetailsController {
 		return stuExpendsDetailsService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取新生缴费明细分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取新生缴费明细分页列表", notes="获取新生缴费明细分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -95,10 +95,10 @@ public class StuExpendsDetailsController {
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加新生缴费明细")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参StuExpendsDetails，是StuExpendsDetailsDO(XXX类)")
+	@ApiOperation(value="添加新生缴费明细", notes="添加新生缴费明细"
+			+ "入参StuExpendsDetails，是StuExpendsDetailsDO(新生缴费明细类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -107,15 +107,15 @@ public class StuExpendsDetailsController {
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
 		if(stuExpendsDetailsService.save(stuExpendsDetails)>0){
-			return PR.ok("添加XXX成功");
+			return PR.ok("添加新生缴费明细成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加新生缴费明细失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改新生缴费明细信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参StuExpendsDetails，是StuExpendsDetailsDO(XXX类)")
+	@ApiOperation(value="修改新生缴费明细", notes="修改新生缴费明细"
+		+ "入参StuExpendsDetails，是StuExpendsDetailsDO(新生缴费明细类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -126,14 +126,14 @@ public class StuExpendsDetailsController {
 		
 		if (stuExpendsDetailsService.update(stuExpendsDetails) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改新生缴费明细成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改新生缴费明细失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除新生缴费明细信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除新生缴费明细", notes="删除新生缴费明细,入参是新生缴费明细Id")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
@@ -142,24 +142,24 @@ public class StuExpendsDetailsController {
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
 		if(stuExpendsDetailsService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+			return PR.ok("删除新生缴费明细成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除新生缴费明细失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除新生缴费明细信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除新生缴费明细", notes="批量删除新生缴费明细")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
 		if(stuExpendsDetailsService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+			return PR.ok("批量删除新生缴费明细成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除新生缴费明细失败");
 	}
 	
 }

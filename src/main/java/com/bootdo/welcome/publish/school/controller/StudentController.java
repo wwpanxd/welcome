@@ -52,9 +52,9 @@ public class StudentController {
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取学生列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+	@ApiOperation(value="获取学生列表", notes="获取学生列表")
 //  @ApiImplicitParams({
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
@@ -69,9 +69,9 @@ public class StudentController {
 		return studentService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取学生分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取学生分页列表", notes="获取学生分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -95,10 +95,10 @@ public class StudentController {
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加学生")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Student，是StudentDO(XXX类)")
+	@ApiOperation(value="添加学生", notes="添加学生"
+			+ "入参Student，是StudentDO(学生类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -107,15 +107,15 @@ public class StudentController {
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
 		if(studentService.save(student)>0){
-			return PR.ok("添加XXX成功");
+			return PR.ok("添加学生成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加学生失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改学生信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Student，是StudentDO(XXX类)")
+	@ApiOperation(value="修改学生", notes="修改学生"
+		+ "入参Student，是StudentDO(学生类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -126,14 +126,14 @@ public class StudentController {
 		
 		if (studentService.update(student) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改学生成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改学生失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除学生信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除学生", notes="删除学生,入参是学生Id")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
@@ -142,24 +142,24 @@ public class StudentController {
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
 		if(studentService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+			return PR.ok("删除学生成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除学生失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除学生信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除学生", notes="批量删除学生")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
 		if(studentService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+			return PR.ok("批量删除学生成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除学生失败");
 	}
 	
 }

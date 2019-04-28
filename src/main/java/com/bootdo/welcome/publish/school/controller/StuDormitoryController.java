@@ -52,9 +52,9 @@ public class StuDormitoryController {
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取学生宿舍列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+	@ApiOperation(value="获取学生宿舍列表", notes="获取学生宿舍列表")
 //  @ApiImplicitParams({
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
@@ -69,9 +69,9 @@ public class StuDormitoryController {
 		return stuDormitoryService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取学生宿舍分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取学生宿舍分页列表", notes="获取学生宿舍分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -95,10 +95,10 @@ public class StuDormitoryController {
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加学生宿舍")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参StuDormitory，是StuDormitoryDO(XXX类)")
+	@ApiOperation(value="添加学生宿舍", notes="添加学生宿舍"
+			+ "入参StuDormitory，是StuDormitoryDO(学生宿舍类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -107,15 +107,15 @@ public class StuDormitoryController {
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
 		if(stuDormitoryService.save(stuDormitory)>0){
-			return PR.ok("添加XXX成功");
+			return PR.ok("添加学生宿舍成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加学生宿舍失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改学生宿舍信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参StuDormitory，是StuDormitoryDO(XXX类)")
+	@ApiOperation(value="修改学生宿舍", notes="修改学生宿舍"
+		+ "入参StuDormitory，是StuDormitoryDO(学生宿舍类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -126,14 +126,14 @@ public class StuDormitoryController {
 		
 		if (stuDormitoryService.update(stuDormitory) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改学生宿舍成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改学生宿舍失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除学生宿舍信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除学生宿舍", notes="删除学生宿舍,入参是学生宿舍Id")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
@@ -142,24 +142,24 @@ public class StuDormitoryController {
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
 		if(stuDormitoryService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+			return PR.ok("删除学生宿舍成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除学生宿舍失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除学生宿舍信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除学生宿舍", notes="批量删除学生宿舍")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
 		if(stuDormitoryService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+			return PR.ok("批量删除学生宿舍成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除学生宿舍失败");
 	}
 	
 }

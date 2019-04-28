@@ -52,9 +52,9 @@ public class RuleController {
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取规则列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+	@ApiOperation(value="获取规则列表", notes="获取规则列表")
 //  @ApiImplicitParams({
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
@@ -69,9 +69,9 @@ public class RuleController {
 		return ruleService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取规则分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取规则分页列表", notes="获取规则分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -95,10 +95,10 @@ public class RuleController {
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加规则")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Rule，是RuleDO(XXX类)")
+	@ApiOperation(value="添加规则", notes="添加规则"
+			+ "入参Rule，是RuleDO(规则类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -107,15 +107,15 @@ public class RuleController {
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
 		if(ruleService.save(rule)>0){
-			return PR.ok("添加XXX成功");
+			return PR.ok("添加规则成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加规则失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改规则信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Rule，是RuleDO(XXX类)")
+	@ApiOperation(value="修改规则", notes="修改规则"
+		+ "入参Rule，是RuleDO(规则类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
@@ -126,14 +126,14 @@ public class RuleController {
 		
 		if (ruleService.update(rule) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改规则成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改规则失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除规则信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除规则", notes="删除规则,入参是规则Id")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "build", value = "BuildDO房屋建筑类，只需要输入，房屋建筑的Id", required = true, dataType = "DeptDO",paramType="body" ,example= "{'id':165}")
   	})
@@ -142,24 +142,24 @@ public class RuleController {
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
 		if(ruleService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+			return PR.ok("删除规则成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除规则失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除规则信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除规则", notes="批量删除规则")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
 		if(ruleService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+			return PR.ok("批量删除规则成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除规则失败");
 	}
 	
 }
