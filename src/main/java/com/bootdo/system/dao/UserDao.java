@@ -18,6 +18,8 @@ public interface UserDao {
 
 	UserDO findOneById(Long userId);
 	
+	UserDO findOneByLoginName(String username);
+	
 	List<UserDO> findPageListByMap(Map<String,Object> map);
 	
 	List<UserDO> list2(Map<String,Object> map);

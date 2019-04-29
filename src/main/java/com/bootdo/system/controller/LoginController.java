@@ -2,7 +2,6 @@ package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.MD5Utils;
@@ -46,16 +45,17 @@ public class LoginController extends BaseController {
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
-		FileDO fileDO = fileService.findOneById(getUser().getPicId());
-		if(fileDO!=null&&fileDO.getUrl()!=null){
-			if(fileService.isExist(fileDO.getUrl())){
-				model.addAttribute("picUrl",fileDO.getUrl());
-			}else {
-				model.addAttribute("picUrl","/img/court.jpg");
-			}
-		}else {
-			model.addAttribute("picUrl","/img/court.jpg");
-		}
+//		FileDO fileDO = fileService.findOneById(getUser().getPicId());
+//		if(fileDO!=null&&fileDO.getUrl()!=null){
+//			if(fileService.isExist(fileDO.getUrl())){
+//				model.addAttribute("picUrl",fileDO.getUrl());
+//			}else {
+//				model.addAttribute("picUrl","/img/court.jpg");
+//			}
+//		}else {
+//			model.addAttribute("picUrl","/img/court.jpg");
+//		}
+		model.addAttribute("picUrl","/img/court.jpg");
 		model.addAttribute("username", getUser().getUsername());
 		return "index_v1";
 	}
@@ -71,7 +71,7 @@ public class LoginController extends BaseController {
 	R ajaxLogin(String username, String password) {
 
 		password = MD5Utils.encrypt(username, password);
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		UsernamePasswordToken token = new UsernamePasswordToken("100000"+username, password);
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);

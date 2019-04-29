@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @email wwpan.xd@163.com
  * @date 2019-04-22 11:57:11
  */
-@ApiModel(value = "UserRoleDO", description = "用户与角色对应关系") 
+@ApiModel(value = "YXUserRoleDO", description = "用户与角色对应关系") 
 public class YXUserRoleDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

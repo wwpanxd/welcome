@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXPlusDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXPlusDao">
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXPlusDO">
 		select `p_id`,`name`,`url`,`description`,`code`,`cost`,`flag` from mange_plus where p_id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXPlusDao">
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXPlusDO">
 		select `p_id`,`name`,`url`,`description`,`code`,`cost`,`flag` from mange_plus
         <where>  
 		  		  <if test="pId != null and pId != ''"> and p_id = #{pId} </if>
@@ -44,7 +44,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXPlusDao" useGeneratedKeys="true" keyProperty="pId">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXPlusDO" useGeneratedKeys="true" keyProperty="pId">
 		insert into mange_plus
 		(
 			`name`, 
@@ -65,7 +65,7 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXPlusDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXPlusDO">
 		update mange_plus 
 		<set>
 			<if test="name != null">`name` = #{name}, </if>

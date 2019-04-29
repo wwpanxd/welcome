@@ -19,6 +19,9 @@ public class YXUserService  {
 		return userDao.findOneById(id);
 	}
 	
+	public YXUserDO findOneByLoginName(Integer uvcode,String loginname){
+		return userDao.findOneByLoginNameAndUVCode(loginname,uvcode);
+	}
 	
 	public List<YXUserDO> list(Map<String, Object> map){
 		return userDao.findPageListByMap(map);

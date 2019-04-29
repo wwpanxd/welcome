@@ -21,7 +21,7 @@ import com.bootdo.welcome.domain.LoanDO;
 import com.bootdo.welcome.domain.StageDO;
 import com.bootdo.welcome.domain.StuCollegeDO;
 import com.bootdo.welcome.domain.StuHealthyDO;
-import com.bootdo.welcome.publish.admin.controller.StageFileController;
+import com.bootdo.welcome.publish.admin.controller.PStageFileController;
 import com.bootdo.welcome.service.StageFileService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
@@ -43,7 +43,7 @@ import com.bootdo.welcome.service.PStuHealthyService;
 @RequestMapping("/welcome/healthy")
 @Api(value = "健康信息配置", description = "健康信息配置")
 public class PStuHealthyController {
-	static Logger log = LoggerFactory.getLogger(StageFileController.class);
+	static Logger log = LoggerFactory.getLogger(PStageFileController.class);
 
 	@Autowired
 	private PStuHealthyService pStuHealthyService;

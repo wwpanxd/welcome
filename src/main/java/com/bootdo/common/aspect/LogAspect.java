@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bootdo.common.service.LogService;
 import com.bootdo.system.domain.UserToken;
+import com.bootdo.system.shiro.LoginUserDO;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -81,7 +83,7 @@ public class LogAspect {
         // 设置IP地址
         sysLog.setIp(IPUtils.getIpAddr(request));
         // 用户名
-        UserDO currUser = ShiroUtils.getUser();
+        LoginUserDO currUser = ShiroUtils.getUser();
         if (null == currUser) {
             if (null != sysLog.getParams()) {
                 sysLog.setUserId(-1L);

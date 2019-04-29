@@ -14,6 +14,7 @@ import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.MenuService;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
+import com.bootdo.system.shiro.LoginUserDO;
 import com.bootdo.system.vo.UserVO;
 
 import io.swagger.annotations.ApiOperation;
@@ -183,7 +184,9 @@ public class UserController extends BaseController {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		try{
-			userService.resetPwd(userVO,getUser());
+			LoginUserDO LoginUserDO=getUser();
+			
+			userService.resetPwd(userVO,new UserDO(LoginUserDO.getUserId(),LoginUserDO.getUsername(),LoginUserDO.getName(),LoginUserDO.getPassword()));
 			return R.ok();
 		}catch (Exception e){
 			return R.error(1,e.getMessage());

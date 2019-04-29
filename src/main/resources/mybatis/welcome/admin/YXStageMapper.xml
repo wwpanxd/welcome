@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StageDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StageDO">
+		select `id`,`uv_code`,`s_level`,`s_name`,`s_description`,`s_time`,`s_stime`,`s_etime`,`s_progress`,`s_mcode`,`s_manager` from yx_stage where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StageDO">
+		select `id`,`uv_code`,`s_level`,`s_name`,`s_description`,`s_time`,`s_stime`,`s_etime`,`s_progress`,`s_mcode`,`s_manager` from yx_stage
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sLevel != null and sLevel != ''"> and s_level = #{sLevel} </if>
+		  		  <if test="sName != null and sName != ''"> and s_name = #{sName} </if>
+		  		  <if test="sDescription != null and sDescription != ''"> and s_description = #{sDescription} </if>
+		  		  <if test="sTime != null and sTime != ''"> and s_time = #{sTime} </if>
+		  		  <if test="sStime != null and sStime != ''"> and s_stime = #{sStime} </if>
+		  		  <if test="sEtime != null and sEtime != ''"> and s_etime = #{sEtime} </if>
+		  		  <if test="sProgress != null and sProgress != ''"> and s_progress = #{sProgress} </if>
+		  		  <if test="sMcode != null and sMcode != ''"> and s_mcode = #{sMcode} </if>
+		  		  <if test="sManager != null and sManager != ''"> and s_manager = #{sManager} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stage
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sLevel != null and sLevel != ''"> and s_level = #{sLevel} </if>
+		  		  <if test="sName != null and sName != ''"> and s_name = #{sName} </if>
+		  		  <if test="sDescription != null and sDescription != ''"> and s_description = #{sDescription} </if>
+		  		  <if test="sTime != null and sTime != ''"> and s_time = #{sTime} </if>
+		  		  <if test="sStime != null and sStime != ''"> and s_stime = #{sStime} </if>
+		  		  <if test="sEtime != null and sEtime != ''"> and s_etime = #{sEtime} </if>
+		  		  <if test="sProgress != null and sProgress != ''"> and s_progress = #{sProgress} </if>
+		  		  <if test="sMcode != null and sMcode != ''"> and s_mcode = #{sMcode} </if>
+		  		  <if test="sManager != null and sManager != ''"> and s_manager = #{sManager} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StageDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_stage
+		(
+			`uv_code`, 
+			`s_level`, 
+			`s_name`, 
+			`s_description`, 
+			`s_time`, 
+			`s_stime`, 
+			`s_etime`, 
+			`s_progress`, 
+			`s_mcode`, 
+			`s_manager`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{sLevel}, 
+			#{sName}, 
+			#{sDescription}, 
+			#{sTime}, 
+			#{sStime}, 
+			#{sEtime}, 
+			#{sProgress}, 
+			#{sMcode}, 
+			#{sManager}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StageDO">
+		update yx_stage 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sLevel != null">`s_level` = #{sLevel}, </if>
+			<if test="sName != null">`s_name` = #{sName}, </if>
+			<if test="sDescription != null">`s_description` = #{sDescription}, </if>
+			<if test="sTime != null">`s_time` = #{sTime}, </if>
+			<if test="sStime != null">`s_stime` = #{sStime}, </if>
+			<if test="sEtime != null">`s_etime` = #{sEtime}, </if>
+			<if test="sProgress != null">`s_progress` = #{sProgress}, </if>
+			<if test="sMcode != null">`s_mcode` = #{sMcode}, </if>
+			<if test="sManager != null">`s_manager` = #{sManager}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stage where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stage where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

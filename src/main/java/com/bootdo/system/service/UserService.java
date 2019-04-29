@@ -13,11 +13,8 @@ import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
@@ -28,7 +25,6 @@ import com.bootdo.system.dao.UserRoleDao;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.domain.UserRoleDO;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -64,6 +60,10 @@ public class UserService  {
         return user;
     }
 
+    //登录认证使用
+    public	UserDO findOneByLoginName(String username) {
+    	return userMapper.findOneByLoginName(username);
+    }
     
     public List<UserDO> list(Map<String, Object> map) {
         return userMapper.findPageListByMap(map);

@@ -49,4 +49,8 @@ public class YXDictService  {
 		return dictDao.batchRemoveByIds(ids);
 	}
 	
+    public List<YXDictDO> listType(Integer uvCode) {
+        return dictDao.listType(uvCode);
+    }
+	
 }

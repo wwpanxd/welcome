@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 迎新阶段表
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-22 11:56:29
+ * @date 2019-04-29 11:42:24
  */
 @Mapper
 public interface StageDao {

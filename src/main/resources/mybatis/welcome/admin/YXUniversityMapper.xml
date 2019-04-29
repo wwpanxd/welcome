@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXUniversityDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXUniversityDao">
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXUniversityDO">
 		select `id`,`uv_code`,`uv_name`,`uv_sname`,`uv_description` from yx_university where id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXUniversityDao">
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXUniversityDO">
 		select `id`,`uv_code`,`uv_name`,`uv_sname`,`uv_description` from yx_university
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -40,7 +40,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXUniversityDao" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXUniversityDO" useGeneratedKeys="true" keyProperty="id">
 		insert into yx_university
 		(
 			`uv_code`, 
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXUniversityDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXUniversityDO">
 		update yx_university 
 		<set>
 			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>

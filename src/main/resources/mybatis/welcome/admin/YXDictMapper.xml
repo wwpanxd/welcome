@@ -103,5 +103,10 @@
 			#{id}
 		</foreach>
 	</delete>
+	
+	<select id="listType" resultType="com.bootdo.welcome.dao.admin.YXDictDao">
+		select distinct `type` , description from yx_dict where `uv_code` = #{value}
+	</select>
+	
 
 </mapper>

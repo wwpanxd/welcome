@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXDeptDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXDeptDao">
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXDeptDO">
 		select `id`,`uv_code`,`parent_id`,`d_name`,`d_order`,`d_flag` from yx_dept where id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXDeptDao">
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXDeptDO">
 		select `id`,`uv_code`,`parent_id`,`d_name`,`d_order`,`d_flag` from yx_dept
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -42,7 +42,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXDeptDao" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXDeptDO" useGeneratedKeys="true" keyProperty="id">
 		insert into yx_dept
 		(
 			`uv_code`, 
@@ -61,7 +61,7 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXDeptDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXDeptDO">
 		update yx_dept 
 		<set>
 			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>

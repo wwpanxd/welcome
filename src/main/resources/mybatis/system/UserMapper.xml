@@ -4,11 +4,15 @@
 <mapper namespace="com.bootdo.system.dao.UserDao">
 
 	<select id="findOneById" resultType="com.bootdo.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`post`,`phone`,`status`,`sex`,`pic_url`,`user_id_create`,`user_id_modified` from sys_user where user_id = #{value}
+		select `user_id`,`username`,`name`,`dept_id`,`email`,`post`,`phone`,`status`,`sex`,`pic_url`,`user_id_create`,`user_id_modified` from sys_user where user_id = #{value}
+	</select>
+	
+	<select id="findOneByLoginName" resultType="com.bootdo.system.domain.UserDO">
+		select `user_id`,`username`,`name`,`password`,`status` from sys_user where username = #{value} limit 1
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`post`,`phone`,`status`,`sex`,`pic_url`,`user_id_create`,`user_id_modified` from sys_user
+		select `user_id`,`username`,`name`,`dept_id`,`email`,`post`,`phone`,`status`,`sex`,`pic_url`,`user_id_create`,`user_id_modified` from sys_user
         <where>  
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
@@ -61,7 +65,6 @@
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		  <if test="name != null and name != ''"> and name LIKE '%${name}%' </if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
 		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
 		  		  <if test="email != null and email != ''"> and email = #{email} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>

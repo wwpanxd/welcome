@@ -2,6 +2,8 @@ package com.bootdo.common.exception;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +32,12 @@ public class ExceptionHandlerAdvice {
     public R handleAuthorizationException(AuthorizationException e, HttpServletRequest request, HttpServletResponse response) {
          response.setStatus(480);
 		 return R.error(10001, "该资源未授权");
+    }
+    
+    @ExceptionHandler(LockedAccountException.class)
+    public R handleAuthorizationException(LockedAccountException e, HttpServletRequest request, HttpServletResponse response) {
+         response.setStatus(480);
+		 return R.error(20002, "账号已被锁定,请联系管理员");
     }
     
     

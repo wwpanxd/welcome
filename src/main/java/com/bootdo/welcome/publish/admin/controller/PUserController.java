@@ -39,8 +39,8 @@ import io.swagger.annotations.ApiResponses;
 
 
 @RestController
-@RequestMapping("welcome/publish/yw/user")
-@Api(value="用户相关",description="用户相关")
+@RequestMapping("welcome/publish/admin/user")
+@Api(value="迎新用户管理相关",description="迎新用户管理相关")
 public class PUserController extends BaseController{
 	
 	static Logger log = LoggerFactory.getLogger(PUserController.class);
@@ -58,9 +58,9 @@ public class PUserController extends BaseController{
 
 	
 	
-	@Log("获取xxx列表")
+	@Log("获取迎新用户列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
+	@ApiOperation(value="获取迎新用户列表", notes="获取迎新用户列表")
 //  @ApiImplicitParams({
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
@@ -75,9 +75,9 @@ public class PUserController extends BaseController{
 		return userService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取迎新用户分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取迎新用户分页列表", notes="获取迎新用户分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -168,32 +168,32 @@ public class PUserController extends BaseController{
 //	}
 
 	
-	@Log("删除XXX信息")
+	@Log("删除迎新用户信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除迎新用户", notes="删除迎新用户,入参是迎新用户Id")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
 		if(userService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+			return PR.ok("删除迎新用户成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除迎新用户失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除迎新用户信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除迎新用户", notes="批量删除迎新用户")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
 		if(userService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+			return PR.ok("批量删除迎新用户成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除迎新用户失败");
 	}
 	
 }

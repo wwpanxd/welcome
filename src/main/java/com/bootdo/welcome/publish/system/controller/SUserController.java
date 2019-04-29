@@ -27,6 +27,7 @@ import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.MenuService;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
+import com.bootdo.system.shiro.LoginUserDO;
 import com.bootdo.system.vo.UserVO;
 import com.bootdo.welcome.publish.admin.controller.PUserController;
 import com.bootdo.welcome.utils.PPageUtils;
@@ -170,8 +171,9 @@ public class SUserController extends BaseController{
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	PR resetPwd(@RequestBody UserVO userVO) {
-		try{
-			userService.resetPwd(userVO,getUser());
+		try{	LoginUserDO LoginUserDO=getUser();
+		
+		userService.resetPwd(userVO,new UserDO(LoginUserDO.getUserId(),LoginUserDO.getUsername(),LoginUserDO.getName(),LoginUserDO.getPassword()));		
 			return PR.ok("用户修改密码成功");
 		}catch (Exception e){
 			return PR.error("用户修改密码失败");

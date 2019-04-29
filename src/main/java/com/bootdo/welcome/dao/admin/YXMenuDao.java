@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.bootdo.welcome.domain.admin.YXMenuDO;
 
@@ -29,4 +30,8 @@ public interface YXMenuDao {
 	int removeById(Long mid);
 	
 	int batchRemoveByIds(Long[] mids);
+	
+	List<YXMenuDO> listMenuByUserId(@Param("uid") Long uid);
+	
+	List<String> listUserPerms(@Param("uid") Long uid);
 }

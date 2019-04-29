@@ -54,7 +54,7 @@ public class UserDO implements Serializable {
     @ApiModelProperty(value="头像url")
     private String picUrl;
     
-    //图片ID
+	//图片ID
     private Long picId;
     
 //    //现居住地
@@ -70,6 +70,13 @@ public class UserDO implements Serializable {
 
     public UserDO() {
     	
+    }
+    public UserDO(Long userId, String username, String name, String password) {
+    	super();
+    	this.userId = userId;
+    	this.username = username;
+    	this.name = name;
+    	this.password = password;
     }
     public UserDO(Long userId, String username, String name, Long deptId, String post, String phone,List<String> perms) {
 		super();

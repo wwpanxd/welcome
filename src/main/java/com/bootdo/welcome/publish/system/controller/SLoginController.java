@@ -50,7 +50,7 @@ public class SLoginController extends BaseController{
 	PR Login(@RequestBody LoginVO login) {
 
 		login.setPassword(MD5Utils.encrypt(login.getUsername(), login.getPassword()));
-		UsernamePasswordToken token = new UsernamePasswordToken(login.getUsername(), login.getPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken("100000"+login.getUsername(), login.getPassword());
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);

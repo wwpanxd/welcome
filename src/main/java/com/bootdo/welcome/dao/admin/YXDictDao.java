@@ -2,9 +2,7 @@ package com.bootdo.welcome.dao.admin;
 
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
-
 import com.bootdo.welcome.domain.admin.YXDictDO;
 
 /**
@@ -29,4 +27,6 @@ public interface YXDictDao {
 	int removeById(Long id);
 	
 	int batchRemoveByIds(Long[] ids);
+	
+	List<YXDictDO> listType(Integer uvCode);
 }

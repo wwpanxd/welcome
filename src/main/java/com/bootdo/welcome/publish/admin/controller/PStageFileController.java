@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.common.exception.ExceptionHandler;
 import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
-import com.bootdo.welcome.domain.admin.YXMenuDO;
-import com.bootdo.welcome.service.admin.YXMenuService;
+import com.bootdo.welcome.domain.StageFileDO;
+import com.bootdo.welcome.service.StageFileService;
 import com.bootdo.welcome.utils.PPageUtils;
 import com.bootdo.welcome.utils.PQuery;
 import com.bootdo.welcome.utils.PR;
-import com.bootdo.welcome.vo.BatchRemoveInput;
-import com.bootdo.welcome.vo.DeletedIdVO;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,47 +28,49 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import com.bootdo.common.annotation.Log;
+import com.bootdo.welcome.vo.DeletedIdVO;
+import com.bootdo.welcome.vo.BatchRemoveInput;
 
 /**
- * 菜单管理 相关服务
+ * 迎新阶段文件表 相关服务
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-23 16:07:27
+ * @date 2019-04-29 11:42:24
  */
  
 @RestController
-@RequestMapping("/welcome/pp/menu")
-@Api(value="菜单管理相关服务",description="菜单管理相关服务")
-public class PMenuController {
+@RequestMapping("/welcome/publish/admin/stageFile")
+@Api(value="学校迎新阶段文件管理相关服务",description="迎新阶段文件管理相关服务")
+public class PStageFileController {
 
-	static Logger log = LoggerFactory.getLogger(PMenuController.class);
+	static Logger log = LoggerFactory.getLogger(PStageFileController.class);
 	
 	@Autowired
-	private YXMenuService menuService;
+	private StageFileService stageFileService;
 	
 	@Autowired
 	ValidateMessage validateMessage;
 	
-	@Log("获取xxx列表")
+	@Log("获取学校迎新阶段文件列表")
 	@GetMapping("/list")
-	@ApiOperation(value="获取xxx列表", notes="获取xxx列表")
-//  @ApiImplicitParams({
-//		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
-//  })
-	@ApiResponses({
-		@ApiResponse( response = YXMenuDO.class, code = 200, message = "返回结构:YXMenuDO的list")
+	@ApiOperation(value="获取学校迎新阶段文件列表", notes="获取学校迎新阶段文件列表")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "uvcode", value = "学校唯一编号", required = true, dataType = "int",paramType="query"),
 	})
-	public List<YXMenuDO> getList( YXMenuDO condition){
+	@ApiResponses({
+		@ApiResponse( response = StageFileDO.class, code = 200, message = "返回结构:StageFileDO的list")
+	})
+	public List<StageFileDO> getList(@RequestParam Integer uvcode){
 		//查询列表数据
        Map<String,Object> params = new HashMap<String,Object>();
-//     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
+       params.put("uvCode",uvcode);//业务的筛选条件
        
-		return menuService.list(params);
+		return stageFileService.list(params);
 	}
 	
-	@Log("获取xxx分页列表")
+	@Log("获取学校迎新阶段文件分页列表")
 	@GetMapping("/list/page")
-	@ApiOperation(value="获取xxx分页列表", notes="获取xxx分页列表")
+	@ApiOperation(value="获取学校迎新阶段文件分页列表", notes="获取学校迎新阶段文件分页列表")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int" ,paramType="query"),
@@ -79,7 +78,7 @@ public class PMenuController {
 	@ApiResponses({
 		@ApiResponse( response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class")
 	})
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  YXMenuDO condition){
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,  StageFileDO condition){
 		//查询列表数据
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("page", page);//数据偏移量
@@ -89,74 +88,74 @@ public class PMenuController {
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
 		
 		PQuery query = new PQuery(params);
-		int total = menuService.count(query);		
-		PPageUtils pageUtil = new PPageUtils(menuService.list(query), total,page,size);
+		int total = stageFileService.count(query);		
+		PPageUtils pageUtil = new PPageUtils(stageFileService.list(query), total,page,size);
 		return pageUtil;
 	}
 	
 	
-	@Log("添加XXX")
+	@Log("添加学校迎新阶段文件")
 	@PostMapping("/save")
-	@ApiOperation(value="添加XXX", notes="添加XXX"
-			+ "入参Menu，是YXMenuDO(XXX类)")
+	@ApiOperation(value="添加学校迎新阶段文件", notes="添加学校迎新阶段文件"
+			+ "入参StageFile，是StageFileDO(学校迎新阶段文件类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR save(@RequestBody  YXMenuDO menu) {
+	public PR save(@RequestBody  StageFileDO stageFile) {
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if(menuService.save(menu)>0){
-			return PR.ok("添加XXX成功");
+		if(stageFileService.save(stageFile)>0){
+			return PR.ok("添加学校迎新阶段文件成功");
 		}
-		return PR.error("添加XXX失败");
+		return PR.error("添加学校迎新阶段文件失败");
 	}
 	
-	@Log("修改XXX信息")
+	@Log("修改学校迎新阶段文件信息")
 	@PostMapping("/update")
-	@ApiOperation(value="修改XXX", notes="修改XXX"
-		+ "入参Menu，是YXMenuDO(XXX类)")
+	@ApiOperation(value="修改学校迎新阶段文件", notes="修改学校迎新阶段文件"
+		+ "入参StageFile，是StageFileDO(学校迎新阶段文件类)")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
-	public PR update(@RequestBody YXMenuDO menu) {
+	public PR update(@RequestBody StageFileDO stageFile) {
 		
 		//异常判断
 //		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
 		
-		if (menuService.update(menu) > 0) {
+		if (stageFileService.update(stageFile) > 0) {
 			
-			return PR.ok("修改XXX成功");
+			return PR.ok("修改学校迎新阶段文件成功");
 		}
-		return PR.error("修改XXX失败");
+		return PR.error("修改学校迎新阶段文件失败");
 	}
 	
-	@Log("删除XXX信息")
+	@Log("删除学校迎新阶段文件信息")
 	@PostMapping("/remove")
-	@ApiOperation(value="删除XXX", notes="删除XXX,入参是XXXId")
+	@ApiOperation(value="删除学校迎新阶段文件", notes="删除学校迎新阶段文件,入参是学校迎新阶段文件Id")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody DeletedIdVO vid) {
-		if(menuService.remove(vid.getId())>0){
-			return PR.ok("删除XXX成功");
+		if(stageFileService.remove(vid.getId())>0){
+			return PR.ok("删除学校迎新阶段文件成功");
 		}
-		return PR.error("删除XXX失败");
+		return PR.error("删除学校迎新阶段文件失败");
 		
 	}
 	
-	@Log("批量删除XXX信息")
+	@Log("批量删除学校迎新阶段文件信息")
 	@PostMapping("/batchRemove")
-	@ApiOperation(value="批量删除XXX", notes="批量删除XXX")
+	@ApiOperation(value="批量删除学校迎新阶段文件", notes="批量删除学校迎新阶段文件")
 	@ApiResponses({
 		@ApiResponse( response = PR.class, code = 200, message = "返回结构:PR.class")
 	})
 	public PR remove(@RequestBody BatchRemoveInput bids) {
 		
-		if(menuService.batchRemove(bids.getIds())>0){
-			return PR.ok("批量删除XXX成功");
+		if(stageFileService.batchRemove(bids.getIds())>0){
+			return PR.ok("批量删除学校迎新阶段文件成功");
 		}
-		return PR.error("批量删除XXX失败");
+		return PR.error("批量删除学校迎新阶段文件失败");
 	}
 	
 }

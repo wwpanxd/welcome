@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StageFileDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StageFileDO">
+		select `id`,`uv_code`,`s_id_level1`,`s_id_level2`,`s_id_level3`,`sf_name`,`sf_url`,`sf_size`,`sf_type` from yx_stage_file where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StageFileDO">
+		select `id`,`uv_code`,`s_id_level1`,`s_id_level2`,`s_id_level3`,`sf_name`,`sf_url`,`sf_size`,`sf_type` from yx_stage_file
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sIdLevel1 != null and sIdLevel1 != ''"> and s_id_level1 = #{sIdLevel1} </if>
+		  		  <if test="sIdLevel2 != null and sIdLevel2 != ''"> and s_id_level2 = #{sIdLevel2} </if>
+		  		  <if test="sIdLevel3 != null and sIdLevel3 != ''"> and s_id_level3 = #{sIdLevel3} </if>
+		  		  <if test="sfName != null and sfName != ''"> and sf_name = #{sfName} </if>
+		  		  <if test="sfUrl != null and sfUrl != ''"> and sf_url = #{sfUrl} </if>
+		  		  <if test="sfSize != null and sfSize != ''"> and sf_size = #{sfSize} </if>
+		  		  <if test="sfType != null and sfType != ''"> and sf_type = #{sfType} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stage_file
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sIdLevel1 != null and sIdLevel1 != ''"> and s_id_level1 = #{sIdLevel1} </if>
+		  		  <if test="sIdLevel2 != null and sIdLevel2 != ''"> and s_id_level2 = #{sIdLevel2} </if>
+		  		  <if test="sIdLevel3 != null and sIdLevel3 != ''"> and s_id_level3 = #{sIdLevel3} </if>
+		  		  <if test="sfName != null and sfName != ''"> and sf_name = #{sfName} </if>
+		  		  <if test="sfUrl != null and sfUrl != ''"> and sf_url = #{sfUrl} </if>
+		  		  <if test="sfSize != null and sfSize != ''"> and sf_size = #{sfSize} </if>
+		  		  <if test="sfType != null and sfType != ''"> and sf_type = #{sfType} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StageFileDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_stage_file
+		(
+			`uv_code`, 
+			`s_id_level1`, 
+			`s_id_level2`, 
+			`s_id_level3`, 
+			`sf_name`, 
+			`sf_url`, 
+			`sf_size`, 
+			`sf_type`
+		)
+		values
+		(
+			#{uvCode}, 
+			#{sIdLevel1}, 
+			#{sIdLevel2}, 
+			#{sIdLevel3}, 
+			#{sfName}, 
+			#{sfUrl}, 
+			#{sfSize}, 
+			#{sfType}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StageFileDO">
+		update yx_stage_file 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sIdLevel1 != null">`s_id_level1` = #{sIdLevel1}, </if>
+			<if test="sIdLevel2 != null">`s_id_level2` = #{sIdLevel2}, </if>
+			<if test="sIdLevel3 != null">`s_id_level3` = #{sIdLevel3}, </if>
+			<if test="sfName != null">`sf_name` = #{sfName}, </if>
+			<if test="sfUrl != null">`sf_url` = #{sfUrl}, </if>
+			<if test="sfSize != null">`sf_size` = #{sfSize}, </if>
+			<if test="sfType != null">`sf_type` = #{sfType}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stage_file where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stage_file where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -3,18 +3,21 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXUserDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXUserDao">
-		select `id`,`uv_code`,`loginname`,`name`,`password`,`dept_id`,`flag`,`post`,`phone`,`pic_url` from yx_user where id = #{value}
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXUserDO">
+		select `id`,`uv_code`,`loginname`,`name`,`dept_id`,`flag`,`post`,`phone`,`pic_url` from yx_user where id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXUserDao">
+	<select id="findOneByLoginNameAndUVCode" resultType="com.bootdo.welcome.domain.admin.YXUserDO">
+		select `id`,`uv_code`,`loginname`,`name`,`password`,`flag` from yx_user where loginname = #{loginname} and uv_code = #{uvcode} limit 1
+	</select>
+	
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXUserDO">
 		select `id`,`uv_code`,`loginname`,`name`,`password`,`dept_id`,`flag`,`post`,`phone`,`pic_url` from yx_user
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
 		  		  <if test="loginname != null and loginname != ''"> and loginname = #{loginname} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
 		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
 		  		  <if test="flag != null and flag != ''"> and flag = #{flag} </if>
 		  		  <if test="post != null and post != ''"> and post = #{post} </if>
@@ -41,7 +44,6 @@
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
 		  		  <if test="loginname != null and loginname != ''"> and loginname = #{loginname} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
 		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
 		  		  <if test="flag != null and flag != ''"> and flag = #{flag} </if>
 		  		  <if test="post != null and post != ''"> and post = #{post} </if>
@@ -50,7 +52,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXUserDao" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXUserDO" useGeneratedKeys="true" keyProperty="id">
 		insert into yx_user
 		(
 			`uv_code`, 
@@ -77,13 +79,12 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXUserDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXUserDO">
 		update yx_user 
 		<set>
 			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
 			<if test="loginname != null">`loginname` = #{loginname}, </if>
 			<if test="name != null">`name` = #{name}, </if>
-			<if test="password != null">`password` = #{password}, </if>
 			<if test="deptId != null">`dept_id` = #{deptId}, </if>
 			<if test="flag != null">`flag` = #{flag}, </if>
 			<if test="post != null">`post` = #{post}, </if>

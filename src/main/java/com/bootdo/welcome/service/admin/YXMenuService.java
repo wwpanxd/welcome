@@ -1,10 +1,14 @@
 package com.bootdo.welcome.service.admin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.bootdo.welcome.dao.admin.YXMenuDao;
 import com.bootdo.welcome.domain.admin.YXMenuDO;
@@ -49,6 +53,17 @@ public class YXMenuService  {
 	
 	public int batchRemove(Long[] mids){
 		return menuDao.batchRemoveByIds(mids);
+	}
+	
+	public Set<String> listPerms(Long userId) {
+		List<String> perms = menuDao.listUserPerms(userId);
+		Set<String> permsSet = new HashSet<>();
+		for (String perm : perms) {
+			if (StringUtils.isNotBlank(perm)) {
+				permsSet.addAll(Arrays.asList(perm.trim().split(",")));
+			}
+		}
+		return permsSet;
 	}
 	
 }

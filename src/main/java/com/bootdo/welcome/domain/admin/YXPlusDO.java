@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @email wwpan.xd@163.com
  * @date 2019-04-22 11:52:54
  */
-@ApiModel(value = "PlusDO", description = "插件信息表") 
+@ApiModel(value = "YXPlusDO", description = "插件信息表") 
 public class YXPlusDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @email wwpan.xd@163.com
  * @date 2019-04-22 11:55:53
  */
-@ApiModel(value = "RoleMenuDO", description = "角色与菜单对应关系") 
+@ApiModel(value = "YXRoleMenuDO", description = "角色与菜单对应关系") 
 public class YXRoleMenuDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

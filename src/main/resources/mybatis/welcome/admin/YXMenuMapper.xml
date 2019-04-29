@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXMenuDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXMenuDao">
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXMenuDO">
 		select `mid`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`uv_code`,`mcode` from yx_menu where mid = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXMenuDao">
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXMenuDO">
 		select `mid`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`uv_code`,`mcode` from yx_menu
         <where>  
 		  		  <if test="mid != null and mid != ''"> and mid = #{mid} </if>
@@ -50,7 +50,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXMenuDao" useGeneratedKeys="true" keyProperty="mid">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXMenuDO" useGeneratedKeys="true" keyProperty="mid">
 		insert into yx_menu
 		(
 			`parent_id`, 
@@ -77,7 +77,7 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXMenuDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXMenuDO">
 		update yx_menu 
 		<set>
 			<if test="parentId != null">`parent_id` = #{parentId}, </if>
@@ -103,5 +103,29 @@
 			#{mid}
 		</foreach>
 	</delete>
+	
+	<select id="listMenuByUserId" resultType="com.bootdo.welcome.domain.admin.YXMenuDO">
+		select distinct
+		m.menu_id , parent_id, name, url,
+		perms,`type`,icon,order_num,gmt_create, gmt_modified
+		from yw_menu m
+		left
+		join yw_role_menu rm on m.menu_id = rm.menu_id left join
+		yw_user_role ur
+		on rm.role_id =ur.role_id where ur.user_id = #{uid}
+		and
+		m.type in(0,1)
+		order by
+		m.order_num
+	</select>
+	
+	<select id="listUserPerms" resultType="string">
+		select distinct m.perms
+		from yw_menu m left join
+		yw_role_menu rm on m.menu_id = rm.menu_id
+		left join yw_user_role ur
+		on rm.role_id = ur.role_id where ur.user_id
+		= #{uid}
+	</select>
 
 </mapper>

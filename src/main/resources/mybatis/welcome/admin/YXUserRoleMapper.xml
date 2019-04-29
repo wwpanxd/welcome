@@ -3,11 +3,11 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXUserRoleDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXUserRoleDO">
 		select `id`,`user_id`,`role_id`,`uv_code` from yx_user_role where id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXUserRoleDO">
 		select `id`,`user_id`,`role_id`,`uv_code` from yx_user_role
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -38,7 +38,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXUserRoleDao" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXUserRoleDO" useGeneratedKeys="true" keyProperty="id">
 		insert into yx_user_role
 		(
 			`user_id`, 
@@ -53,7 +53,7 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXUserRoleDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXUserRoleDO">
 		update yx_user_role 
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>

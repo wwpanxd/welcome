@@ -12,6 +12,8 @@ public class LoginVO implements Serializable{
 	 String username;
 	@ApiModelProperty(value="用户密码")
 	 String password;
+	@ApiModelProperty(value = "学校的唯一编码")
+	 Integer uvcode;
 	
 	public String getUsername() {
 		return username;
@@ -24,5 +26,11 @@ public class LoginVO implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Integer getUvcode() {
+		return uvcode;
+	}
+	public void setUvcode(Integer uvcode) {
+		this.uvcode = uvcode;
 	}
 }

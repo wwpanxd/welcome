@@ -13,8 +13,9 @@ import io.swagger.annotations.ApiModelProperty;
  * @email wwpan.xd@163.com
  * @date 2019-04-22 11:56:29
  */
-@ApiModel(value = "UserDO", description = "迎新用户表,所有用户") 
+@ApiModel(value = "YXUserDO", description = "迎新用户表,所有用户") 
 public class YXUserDO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	//
@@ -48,6 +49,10 @@ public class YXUserDO implements Serializable {
 	@ApiModelProperty(value = "头像url")
 	private String picUrl;
 
+	public YXUserDO() {
+		
+	}
+	
 	/**
 	 * 设置：
 	 */

@@ -2,8 +2,8 @@ package com.bootdo.welcome.dao.admin;
 
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.bootdo.welcome.domain.admin.YXUserDO;
 
@@ -17,6 +17,8 @@ import com.bootdo.welcome.domain.admin.YXUserDO;
 public interface YXUserDao {
 
 	YXUserDO findOneById(Long id);
+	
+	YXUserDO findOneByLoginNameAndUVCode(@Param("loginname") String loginname,@Param("uvcode") Integer uvcode);
 	
 	List<YXUserDO> findPageListByMap(Map<String,Object> map);
 	
