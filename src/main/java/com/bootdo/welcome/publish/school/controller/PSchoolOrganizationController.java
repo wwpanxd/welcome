@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/welcome/school/organization")
+@RequestMapping("/welcome/publish/school/organization")
 public class PSchoolOrganizationController extends BaseController {
 	@GetMapping("all")
 	@ResponseBody

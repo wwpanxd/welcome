@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/publish/channel")
+@RequestMapping("/welcome/publish/school/channel")
 @Api(value="迎新通道表相关服务",description="迎新通道表相关服务")
 public class ChannelController {
 

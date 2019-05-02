@@ -39,7 +39,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/publish/class")
+@RequestMapping("/welcome/publish/school/class")
 @Api(value="班级表相关服务",description="班级表相关服务")
 public class ClassController {
 

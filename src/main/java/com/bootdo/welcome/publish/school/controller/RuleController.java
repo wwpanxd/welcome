@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/rule")
+@RequestMapping("/welcome/publish/school/rule")
 @Api(value="规则表(批量建班规则、分班规则、分宿规则、学号规则、考试分班规则)相关服务",description="规则表(批量建班规则、分班规则、分宿规则、学号规则、考试分班规则)相关服务")
 public class RuleController {
 

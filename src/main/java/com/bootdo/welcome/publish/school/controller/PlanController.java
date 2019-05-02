@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/publish/plan")
+@RequestMapping("/welcome/publish/school/plan")
 @Api(value="迎新计划表相关服务",description="迎新计划表相关服务")
 public class PlanController {
 

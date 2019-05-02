@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/stuExpends")
+@RequestMapping("/welcome/publish/school/stuExpends")
 @Api(value="新生缴费信息表相关服务",description="新生缴费信息表相关服务")
 public class StuExpendsController {
 

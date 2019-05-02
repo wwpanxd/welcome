@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/link")
+@RequestMapping("/welcome/publish/school/link")
 @Api(value="迎新环节表相关服务",description="迎新环节表相关服务")
 public class LinkController {
 
