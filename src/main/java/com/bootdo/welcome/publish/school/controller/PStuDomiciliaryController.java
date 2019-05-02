@@ -41,7 +41,7 @@ public class PStuDomiciliaryController {
 	@ApiOperation(value = "获取学生户籍列表", notes = "获取学生户籍列表")
 	@ApiResponses({
 			@ApiResponse(response = StuDomiciliaryDO.class, code = 200, message = "返回结构:StuDomiciliaryDO的list") })
-	public List<StuDomiciliaryDO> getList(@RequestParam StuDomiciliaryDO condition) {
+	public List<StuDomiciliaryDO> getList(StuDomiciliaryDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -56,7 +56,7 @@ public class PStuDomiciliaryController {
 			@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int", paramType = "query"),
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = StuDomiciliaryDO.class, code = 200, message = "返回结构:StuDomiciliaryDO.class") })
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StuDomiciliaryDO condition) {
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, StuDomiciliaryDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量

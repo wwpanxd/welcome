@@ -52,7 +52,7 @@ public class PTakeStationController {
 	@ApiOperation(value = "获取接站信息配置列表", notes = "获取接站信息配置列表")
 	@ApiResponses({
 			@ApiResponse(response = StuTakeStationDO.class, code = 200, message = "返回结构:StuTakeStationDO的list") })
-	public List<StuTakeStationDO> getList(@RequestParam StuTakeStationDO condition) {
+	public List<StuTakeStationDO> getList(StuTakeStationDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -68,7 +68,7 @@ public class PTakeStationController {
 			@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int", paramType = "query"),
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class") })
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StuTakeStationDO condition) {
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, StuTakeStationDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量
