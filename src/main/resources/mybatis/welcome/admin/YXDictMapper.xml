@@ -108,5 +108,13 @@
 		select distinct `code` , description from yx_dict where `uv_code` = #{value}
 	</select>
 	
+	
+	<select id="findListByUVCodeAndTypeIn" resultType="com.bootdo.welcome.domain.admin.YXDictDO">
+		select `name`,`value`,`code` from yx_dict where uv_code = #{uvCode} and code in 
+       	<foreach item="type" collection="types" open="(" separator="," close=")">
+			#{type}
+		</foreach>
+        order by order_num
+	</select>
 
 </mapper>

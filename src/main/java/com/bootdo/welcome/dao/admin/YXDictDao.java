@@ -3,6 +3,8 @@ package com.bootdo.welcome.dao.admin;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.bootdo.welcome.domain.admin.YXDictDO;
 
 /**
@@ -29,4 +31,6 @@ public interface YXDictDao {
 	int batchRemoveByIds(Long[] ids);
 	
 	List<YXDictDO> listType(Integer uvCode);
+	
+	List<YXDictDO> findListByUVCodeAndTypeIn( @Param("uvCode") Integer uvcode, @Param("types") List<String> types);
 }

@@ -16,8 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "CollegeDO", description = "学校院系机构") 
 public class CollegeDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//
+
 	@ApiModelProperty(value = "")
 	private Long id;
 	//学校唯一编码(100000:公共机构)

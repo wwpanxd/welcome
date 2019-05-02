@@ -2,6 +2,9 @@ package com.bootdo.welcome.service.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.bootdo.welcome.dao.admin.YXDictDao;
@@ -53,4 +56,14 @@ public class YXDictService  {
         return dictDao.listType(uvCode);
     }
 	
+    public Map<Integer,List<YXDictDO>> getTypeInLists( Integer uvcode, List<String> types){
+		List<YXDictDO> yxddolist=dictDao.findListByUVCodeAndTypeIn(uvcode,types);
+		Map<Integer,List<YXDictDO>> map_dict= new HashMap<Integer,List<YXDictDO>>();
+		for(YXDictDO yxdictdo:yxddolist) {
+			if(!map_dict.containsKey(yxdictdo.getCode())) map_dict.put(yxdictdo.getCode(), new ArrayList<YXDictDO>());
+		   
+			map_dict.get(yxdictdo.getCode()).add(yxdictdo);
+		}
+    	return map_dict;
+    }
 }

@@ -84,6 +84,21 @@ public class PDictController {
 		return dictService.list(params);
 	}
 	
+	@Log("获取具体类型的学校字典数据")
+	@GetMapping("/type/listin")
+	@ApiOperation(value="获取具体学校字典、机构级别、宿舍级别等", notes="获取具体类型的学校字典数据,多个获取")
+//    @ApiImplicitParams({
+//		@ApiImplicitParam(name = "uvcode", value = "学校唯一编号", required = true, dataType = "int",paramType="query"),
+//		@ApiImplicitParam(name = "types", value = "字典类型", required = true, dataType = "list",paramType="query"),
+//  	})
+	@ApiResponses({
+		@ApiResponse( response = YXDictDO.class, code = 200, message = "返回结构:YXDictDO的list")
+	})
+	public Map<Integer,List<YXDictDO>> getTypeInLists(@RequestParam Integer uvcode,@RequestParam List<String> types) {
+		// 查询列表数据
+		return dictService.getTypeInLists(uvcode, types);
+	}
+	
 	@Log("获取学校字典枚举列表")
 	@GetMapping("/list")
 	@ApiOperation(value="获取学校字典枚举列表", notes="获取学校字典枚举列表")
