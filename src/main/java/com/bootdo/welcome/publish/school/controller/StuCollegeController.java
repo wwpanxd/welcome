@@ -60,7 +60,7 @@ public class StuCollegeController {
 //		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
 //  })
 	@ApiResponses({ @ApiResponse(response = StuCollegeDO.class, code = 200, message = "返回结构:StuCollegeDO的list") })
-	public List<StuCollegeDO> getList(@RequestParam StuCollegeDO condition) {
+	public List<StuCollegeDO> getList(StuCollegeDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -76,7 +76,7 @@ public class StuCollegeController {
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class") })
 	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size,
-			@RequestParam StuCollegeDO condition) {
+			StuCollegeDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量

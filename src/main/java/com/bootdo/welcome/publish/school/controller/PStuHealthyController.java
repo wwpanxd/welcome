@@ -55,7 +55,7 @@ public class PStuHealthyController {
 	@GetMapping("/list")
 	@ApiOperation(value = "获取学生健康信息列表", notes = "获取学生健康信息列表")
 	@ApiResponses({ @ApiResponse(response = StuHealthyDO.class, code = 200, message = "返回结构:StuHealthyDO的list") })
-	public List<StuHealthyDO> getList(@RequestParam StuHealthyDO condition) {
+	public List<StuHealthyDO> getList(StuHealthyDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -71,7 +71,7 @@ public class PStuHealthyController {
 			@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int", paramType = "query"),
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = PPageUtils.class, code = 200, message = "返回结构:PPageUtils.class") })
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam StuHealthyDO condition) {
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, StuHealthyDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量
