@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/welcome/studomiciliary")
+@RequestMapping("/welcome/publish/studomiciliary")
 @Api(value = "学生户籍服务相关", description = "学生户籍服务相关")
 public class PStuDomiciliaryController {
 	static Logger log = LoggerFactory.getLogger(PStuDomiciliaryController.class);

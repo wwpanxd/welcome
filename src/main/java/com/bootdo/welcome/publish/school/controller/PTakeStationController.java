@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/welcome/takestation")
+@RequestMapping("/welcome/publish/takestation")
 @Api(value = "接站信息配置", description = "接站信息配置")
 public class PTakeStationController {
 	static Logger log = LoggerFactory.getLogger(PStageFileController.class);

@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/welcome/stuachievement")
+@RequestMapping("/welcome/publish/stuachievement")
 @Api(value = "学生成绩", description = "学生成绩")
 public class PStuAchievementController {
 	static Logger log = LoggerFactory.getLogger(PStuAchievementController.class);

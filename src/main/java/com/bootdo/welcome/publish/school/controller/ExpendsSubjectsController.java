@@ -38,9 +38,9 @@ import com.bootdo.common.annotation.Log;
  * @email wwpan.xd@163.com
  * @date 2019-04-23 16:07:27
  */
- 
+
 @RestController
-@RequestMapping("/welcome/expendsSubjects")
+@RequestMapping("/welcome/publish/expendsSubjects")
 @Api(value="缴费科目表相关服务",description="缴费科目表相关服务")
 public class ExpendsSubjectsController {
 

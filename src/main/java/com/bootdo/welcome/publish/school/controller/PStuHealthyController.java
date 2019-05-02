@@ -40,7 +40,7 @@ import com.bootdo.welcome.vo.StuHealthyListVO;
 import com.bootdo.welcome.service.PStuHealthyService;
 
 @RestController
-@RequestMapping("/welcome/healthy")
+@RequestMapping("/welcome/publish/healthy")
 @Api(value = "健康信息配置", description = "健康信息配置")
 public class PStuHealthyController {
 	static Logger log = LoggerFactory.getLogger(PStageFileController.class);

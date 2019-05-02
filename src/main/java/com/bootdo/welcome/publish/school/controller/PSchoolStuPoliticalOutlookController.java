@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/welcome/stuPoliticalOutlook")
+@RequestMapping("/welcome/publish/stuPoliticalOutlook")
 @Api(value = "学生政治面貌相关服务", description = "学生政治面貌相关服务")
 public class PSchoolStuPoliticalOutlookController {
 	static Logger log = LoggerFactory.getLogger(PSchoolStuPoliticalOutlookController.class);
