@@ -41,7 +41,7 @@ public class PSchoolStuPoliticalOutlookController {
 	@ApiOperation(value = "获取学生政治面貌列表", notes = "获取学生政治面貌列表")
 	@ApiResponses({
 			@ApiResponse(response = StuPoliticalOutlookDO.class, code = 200, message = "返回结构:StuPoliticalOutlookDO的list") })
-	public List<StuPoliticalOutlookDO> getList(@RequestParam StuPoliticalOutlookDO condition) {
+	public List<StuPoliticalOutlookDO> getList(StuPoliticalOutlookDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -57,7 +57,7 @@ public class PSchoolStuPoliticalOutlookController {
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({
 			@ApiResponse(response = StuPoliticalOutlookDO.class, code = 200, message = "返回结构:StuPoliticalOutlookDO.class") })
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam RuleDO condition) {
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, RuleDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量
