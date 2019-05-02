@@ -33,7 +33,7 @@ public class YXDictDO implements Serializable {
 	private String description;
 	//排序（升序）
 	@ApiModelProperty(value = "排序（升序）")
-	private Integer sort;
+	private Integer orderNum;
 	//父级编号
 	@ApiModelProperty(value = "父级编号")
 	private Long parentId;
@@ -107,18 +107,7 @@ public class YXDictDO implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-	/**
-	 * 设置：排序（升序）
-	 */
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-	/**
-	 * 获取：排序（升序）
-	 */
-	public Integer getSort() {
-		return sort;
-	}
+
 	/**
 	 * 设置：父级编号
 	 */
@@ -166,5 +155,11 @@ public class YXDictDO implements Serializable {
 	 */
 	public Integer getUvCode() {
 		return uvCode;
+	}
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
 	}
 }

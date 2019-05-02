@@ -1,5 +1,5 @@
 
-var prefix = "/learns/score"
+var prefix = "/welcome/dict"
 $(function() {
 	load();
 });
@@ -49,23 +49,43 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '编号' 
 								},
 																{
-									field : 'uid', 
-									title : '用户ID' 
+									field : 'name', 
+									title : '标签名' 
 								},
 																{
-									field : 'utime', 
-									title : '考核耗时' 
+									field : 'value', 
+									title : '数据值' 
 								},
 																{
-									field : 'score', 
-									title : '考核成绩' 
+									field : 'code', 
+									title : '类型编码' 
 								},
 																{
-									field : 'ptime', 
-									title : '考核时间' 
+									field : 'description', 
+									title : '描述' 
+								},
+																{
+									field : 'orderNum', 
+									title : '排序（升序）' 
+								},
+																{
+									field : 'parentId', 
+									title : '父级编号' 
+								},
+																{
+									field : 'remarks', 
+									title : '备注信息' 
+								},
+																{
+									field : 'flag', 
+									title : '状态  1：启用  0：禁用' 
+								},
+																{
+									field : 'uvCode', 
+									title : '学校唯一编码(100000:公共机构)' 
 								},
 																{
 									title : '操作',

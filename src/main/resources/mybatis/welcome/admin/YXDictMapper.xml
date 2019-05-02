@@ -3,19 +3,19 @@
 
 <mapper namespace="com.bootdo.welcome.dao.admin.YXDictDao">
 
-	<select id="findOneById" resultType="com.bootdo.welcome.dao.admin.YXDictDao">
-		select `id`,`name`,`value`,`code`,`description`,`sort`,`parent_id`,`remarks`,`flag`,`uv_code` from yx_dict where id = #{value}
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.admin.YXDictDO">
+		select `id`,`name`,`value`,`code`,`description`,`order_num`,`parent_id`,`remarks`,`flag`,`uv_code` from yx_dict where id = #{value}
 	</select>
 
-	<select id="findPageListByMap" resultType="com.bootdo.welcome.dao.admin.YXDictDao">
-		select `id`,`name`,`value`,`code`,`description`,`sort`,`parent_id`,`remarks`,`flag`,`uv_code` from yx_dict
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.admin.YXDictDO">
+		select `id`,`name`,`value`,`code`,`description`,`order_num`,`parent_id`,`remarks`,`flag`,`uv_code` from yx_dict
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="value != null and value != ''"> and value = #{value} </if>
 		  		  <if test="code != null and code != ''"> and code = #{code} </if>
 		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		 <if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
 		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
 		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 		  		  <if test="flag != null and flag != ''"> and flag = #{flag} </if>
@@ -42,7 +42,7 @@
 		  		  <if test="value != null and value != ''"> and value = #{value} </if>
 		  		  <if test="code != null and code != ''"> and code = #{code} </if>
 		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
 		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
 		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 		  		  <if test="flag != null and flag != ''"> and flag = #{flag} </if>
@@ -50,14 +50,14 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.dao.admin.YXDictDao" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.admin.YXDictDO" useGeneratedKeys="true" keyProperty="id">
 		insert into yx_dict
 		(
 			`name`, 
 			`value`, 
 			`code`, 
 			`description`, 
-			`sort`, 
+			`order_num`, 
 			`parent_id`, 
 			`remarks`, 
 			`flag`, 
@@ -69,7 +69,7 @@
 			#{value}, 
 			#{code}, 
 			#{description}, 
-			#{sort}, 
+			#{orderNum},
 			#{parentId}, 
 			#{remarks}, 
 			#{flag}, 
@@ -77,14 +77,14 @@
 		)
 	</insert>
 	 
-	<update id="updateById" parameterType="com.bootdo.welcome.dao.admin.YXDictDao">
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.admin.YXDictDO">
 		update yx_dict 
 		<set>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="value != null">`value` = #{value}, </if>
 			<if test="code != null">`code` = #{code}, </if>
 			<if test="description != null">`description` = #{description}, </if>
-			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="orderNum != null">`order_num` = #{orderNum}, </if>
 			<if test="parentId != null">`parent_id` = #{parentId}, </if>
 			<if test="remarks != null">`remarks` = #{remarks}, </if>
 			<if test="flag != null">`flag` = #{flag}, </if>
@@ -104,8 +104,8 @@
 		</foreach>
 	</delete>
 	
-	<select id="listType" resultType="com.bootdo.welcome.dao.admin.YXDictDao">
-		select distinct `type` , description from yx_dict where `uv_code` = #{value}
+	<select id="listType" resultType="com.bootdo.welcome.domain.admin.YXDictDO">
+		select distinct `code` , description from yx_dict where `uv_code` = #{value}
 	</select>
 	
 

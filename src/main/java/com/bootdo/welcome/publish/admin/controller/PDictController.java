@@ -66,7 +66,7 @@ public class PDictController {
 	
 	@Log("获取具体类型的学校字典数据")
 	@GetMapping("/type/list")
-	@ApiOperation(value="获取具体学校字典、词库分类等", notes="获取具体类型的学校字典数据")
+	@ApiOperation(value="获取具体学校字典、机构级别、宿舍级别等", notes="获取具体类型的学校字典数据")
     @ApiImplicitParams({
 		@ApiImplicitParam(name = "uvcode", value = "学校唯一编号", required = true, dataType = "int",paramType="query"),
 		@ApiImplicitParam(name = "type", value = "字典类型", required = true, dataType = "int",paramType="query"),
@@ -76,8 +76,9 @@ public class PDictController {
 	})
 	public List<YXDictDO> getTypeLists(@RequestParam Integer uvcode,@RequestParam String type) {
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("type",type);//
-		params.put("sort","sort");
+		params.put("code",type);//
+		params.put("uvcode",uvcode);
+		params.put("sort","order_num");
 		params.put("order","asc");
 		// 查询列表数据
 		return dictService.list(params);

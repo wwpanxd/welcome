@@ -1,8 +1,10 @@
 package com.bootdo.system.shiro;
 
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 
-public class LoginUserDO {
+public class LoginUserDO implements Serializable{
 	 private static final long serialVersionUID = 1L;
 	    
 	    @ApiModelProperty(value="用户ID")

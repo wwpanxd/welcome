@@ -1,7 +1,8 @@
 package com.bootdo.welcome.vo;
 
+import java.util.List;
+
 import com.bootdo.welcome.domain.StuHealthyDO;
-import com.sun.tools.javac.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
