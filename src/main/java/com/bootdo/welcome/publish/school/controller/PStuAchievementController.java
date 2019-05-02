@@ -44,7 +44,7 @@ public class PStuAchievementController {
 	@GetMapping("/list")
 	@ApiOperation(value = "获取学生成绩列表", notes = "获取学生成绩列表")
 	@ApiResponses({ @ApiResponse(response = AchievementDO.class, code = 200, message = "返回结构:AchievementDO的list") })
-	public List<AchievementDO> getList(@RequestParam AchievementDO condition) {
+	public List<AchievementDO> getList( AchievementDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 //     if(condition!=null) params.put("id",condition.getId());//业务的筛选条件
@@ -59,7 +59,7 @@ public class PStuAchievementController {
 			@ApiImplicitParam(name = "page", value = "分页,当前页", required = true, dataType = "int", paramType = "query"),
 			@ApiImplicitParam(name = "size", value = "分页,每页条数", required = true, dataType = "int", paramType = "query"), })
 	@ApiResponses({ @ApiResponse(response = AchievementDO.class, code = 200, message = "返回结构:AchievementDO.class") })
-	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, @RequestParam RuleDO condition) {
+	public PPageUtils getListPage(@RequestParam int page, @RequestParam int size, RuleDO condition) {
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("page", page);// 数据偏移量

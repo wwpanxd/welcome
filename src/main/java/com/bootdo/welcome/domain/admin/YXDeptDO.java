@@ -18,13 +18,13 @@ public class YXDeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "自增ID,S0|A0|U1|D1")
 	private Long id;
 	//学校的唯一编码
-	@ApiModelProperty(value = "学校的唯一编码")
+	@ApiModelProperty(value = "学校的唯一编码,S1|A1|U0|D0")
 	private Integer uvCode;
 	//父ID
-	@ApiModelProperty(value = "父ID")
+	@ApiModelProperty(value = "父ID,S0|A1|U0|D0")
 	private Long parentId;
 	//部门名称
 	@ApiModelProperty(value = "部门名称")

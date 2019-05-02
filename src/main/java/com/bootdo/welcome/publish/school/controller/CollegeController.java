@@ -55,9 +55,6 @@ public class CollegeController {
 	@Log("获取学校院系机构列表")
 	@GetMapping("/list")
 	@ApiOperation(value="获取学校院系机构列表", notes="获取学校院系机构列表")
-//  @ApiImplicitParams({
-//		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
-//  })
 	@ApiResponses({
 		@ApiResponse( response = CollegeDO.class, code = 200, message = "返回结构:CollegeDO的list")
 	})

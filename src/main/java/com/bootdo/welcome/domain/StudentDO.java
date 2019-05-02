@@ -21,7 +21,8 @@ public class StudentDO implements Serializable {
 	@ApiModelProperty(value = "自增主键")
 	private Long id;
 	//学校唯一编码(100000:公共机构)
-	@ApiModelProperty(value = "学校唯一编码(100000:公共机构)")
+//	@ApiModelProperty(value = "学校唯一编码(100000:公共机构)")
+	@ApiModelProperty(value = "学校唯一编码")
 	private Integer uvCode;
 	//学生唯一编码
 	@ApiModelProperty(value = "学生唯一编码")
@@ -30,7 +31,8 @@ public class StudentDO implements Serializable {
 	@ApiModelProperty(value = "学生姓名")
 	private String sName;
 	//性别(0:未知,1:男,2:女)
-	@ApiModelProperty(value = "性别(0:未知,1:男,2:女)")
+//	@ApiModelProperty(value = "性别(0:未知,1:男,2:女)")
+	@ApiModelProperty(value = "性别")
 	private Integer sSex;
 	//身份证
 	@ApiModelProperty(value = "身份证")
@@ -45,7 +47,8 @@ public class StudentDO implements Serializable {
 	@ApiModelProperty(value = "学号")
 	private String sAcadNum;
 	//升学方式(字典定义803002)
-	@ApiModelProperty(value = "升学方式(字典定义803002)")
+//	@ApiModelProperty(value = "升学方式(字典定义803002)")
+	@ApiModelProperty(value = "升学方式")
 	private Integer sEnterType;
 
 	/**
