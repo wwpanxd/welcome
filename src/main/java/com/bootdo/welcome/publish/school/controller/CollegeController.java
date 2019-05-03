@@ -24,6 +24,7 @@ import com.bootdo.welcome.domain.ClassDO;
 import com.bootdo.welcome.domain.CollegeDO;
 import com.bootdo.welcome.domain.SchoolDepartmentDO;
 import com.bootdo.welcome.domain.SchoolDistrictDO;
+import com.bootdo.welcome.domain.SchoolGradesDO;
 import com.bootdo.welcome.domain.SchoolProfessionDO;
 import com.bootdo.welcome.service.ClassService;
 import com.bootdo.welcome.service.CollegeService;
@@ -36,6 +37,7 @@ import com.bootdo.welcome.vo.FindIdVO;
 import com.bootdo.welcome.vo.FindStringIdVO;
 import com.bootdo.welcome.vo.SchoolDepartmentVO;
 import com.bootdo.welcome.vo.SchoolDistrictVO;
+import com.bootdo.welcome.vo.SchoolGradesVO;
 import com.bootdo.welcome.vo.SchoolProfessionVO;
 import com.bootdo.welcome.vo.admin.CollegeScanVO;
 
@@ -448,5 +450,88 @@ public class CollegeController {
 	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
 	public PR deleteProfession(DeletedIdVO deletedIdVO) {
 		return PR.ok("删除成功");
+	}
+
+	@GetMapping("/grades/all")
+	@ResponseBody
+	@ApiOperation(value = "获取所有的班级", notes = "获取所有的班级")
+	@ApiResponses({ @ApiResponse(response = SchoolGradesDO.class, code = 200, message = "返回结构:SchoolGradesDO的list") })
+	public List<SchoolGradesDO> getGradesAll(SchoolGradesDO condition) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (condition != null)
+			params.put("id", condition.getId());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getName()))
+			params.put("name", condition.getName());// 业务的筛选条件
+		if (condition != null)
+			params.put("userCount", condition.getUserCount());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getHeadMaster()))
+			params.put("headMaster", condition.getHeadMaster());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getHeadMasterPhone()))
+			params.put("headMasterPhone", condition.getHeadMasterPhone());// 业务的筛选条件
+
+		List<SchoolGradesDO> list = new ArrayList<SchoolGradesDO>();
+		for (int i = 1; i < 10; i++) {
+			SchoolGradesDO schoolGradesDO = new SchoolGradesDO();
+			schoolGradesDO.setName("班级名字" + i);
+			schoolGradesDO.setHeadMaster("班主任名字" + i);
+			schoolGradesDO.setHeadMasterPhone("13027017068");
+			schoolGradesDO.setUserCount(50);
+			list.add(schoolGradesDO);
+		}
+		return list;
+	}
+
+	@GetMapping("/grades/get")
+	@ResponseBody
+	@ApiOperation(value = "分页获取班级", notes = "分页获取班级")
+	@ApiResponses({ @ApiResponse(response = SchoolGradesDO.class, code = 200, message = "返回结构:SchoolGradesDO的对象") })
+	public PPageUtils getGradesList(SchoolGradesDO condition) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (condition != null)
+			params.put("id", condition.getId());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getName()))
+			params.put("name", condition.getName());// 业务的筛选条件
+		if (condition != null)
+			params.put("userCount", condition.getUserCount());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getHeadMaster()))
+			params.put("headMaster", condition.getHeadMaster());// 业务的筛选条件
+		if (condition != null && StringUtils.isNotBlank(condition.getHeadMasterPhone()))
+			params.put("headMasterPhone", condition.getHeadMasterPhone());// 业务的筛选条件
+
+		List<SchoolGradesDO> list = new ArrayList<SchoolGradesDO>();
+		SchoolGradesDO schoolGradesDO = new SchoolGradesDO();
+		schoolGradesDO.setName("班级名字");
+		schoolGradesDO.setHeadMaster("班主任名字");
+		schoolGradesDO.setHeadMasterPhone("13027017068");
+		schoolGradesDO.setUserCount(50);
+
+		PQuery query = new PQuery(params);
+		int total = classService.count(query);
+		PPageUtils pageUtil = new PPageUtils(list, total, 1, 1);
+		return pageUtil;
+	}
+
+	@PostMapping("/grades/add")
+	@ResponseBody
+	@ApiOperation(value = "增加一个班级", notes = "增加一个班级")
+	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
+	public PR add(SchoolGradesVO schoolGradesVO) {
+		return PR.ok("增加成功!");
+	}
+
+	@PostMapping("/grades/update")
+	@ResponseBody
+	@ApiOperation(value = "更新某个班级", notes = "更新某个班级")
+	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
+	public PR update(SchoolGradesDO schoolGradesDO) {
+		return PR.ok("更新成功!");
+	}
+
+	@PostMapping("/grades/delete")
+	@ResponseBody
+	@ApiOperation(value = "删除某个班级", notes = "删除某个班级")
+	@ApiResponses({ @ApiResponse(response = Boolean.class, code = 200, message = "返回结构:Bool对象") })
+	public PR delete(DeletedIdVO deletedIdVO) {
+		return PR.ok("删除成功!");
 	}
 }
