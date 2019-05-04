@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<title>上传界面</title>  
+</head>  
+<body> 
+<h1>---------------------------------单文件上传-----------------------------------</h1> 
+<form action="http://sxqfwl2015.6655.la:28099/learns/publish/file/upload/one" th:action="${url_uploadone}" method="POST" enctype="multipart/form-data">  
+    <input type="file" name="file"/>  
+    <input type="submit" />  
+</form> 
+<h1>---------------------------------单文件上传地址-----------------------------------</h1>
+<p th:text="${url_uploadone}">http://IP:Port/learns/publish/file/upload/one</p>
+
+<h1>----------------------------------多文件上传----------------------------------</h1>
+<form method="POST" enctype="multipart/form-data" action="http://sxqfwl2015.6655.la:28099/learns/publish/file/upload/batch" th:action="${url_uploadbatch}">
+  <p>文件1：<input type="file" name="file" /></p>
+  <p>文件2：<input type="file" name="file" /></p>
+  <p><input type="submit" value="上传" /></p>
+</form>
+<h1>----------------------------------多文件上传地址----------------------------------</h1>
+<p th:text="${url_uploadbatch}">http://IP:Port/learns/publish/file/upload/batch</p>
+ 
+<h1>----------------------------------URL显示----------------------------------</h1>
+<p th:text="${url_show}">http://IP:Port/learns/publish/file/show/484d1ee3-b351-433e-99b5-a48e8f59855e.png</p>
+<h1>----------------------------------URL下载----------------------------------</h1>
+<p th:text="${url_download}">http://IP:Port/learns/publish/file/download/484d1ee3-b351-433e-99b5-a48e8f59855e.png</p>
+</body>  
+</html>

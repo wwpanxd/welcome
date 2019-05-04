@@ -4,15 +4,15 @@
 <mapper namespace="com.bootdo.system.dao.AppDao">
 
 	<select id="findOneById" resultType="com.bootdo.system.domain.AppDO">
-		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app where id = #{value}
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from sys_app where id = #{value}
 	</select>
 	
 	<select id="findlastOne" resultType="com.bootdo.system.domain.AppDO">
-		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app where enable = 1 order by id desc limit 1
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from sys_app where enable = 1 order by id desc limit 1
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.system.domain.AppDO">
-		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from yw_app
+		select `id`,`ver`,`update`,`enable`,`url`,`info`,`utime` from sys_app
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="ver != null and ver != ''"> and ver = #{ver} </if>
@@ -36,7 +36,7 @@
 	</select>
 	
  	<select id="countByMap" resultType="int">
-		select count(*) from yw_app
+		select count(*) from sys_app
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="ver != null and ver != ''"> and ver = #{ver} </if>
@@ -49,7 +49,7 @@
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.system.domain.AppDO" useGeneratedKeys="true" keyProperty="id">
-		insert into yw_app
+		insert into sys_app
 		(
 			`ver`, 
 			`update`, 
@@ -70,7 +70,7 @@
 	</insert>
 	 
 	<update id="updateById" parameterType="com.bootdo.system.domain.AppDO">
-		update yw_app 
+		update sys_app 
 		<set>
 			<if test="ver != null">`ver` = #{ver}, </if>
 			<if test="update != null">`update` = #{update}, </if>
@@ -83,11 +83,11 @@
 	</update>
 	
 	<delete id="removeById">
-		delete from yw_app where id = #{value}
+		delete from sys_app where id = #{value}
 	</delete>
 	
 	<delete id="batchRemoveByIds">
-		delete from yw_app where id in 
+		delete from sys_app where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

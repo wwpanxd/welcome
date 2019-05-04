@@ -2,6 +2,8 @@ package com.bootdo.system.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -41,6 +43,17 @@ public class AppController extends BaseController{
 		AppDO ado=	appService.getlast();
 		model.addAttribute("url", ado.getUrl());
 	    return "system/app/appdownload";
+	}
+	
+	@GetMapping("/upload")
+	String upload(Model model){
+		
+		AppDO ado=	appService.getlast();
+		model.addAttribute("url_uploadone","http://"+ StringUtils.substringBetween(ado.getUrl(), "http://", "/")+"/welcome/publish/system/file/upload/one");
+		model.addAttribute("url_uploadbatch","http://"+ StringUtils.substringBetween(ado.getUrl(), "http://", "/")+"/welcome/publish/system/file/upload/batch");
+		model.addAttribute("url_show","http://"+ StringUtils.substringBetween(ado.getUrl(), "http://", "/")+"/welcome/publish/system/file/show/xxx.png");
+		model.addAttribute("url_download","http://"+ StringUtils.substringBetween(ado.getUrl(), "http://", "/")+"/welcome/publish/system/file/download/xxx.apk");
+	    return "system/app/upload";
 	}
 	
 	@GetMapping()

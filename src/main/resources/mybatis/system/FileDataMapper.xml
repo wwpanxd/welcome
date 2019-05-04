@@ -4,15 +4,15 @@
 <mapper namespace="com.bootdo.system.dao.FileDataDao">
 
 	<select id="findOneById" resultType="com.bootdo.system.domain.FileDataDO">
-		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data where id = #{value}
+		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from sys_file_data where id = #{value}
 	</select>
 	
 	<select id="getbyfname" resultType="com.bootdo.system.domain.FileDataDO">
-		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data where fname = #{value} limit 1
+		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from sys_file_data where fname = #{value} limit 1
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.system.domain.FileDataDO">
-		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from yw_file_data
+		select `id`,`fname`,`foname`,`fdata`,`ftype`,`ctime`,`num` from sys_file_data
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="fname != null and fname != ''"> and fname = #{fname} </if>
@@ -36,7 +36,7 @@
 	</select>
 	
  	<select id="countByMap" resultType="int">
-		select count(*) from yw_file_data
+		select count(*) from sys_file_data
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="fname != null and fname != ''"> and fname = #{fname} </if>
@@ -49,7 +49,7 @@
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.system.domain.FileDataDO" useGeneratedKeys="true" keyProperty="id">
-		insert into yw_file_data
+		insert into sys_file_data
 		(
 			`fname`, 
 			`foname`, 
@@ -70,7 +70,7 @@
 	</insert>
 	 
 	<update id="updateById" parameterType="com.bootdo.system.domain.FileDataDO">
-		update yw_file_data 
+		update sys_file_data 
 		<set>
 			<if test="fname != null">`fname` = #{fname}, </if>
 			<if test="foname != null">`foname` = #{foname}, </if>
@@ -83,11 +83,11 @@
 	</update>
 	
 	<delete id="removeById">
-		delete from yw_file_data where id = #{value}
+		delete from sys_file_data where id = #{value}
 	</delete>
 	
 	<delete id="batchRemoveByIds">
-		delete from yw_file_data where id in 
+		delete from sys_file_data where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
