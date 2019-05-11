@@ -40,7 +40,7 @@ import com.bootdo.common.annotation.Log;
  */
  
 @RestController
-@RequestMapping("/welcome/stuExpendsDetails")
+@RequestMapping("/welcome/publish/school/stuExpendsDetails")
 @Api(value="新生缴费明细表相关服务",description="新生缴费明细表相关服务")
 public class StuExpendsDetailsController {
 
@@ -55,9 +55,6 @@ public class StuExpendsDetailsController {
 	@Log("获取新生缴费明细列表")
 	@GetMapping("/list")
 	@ApiOperation(value="获取新生缴费明细列表", notes="获取新生缴费明细列表")
-//  @ApiImplicitParams({
-//		@ApiImplicitParam(name = "", value = "", required = true, dataType = "int",paramType="query"),
-//  })
 	@ApiResponses({
 		@ApiResponse( response = StuExpendsDetailsDO.class, code = 200, message = "返回结构:StuExpendsDetailsDO的list")
 	})

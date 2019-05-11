@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.bootdo.common.exception.ValidateCode;
 import com.bootdo.common.exception.ValidateMessage;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.service.DeptService;
@@ -21,6 +23,7 @@ import com.bootdo.welcome.utils.PR;
 import com.bootdo.welcome.vo.DeletedIdVO;
 import com.bootdo.welcome.vo.system.DeptScanVO;
 
+import ch.qos.logback.core.net.SocketConnector.ExceptionHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -125,7 +128,7 @@ public class SDeptController {
 	public PR update(@RequestBody DeptDO dept) {
 		
 		//异常判断
-//		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.BUILDS_SAVE_SCODE_EXIST));		
+//		ExceptionHandler.handle(validateMessage.getBusinessError(ValidateCode.ROLE_DELETE_ADMIN));		
 		
 		if (deptService.update(dept) > 0) {
 			

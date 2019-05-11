@@ -18,7 +18,7 @@ public class DeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = " ")
 	private Long deptId;
 	//上级部门ID，一级部门为0
 	@ApiModelProperty(value = "上级部门ID，一级部门为0")
