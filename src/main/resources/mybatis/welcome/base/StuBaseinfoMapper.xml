@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuBaseinfoDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuBaseinfoDO">
+		select `id`,`s_id`,`uv_code`,`s_used_name`,`s_photo`,`s_age`,`s_height`,`s_weight`,`s_nation`,`s_source_place`,`s_birthday`,`s_phone`,`s_fix_phone`,`s_email`,`s_marriage`,`s_political`,`s_political_time`,`s_nature`,`s_addr_province`,`s_addr_county`,`s_addr_street`,`s_addr_city`,`s_address`,`s_native_place`,`s_household`,`s_domicile`,`s_area`,`s_police_station`,`s_commu_address`,`s_graduate_school`,`s_school_time`,`s_belief`,`s_blood`,`s_only_child`,`s_admission`,`s_studying_way`,`s_dormitory`,`s_healthy`,`s_specialty`,`s_pre_education`,`s_left_behind`,`s_subsidize`,`s_subsidies`,`s_orphan`,`s_martyr`,`s_sh_distance`,`s_come_way`,`s_sh_bus`,`s_migrant_child`,`s_poverty`,`s_record`,`s_entrance_way`,`s_source_type`,`s_army`,`s_army_file1`,`s_army_file2`,`s_army_file3`,`s_greet`,`s_greet_num`,`s_greet_stations`,`s_greet_time`,`s_clothing`,`s_clothing_file1`,`s_clothing_file2`,`s_clothing_file3`,`s_f1`,`s_f2`,`s_f3`,`s_f4`,`s_f5` from yx_stu_baseinfo where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuBaseinfoDO">
+		select `id`,`s_id`,`uv_code`,`s_used_name`,`s_photo`,`s_age`,`s_height`,`s_weight`,`s_nation`,`s_source_place`,`s_birthday`,`s_phone`,`s_fix_phone`,`s_email`,`s_marriage`,`s_political`,`s_political_time`,`s_nature`,`s_addr_province`,`s_addr_county`,`s_addr_street`,`s_addr_city`,`s_address`,`s_native_place`,`s_household`,`s_domicile`,`s_area`,`s_police_station`,`s_commu_address`,`s_graduate_school`,`s_school_time`,`s_belief`,`s_blood`,`s_only_child`,`s_admission`,`s_studying_way`,`s_dormitory`,`s_healthy`,`s_specialty`,`s_pre_education`,`s_left_behind`,`s_subsidize`,`s_subsidies`,`s_orphan`,`s_martyr`,`s_sh_distance`,`s_come_way`,`s_sh_bus`,`s_migrant_child`,`s_poverty`,`s_record`,`s_entrance_way`,`s_source_type`,`s_army`,`s_army_file1`,`s_army_file2`,`s_army_file3`,`s_greet`,`s_greet_num`,`s_greet_stations`,`s_greet_time`,`s_clothing`,`s_clothing_file1`,`s_clothing_file2`,`s_clothing_file3`,`s_f1`,`s_f2`,`s_f3`,`s_f4`,`s_f5` from yx_stu_baseinfo
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sUsedName != null and sUsedName != ''"> and s_used_name = #{sUsedName} </if>
+		  		  <if test="sPhoto != null and sPhoto != ''"> and s_photo = #{sPhoto} </if>
+		  		  <if test="sAge != null and sAge != ''"> and s_age = #{sAge} </if>
+		  		  <if test="sHeight != null and sHeight != ''"> and s_height = #{sHeight} </if>
+		  		  <if test="sWeight != null and sWeight != ''"> and s_weight = #{sWeight} </if>
+		  		  <if test="sNation != null and sNation != ''"> and s_nation = #{sNation} </if>
+		  		  <if test="sSourcePlace != null and sSourcePlace != ''"> and s_source_place = #{sSourcePlace} </if>
+		  		  <if test="sBirthday != null and sBirthday != ''"> and s_birthday = #{sBirthday} </if>
+		  		  <if test="sPhone != null and sPhone != ''"> and s_phone = #{sPhone} </if>
+		  		  <if test="sFixPhone != null and sFixPhone != ''"> and s_fix_phone = #{sFixPhone} </if>
+		  		  <if test="sEmail != null and sEmail != ''"> and s_email = #{sEmail} </if>
+		  		  <if test="sMarriage != null and sMarriage != ''"> and s_marriage = #{sMarriage} </if>
+		  		  <if test="sPolitical != null and sPolitical != ''"> and s_political = #{sPolitical} </if>
+		  		  <if test="sPoliticalTime != null and sPoliticalTime != ''"> and s_political_time = #{sPoliticalTime} </if>
+		  		  <if test="sNature != null and sNature != ''"> and s_nature = #{sNature} </if>
+		  		  <if test="sAddrProvince != null and sAddrProvince != ''"> and s_addr_province = #{sAddrProvince} </if>
+		  		  <if test="sAddrCounty != null and sAddrCounty != ''"> and s_addr_county = #{sAddrCounty} </if>
+		  		  <if test="sAddrStreet != null and sAddrStreet != ''"> and s_addr_street = #{sAddrStreet} </if>
+		  		  <if test="sAddrCity != null and sAddrCity != ''"> and s_addr_city = #{sAddrCity} </if>
+		  		  <if test="sAddress != null and sAddress != ''"> and s_address = #{sAddress} </if>
+		  		  <if test="sNativePlace != null and sNativePlace != ''"> and s_native_place = #{sNativePlace} </if>
+		  		  <if test="sHousehold != null and sHousehold != ''"> and s_household = #{sHousehold} </if>
+		  		  <if test="sDomicile != null and sDomicile != ''"> and s_domicile = #{sDomicile} </if>
+		  		  <if test="sArea != null and sArea != ''"> and s_area = #{sArea} </if>
+		  		  <if test="sPoliceStation != null and sPoliceStation != ''"> and s_police_station = #{sPoliceStation} </if>
+		  		  <if test="sCommuAddress != null and sCommuAddress != ''"> and s_commu_address = #{sCommuAddress} </if>
+		  		  <if test="sGraduateSchool != null and sGraduateSchool != ''"> and s_graduate_school = #{sGraduateSchool} </if>
+		  		  <if test="sSchoolTime != null and sSchoolTime != ''"> and s_school_time = #{sSchoolTime} </if>
+		  		  <if test="sBelief != null and sBelief != ''"> and s_belief = #{sBelief} </if>
+		  		  <if test="sBlood != null and sBlood != ''"> and s_blood = #{sBlood} </if>
+		  		  <if test="sOnlyChild != null and sOnlyChild != ''"> and s_only_child = #{sOnlyChild} </if>
+		  		  <if test="sAdmission != null and sAdmission != ''"> and s_admission = #{sAdmission} </if>
+		  		  <if test="sStudyingWay != null and sStudyingWay != ''"> and s_studying_way = #{sStudyingWay} </if>
+		  		  <if test="sDormitory != null and sDormitory != ''"> and s_dormitory = #{sDormitory} </if>
+		  		  <if test="sHealthy != null and sHealthy != ''"> and s_healthy = #{sHealthy} </if>
+		  		  <if test="sSpecialty != null and sSpecialty != ''"> and s_specialty = #{sSpecialty} </if>
+		  		  <if test="sPreEducation != null and sPreEducation != ''"> and s_pre_education = #{sPreEducation} </if>
+		  		  <if test="sLeftBehind != null and sLeftBehind != ''"> and s_left_behind = #{sLeftBehind} </if>
+		  		  <if test="sSubsidize != null and sSubsidize != ''"> and s_subsidize = #{sSubsidize} </if>
+		  		  <if test="sSubsidies != null and sSubsidies != ''"> and s_subsidies = #{sSubsidies} </if>
+		  		  <if test="sOrphan != null and sOrphan != ''"> and s_orphan = #{sOrphan} </if>
+		  		  <if test="sMartyr != null and sMartyr != ''"> and s_martyr = #{sMartyr} </if>
+		  		  <if test="sShDistance != null and sShDistance != ''"> and s_sh_distance = #{sShDistance} </if>
+		  		  <if test="sComeWay != null and sComeWay != ''"> and s_come_way = #{sComeWay} </if>
+		  		  <if test="sShBus != null and sShBus != ''"> and s_sh_bus = #{sShBus} </if>
+		  		  <if test="sMigrantChild != null and sMigrantChild != ''"> and s_migrant_child = #{sMigrantChild} </if>
+		  		  <if test="sPoverty != null and sPoverty != ''"> and s_poverty = #{sPoverty} </if>
+		  		  <if test="sRecord != null and sRecord != ''"> and s_record = #{sRecord} </if>
+		  		  <if test="sEntranceWay != null and sEntranceWay != ''"> and s_entrance_way = #{sEntranceWay} </if>
+		  		  <if test="sSourceType != null and sSourceType != ''"> and s_source_type = #{sSourceType} </if>
+		  		  <if test="sArmy != null and sArmy != ''"> and s_army = #{sArmy} </if>
+		  		  <if test="sArmyFile1 != null and sArmyFile1 != ''"> and s_army_file1 = #{sArmyFile1} </if>
+		  		  <if test="sArmyFile2 != null and sArmyFile2 != ''"> and s_army_file2 = #{sArmyFile2} </if>
+		  		  <if test="sArmyFile3 != null and sArmyFile3 != ''"> and s_army_file3 = #{sArmyFile3} </if>
+		  		  <if test="sGreet != null and sGreet != ''"> and s_greet = #{sGreet} </if>
+		  		  <if test="sGreetNum != null and sGreetNum != ''"> and s_greet_num = #{sGreetNum} </if>
+		  		  <if test="sGreetStations != null and sGreetStations != ''"> and s_greet_stations = #{sGreetStations} </if>
+		  		  <if test="sGreetTime != null and sGreetTime != ''"> and s_greet_time = #{sGreetTime} </if>
+		  		  <if test="sClothing != null and sClothing != ''"> and s_clothing = #{sClothing} </if>
+		  		  <if test="sClothingFile1 != null and sClothingFile1 != ''"> and s_clothing_file1 = #{sClothingFile1} </if>
+		  		  <if test="sClothingFile2 != null and sClothingFile2 != ''"> and s_clothing_file2 = #{sClothingFile2} </if>
+		  		  <if test="sClothingFile3 != null and sClothingFile3 != ''"> and s_clothing_file3 = #{sClothingFile3} </if>
+		  		  <if test="sF1 != null and sF1 != ''"> and s_f1 = #{sF1} </if>
+		  		  <if test="sF2 != null and sF2 != ''"> and s_f2 = #{sF2} </if>
+		  		  <if test="sF3 != null and sF3 != ''"> and s_f3 = #{sF3} </if>
+		  		  <if test="sF4 != null and sF4 != ''"> and s_f4 = #{sF4} </if>
+		  		  <if test="sF5 != null and sF5 != ''"> and s_f5 = #{sF5} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_baseinfo
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sUsedName != null and sUsedName != ''"> and s_used_name = #{sUsedName} </if>
+		  		  <if test="sPhoto != null and sPhoto != ''"> and s_photo = #{sPhoto} </if>
+		  		  <if test="sAge != null and sAge != ''"> and s_age = #{sAge} </if>
+		  		  <if test="sHeight != null and sHeight != ''"> and s_height = #{sHeight} </if>
+		  		  <if test="sWeight != null and sWeight != ''"> and s_weight = #{sWeight} </if>
+		  		  <if test="sNation != null and sNation != ''"> and s_nation = #{sNation} </if>
+		  		  <if test="sSourcePlace != null and sSourcePlace != ''"> and s_source_place = #{sSourcePlace} </if>
+		  		  <if test="sBirthday != null and sBirthday != ''"> and s_birthday = #{sBirthday} </if>
+		  		  <if test="sPhone != null and sPhone != ''"> and s_phone = #{sPhone} </if>
+		  		  <if test="sFixPhone != null and sFixPhone != ''"> and s_fix_phone = #{sFixPhone} </if>
+		  		  <if test="sEmail != null and sEmail != ''"> and s_email = #{sEmail} </if>
+		  		  <if test="sMarriage != null and sMarriage != ''"> and s_marriage = #{sMarriage} </if>
+		  		  <if test="sPolitical != null and sPolitical != ''"> and s_political = #{sPolitical} </if>
+		  		  <if test="sPoliticalTime != null and sPoliticalTime != ''"> and s_political_time = #{sPoliticalTime} </if>
+		  		  <if test="sNature != null and sNature != ''"> and s_nature = #{sNature} </if>
+		  		  <if test="sAddrProvince != null and sAddrProvince != ''"> and s_addr_province = #{sAddrProvince} </if>
+		  		  <if test="sAddrCounty != null and sAddrCounty != ''"> and s_addr_county = #{sAddrCounty} </if>
+		  		  <if test="sAddrStreet != null and sAddrStreet != ''"> and s_addr_street = #{sAddrStreet} </if>
+		  		  <if test="sAddrCity != null and sAddrCity != ''"> and s_addr_city = #{sAddrCity} </if>
+		  		  <if test="sAddress != null and sAddress != ''"> and s_address = #{sAddress} </if>
+		  		  <if test="sNativePlace != null and sNativePlace != ''"> and s_native_place = #{sNativePlace} </if>
+		  		  <if test="sHousehold != null and sHousehold != ''"> and s_household = #{sHousehold} </if>
+		  		  <if test="sDomicile != null and sDomicile != ''"> and s_domicile = #{sDomicile} </if>
+		  		  <if test="sArea != null and sArea != ''"> and s_area = #{sArea} </if>
+		  		  <if test="sPoliceStation != null and sPoliceStation != ''"> and s_police_station = #{sPoliceStation} </if>
+		  		  <if test="sCommuAddress != null and sCommuAddress != ''"> and s_commu_address = #{sCommuAddress} </if>
+		  		  <if test="sGraduateSchool != null and sGraduateSchool != ''"> and s_graduate_school = #{sGraduateSchool} </if>
+		  		  <if test="sSchoolTime != null and sSchoolTime != ''"> and s_school_time = #{sSchoolTime} </if>
+		  		  <if test="sBelief != null and sBelief != ''"> and s_belief = #{sBelief} </if>
+		  		  <if test="sBlood != null and sBlood != ''"> and s_blood = #{sBlood} </if>
+		  		  <if test="sOnlyChild != null and sOnlyChild != ''"> and s_only_child = #{sOnlyChild} </if>
+		  		  <if test="sAdmission != null and sAdmission != ''"> and s_admission = #{sAdmission} </if>
+		  		  <if test="sStudyingWay != null and sStudyingWay != ''"> and s_studying_way = #{sStudyingWay} </if>
+		  		  <if test="sDormitory != null and sDormitory != ''"> and s_dormitory = #{sDormitory} </if>
+		  		  <if test="sHealthy != null and sHealthy != ''"> and s_healthy = #{sHealthy} </if>
+		  		  <if test="sSpecialty != null and sSpecialty != ''"> and s_specialty = #{sSpecialty} </if>
+		  		  <if test="sPreEducation != null and sPreEducation != ''"> and s_pre_education = #{sPreEducation} </if>
+		  		  <if test="sLeftBehind != null and sLeftBehind != ''"> and s_left_behind = #{sLeftBehind} </if>
+		  		  <if test="sSubsidize != null and sSubsidize != ''"> and s_subsidize = #{sSubsidize} </if>
+		  		  <if test="sSubsidies != null and sSubsidies != ''"> and s_subsidies = #{sSubsidies} </if>
+		  		  <if test="sOrphan != null and sOrphan != ''"> and s_orphan = #{sOrphan} </if>
+		  		  <if test="sMartyr != null and sMartyr != ''"> and s_martyr = #{sMartyr} </if>
+		  		  <if test="sShDistance != null and sShDistance != ''"> and s_sh_distance = #{sShDistance} </if>
+		  		  <if test="sComeWay != null and sComeWay != ''"> and s_come_way = #{sComeWay} </if>
+		  		  <if test="sShBus != null and sShBus != ''"> and s_sh_bus = #{sShBus} </if>
+		  		  <if test="sMigrantChild != null and sMigrantChild != ''"> and s_migrant_child = #{sMigrantChild} </if>
+		  		  <if test="sPoverty != null and sPoverty != ''"> and s_poverty = #{sPoverty} </if>
+		  		  <if test="sRecord != null and sRecord != ''"> and s_record = #{sRecord} </if>
+		  		  <if test="sEntranceWay != null and sEntranceWay != ''"> and s_entrance_way = #{sEntranceWay} </if>
+		  		  <if test="sSourceType != null and sSourceType != ''"> and s_source_type = #{sSourceType} </if>
+		  		  <if test="sArmy != null and sArmy != ''"> and s_army = #{sArmy} </if>
+		  		  <if test="sArmyFile1 != null and sArmyFile1 != ''"> and s_army_file1 = #{sArmyFile1} </if>
+		  		  <if test="sArmyFile2 != null and sArmyFile2 != ''"> and s_army_file2 = #{sArmyFile2} </if>
+		  		  <if test="sArmyFile3 != null and sArmyFile3 != ''"> and s_army_file3 = #{sArmyFile3} </if>
+		  		  <if test="sGreet != null and sGreet != ''"> and s_greet = #{sGreet} </if>
+		  		  <if test="sGreetNum != null and sGreetNum != ''"> and s_greet_num = #{sGreetNum} </if>
+		  		  <if test="sGreetStations != null and sGreetStations != ''"> and s_greet_stations = #{sGreetStations} </if>
+		  		  <if test="sGreetTime != null and sGreetTime != ''"> and s_greet_time = #{sGreetTime} </if>
+		  		  <if test="sClothing != null and sClothing != ''"> and s_clothing = #{sClothing} </if>
+		  		  <if test="sClothingFile1 != null and sClothingFile1 != ''"> and s_clothing_file1 = #{sClothingFile1} </if>
+		  		  <if test="sClothingFile2 != null and sClothingFile2 != ''"> and s_clothing_file2 = #{sClothingFile2} </if>
+		  		  <if test="sClothingFile3 != null and sClothingFile3 != ''"> and s_clothing_file3 = #{sClothingFile3} </if>
+		  		  <if test="sF1 != null and sF1 != ''"> and s_f1 = #{sF1} </if>
+		  		  <if test="sF2 != null and sF2 != ''"> and s_f2 = #{sF2} </if>
+		  		  <if test="sF3 != null and sF3 != ''"> and s_f3 = #{sF3} </if>
+		  		  <if test="sF4 != null and sF4 != ''"> and s_f4 = #{sF4} </if>
+		  		  <if test="sF5 != null and sF5 != ''"> and s_f5 = #{sF5} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuBaseinfoDO">
+		insert into yx_stu_baseinfo
+		(
+			`id`, 
+			`s_id`, 
+			`uv_code`, 
+			`s_used_name`, 
+			`s_photo`, 
+			`s_age`, 
+			`s_height`, 
+			`s_weight`, 
+			`s_nation`, 
+			`s_source_place`, 
+			`s_birthday`, 
+			`s_phone`, 
+			`s_fix_phone`, 
+			`s_email`, 
+			`s_marriage`, 
+			`s_political`, 
+			`s_political_time`, 
+			`s_nature`, 
+			`s_addr_province`, 
+			`s_addr_county`, 
+			`s_addr_street`, 
+			`s_addr_city`, 
+			`s_address`, 
+			`s_native_place`, 
+			`s_household`, 
+			`s_domicile`, 
+			`s_area`, 
+			`s_police_station`, 
+			`s_commu_address`, 
+			`s_graduate_school`, 
+			`s_school_time`, 
+			`s_belief`, 
+			`s_blood`, 
+			`s_only_child`, 
+			`s_admission`, 
+			`s_studying_way`, 
+			`s_dormitory`, 
+			`s_healthy`, 
+			`s_specialty`, 
+			`s_pre_education`, 
+			`s_left_behind`, 
+			`s_subsidize`, 
+			`s_subsidies`, 
+			`s_orphan`, 
+			`s_martyr`, 
+			`s_sh_distance`, 
+			`s_come_way`, 
+			`s_sh_bus`, 
+			`s_migrant_child`, 
+			`s_poverty`, 
+			`s_record`, 
+			`s_entrance_way`, 
+			`s_source_type`, 
+			`s_army`, 
+			`s_army_file1`, 
+			`s_army_file2`, 
+			`s_army_file3`, 
+			`s_greet`, 
+			`s_greet_num`, 
+			`s_greet_stations`, 
+			`s_greet_time`, 
+			`s_clothing`, 
+			`s_clothing_file1`, 
+			`s_clothing_file2`, 
+			`s_clothing_file3`, 
+			`s_f1`, 
+			`s_f2`, 
+			`s_f3`, 
+			`s_f4`, 
+			`s_f5`
+		)
+		values
+		(
+			#{id}, 
+			#{sId}, 
+			#{uvCode}, 
+			#{sUsedName}, 
+			#{sPhoto}, 
+			#{sAge}, 
+			#{sHeight}, 
+			#{sWeight}, 
+			#{sNation}, 
+			#{sSourcePlace}, 
+			#{sBirthday}, 
+			#{sPhone}, 
+			#{sFixPhone}, 
+			#{sEmail}, 
+			#{sMarriage}, 
+			#{sPolitical}, 
+			#{sPoliticalTime}, 
+			#{sNature}, 
+			#{sAddrProvince}, 
+			#{sAddrCounty}, 
+			#{sAddrStreet}, 
+			#{sAddrCity}, 
+			#{sAddress}, 
+			#{sNativePlace}, 
+			#{sHousehold}, 
+			#{sDomicile}, 
+			#{sArea}, 
+			#{sPoliceStation}, 
+			#{sCommuAddress}, 
+			#{sGraduateSchool}, 
+			#{sSchoolTime}, 
+			#{sBelief}, 
+			#{sBlood}, 
+			#{sOnlyChild}, 
+			#{sAdmission}, 
+			#{sStudyingWay}, 
+			#{sDormitory}, 
+			#{sHealthy}, 
+			#{sSpecialty}, 
+			#{sPreEducation}, 
+			#{sLeftBehind}, 
+			#{sSubsidize}, 
+			#{sSubsidies}, 
+			#{sOrphan}, 
+			#{sMartyr}, 
+			#{sShDistance}, 
+			#{sComeWay}, 
+			#{sShBus}, 
+			#{sMigrantChild}, 
+			#{sPoverty}, 
+			#{sRecord}, 
+			#{sEntranceWay}, 
+			#{sSourceType}, 
+			#{sArmy}, 
+			#{sArmyFile1}, 
+			#{sArmyFile2}, 
+			#{sArmyFile3}, 
+			#{sGreet}, 
+			#{sGreetNum}, 
+			#{sGreetStations}, 
+			#{sGreetTime}, 
+			#{sClothing}, 
+			#{sClothingFile1}, 
+			#{sClothingFile2}, 
+			#{sClothingFile3}, 
+			#{sF1}, 
+			#{sF2}, 
+			#{sF3}, 
+			#{sF4}, 
+			#{sF5}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuBaseinfoDO">
+		update yx_stu_baseinfo 
+		<set>
+			<if test="sId != null">`s_id` = #{sId}, </if>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sUsedName != null">`s_used_name` = #{sUsedName}, </if>
+			<if test="sPhoto != null">`s_photo` = #{sPhoto}, </if>
+			<if test="sAge != null">`s_age` = #{sAge}, </if>
+			<if test="sHeight != null">`s_height` = #{sHeight}, </if>
+			<if test="sWeight != null">`s_weight` = #{sWeight}, </if>
+			<if test="sNation != null">`s_nation` = #{sNation}, </if>
+			<if test="sSourcePlace != null">`s_source_place` = #{sSourcePlace}, </if>
+			<if test="sBirthday != null">`s_birthday` = #{sBirthday}, </if>
+			<if test="sPhone != null">`s_phone` = #{sPhone}, </if>
+			<if test="sFixPhone != null">`s_fix_phone` = #{sFixPhone}, </if>
+			<if test="sEmail != null">`s_email` = #{sEmail}, </if>
+			<if test="sMarriage != null">`s_marriage` = #{sMarriage}, </if>
+			<if test="sPolitical != null">`s_political` = #{sPolitical}, </if>
+			<if test="sPoliticalTime != null">`s_political_time` = #{sPoliticalTime}, </if>
+			<if test="sNature != null">`s_nature` = #{sNature}, </if>
+			<if test="sAddrProvince != null">`s_addr_province` = #{sAddrProvince}, </if>
+			<if test="sAddrCounty != null">`s_addr_county` = #{sAddrCounty}, </if>
+			<if test="sAddrStreet != null">`s_addr_street` = #{sAddrStreet}, </if>
+			<if test="sAddrCity != null">`s_addr_city` = #{sAddrCity}, </if>
+			<if test="sAddress != null">`s_address` = #{sAddress}, </if>
+			<if test="sNativePlace != null">`s_native_place` = #{sNativePlace}, </if>
+			<if test="sHousehold != null">`s_household` = #{sHousehold}, </if>
+			<if test="sDomicile != null">`s_domicile` = #{sDomicile}, </if>
+			<if test="sArea != null">`s_area` = #{sArea}, </if>
+			<if test="sPoliceStation != null">`s_police_station` = #{sPoliceStation}, </if>
+			<if test="sCommuAddress != null">`s_commu_address` = #{sCommuAddress}, </if>
+			<if test="sGraduateSchool != null">`s_graduate_school` = #{sGraduateSchool}, </if>
+			<if test="sSchoolTime != null">`s_school_time` = #{sSchoolTime}, </if>
+			<if test="sBelief != null">`s_belief` = #{sBelief}, </if>
+			<if test="sBlood != null">`s_blood` = #{sBlood}, </if>
+			<if test="sOnlyChild != null">`s_only_child` = #{sOnlyChild}, </if>
+			<if test="sAdmission != null">`s_admission` = #{sAdmission}, </if>
+			<if test="sStudyingWay != null">`s_studying_way` = #{sStudyingWay}, </if>
+			<if test="sDormitory != null">`s_dormitory` = #{sDormitory}, </if>
+			<if test="sHealthy != null">`s_healthy` = #{sHealthy}, </if>
+			<if test="sSpecialty != null">`s_specialty` = #{sSpecialty}, </if>
+			<if test="sPreEducation != null">`s_pre_education` = #{sPreEducation}, </if>
+			<if test="sLeftBehind != null">`s_left_behind` = #{sLeftBehind}, </if>
+			<if test="sSubsidize != null">`s_subsidize` = #{sSubsidize}, </if>
+			<if test="sSubsidies != null">`s_subsidies` = #{sSubsidies}, </if>
+			<if test="sOrphan != null">`s_orphan` = #{sOrphan}, </if>
+			<if test="sMartyr != null">`s_martyr` = #{sMartyr}, </if>
+			<if test="sShDistance != null">`s_sh_distance` = #{sShDistance}, </if>
+			<if test="sComeWay != null">`s_come_way` = #{sComeWay}, </if>
+			<if test="sShBus != null">`s_sh_bus` = #{sShBus}, </if>
+			<if test="sMigrantChild != null">`s_migrant_child` = #{sMigrantChild}, </if>
+			<if test="sPoverty != null">`s_poverty` = #{sPoverty}, </if>
+			<if test="sRecord != null">`s_record` = #{sRecord}, </if>
+			<if test="sEntranceWay != null">`s_entrance_way` = #{sEntranceWay}, </if>
+			<if test="sSourceType != null">`s_source_type` = #{sSourceType}, </if>
+			<if test="sArmy != null">`s_army` = #{sArmy}, </if>
+			<if test="sArmyFile1 != null">`s_army_file1` = #{sArmyFile1}, </if>
+			<if test="sArmyFile2 != null">`s_army_file2` = #{sArmyFile2}, </if>
+			<if test="sArmyFile3 != null">`s_army_file3` = #{sArmyFile3}, </if>
+			<if test="sGreet != null">`s_greet` = #{sGreet}, </if>
+			<if test="sGreetNum != null">`s_greet_num` = #{sGreetNum}, </if>
+			<if test="sGreetStations != null">`s_greet_stations` = #{sGreetStations}, </if>
+			<if test="sGreetTime != null">`s_greet_time` = #{sGreetTime}, </if>
+			<if test="sClothing != null">`s_clothing` = #{sClothing}, </if>
+			<if test="sClothingFile1 != null">`s_clothing_file1` = #{sClothingFile1}, </if>
+			<if test="sClothingFile2 != null">`s_clothing_file2` = #{sClothingFile2}, </if>
+			<if test="sClothingFile3 != null">`s_clothing_file3` = #{sClothingFile3}, </if>
+			<if test="sF1 != null">`s_f1` = #{sF1}, </if>
+			<if test="sF2 != null">`s_f2` = #{sF2}, </if>
+			<if test="sF3 != null">`s_f3` = #{sF3}, </if>
+			<if test="sF4 != null">`s_f4` = #{sF4}, </if>
+			<if test="sF5 != null">`s_f5` = #{sF5}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_baseinfo where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_baseinfo where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

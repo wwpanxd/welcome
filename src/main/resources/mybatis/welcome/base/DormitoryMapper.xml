@@ -4,11 +4,11 @@
 <mapper namespace="com.bootdo.welcome.dao.DormitoryDao">
 
 	<select id="findOneById" resultType="com.bootdo.welcome.domain.DormitoryDO">
-		select `id`,`uv_code`,`parent_id`,`d_name`,`d_code`,`d_level`,`d_sort`,`s_id`,`dm_id`,`b_id`,`b_fl_id`,`b_xq_id` from yx_dormitory where id = #{value}
+		select `id`,`uv_code`,`parent_id`,`d_name`,`d_code`,`d_level`,`d_sort`,`s_id`,`dm_id`,`b_id`,`b_fl_id`,`b_xq_id`,`b_d_id` from yx_dormitory where id = #{value}
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.DormitoryDO">
-		select `id`,`uv_code`,`parent_id`,`d_name`,`d_code`,`d_level`,`d_sort`,`s_id`,`dm_id`,`b_id`,`b_fl_id`,`b_xq_id` from yx_dormitory
+		select `id`,`uv_code`,`parent_id`,`d_name`,`d_code`,`d_level`,`d_sort`,`s_id`,`dm_id`,`b_id`,`b_fl_id`,`b_xq_id`,`b_d_id` from yx_dormitory
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
@@ -22,6 +22,7 @@
 		  		  <if test="bId != null and bId != ''"> and b_id = #{bId} </if>
 		  		  <if test="bFlId != null and bFlId != ''"> and b_fl_id = #{bFlId} </if>
 		  		  <if test="bXqId != null and bXqId != ''"> and b_xq_id = #{bXqId} </if>
+		  		  <if test="bDId != null and bDId != ''"> and b_d_id = #{bDId} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -51,12 +52,14 @@
 		  		  <if test="bId != null and bId != ''"> and b_id = #{bId} </if>
 		  		  <if test="bFlId != null and bFlId != ''"> and b_fl_id = #{bFlId} </if>
 		  		  <if test="bXqId != null and bXqId != ''"> and b_xq_id = #{bXqId} </if>
+		  		  <if test="bDId != null and bDId != ''"> and b_d_id = #{bDId} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.domain.DormitoryDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.DormitoryDO">
 		insert into yx_dormitory
 		(
+			`id`, 
 			`uv_code`, 
 			`parent_id`, 
 			`d_name`, 
@@ -67,10 +70,12 @@
 			`dm_id`, 
 			`b_id`, 
 			`b_fl_id`, 
-			`b_xq_id`
+			`b_xq_id`, 
+			`b_d_id`
 		)
 		values
 		(
+			#{id}, 
 			#{uvCode}, 
 			#{parentId}, 
 			#{dName}, 
@@ -81,7 +86,8 @@
 			#{dmId}, 
 			#{bId}, 
 			#{bFlId}, 
-			#{bXqId}
+			#{bXqId}, 
+			#{bDId}
 		)
 	</insert>
 	 
@@ -98,7 +104,8 @@
 			<if test="dmId != null">`dm_id` = #{dmId}, </if>
 			<if test="bId != null">`b_id` = #{bId}, </if>
 			<if test="bFlId != null">`b_fl_id` = #{bFlId}, </if>
-			<if test="bXqId != null">`b_xq_id` = #{bXqId}</if>
+			<if test="bXqId != null">`b_xq_id` = #{bXqId}, </if>
+			<if test="bDId != null">`b_d_id` = #{bDId}</if>
 		</set>
 		where id = #{id}
 	</update>

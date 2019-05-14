@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuFamilyDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuFamilyDO">
+		select `id`,`uv_code`,`s_id`,`f_relationship`,`f_name`,`f_political`,`f_education`,`f_job_dept`,`f_age`,`f_email`,`f_phone`,`f_rs_remark`,`f_address`,`f_area`,`f_nation`,`f_guardianship`,`f_cardno` from yx_stu_family where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuFamilyDO">
+		select `id`,`uv_code`,`s_id`,`f_relationship`,`f_name`,`f_political`,`f_education`,`f_job_dept`,`f_age`,`f_email`,`f_phone`,`f_rs_remark`,`f_address`,`f_area`,`f_nation`,`f_guardianship`,`f_cardno` from yx_stu_family
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="fRelationship != null and fRelationship != ''"> and f_relationship = #{fRelationship} </if>
+		  		  <if test="fName != null and fName != ''"> and f_name = #{fName} </if>
+		  		  <if test="fPolitical != null and fPolitical != ''"> and f_political = #{fPolitical} </if>
+		  		  <if test="fEducation != null and fEducation != ''"> and f_education = #{fEducation} </if>
+		  		  <if test="fJobDept != null and fJobDept != ''"> and f_job_dept = #{fJobDept} </if>
+		  		  <if test="fAge != null and fAge != ''"> and f_age = #{fAge} </if>
+		  		  <if test="fEmail != null and fEmail != ''"> and f_email = #{fEmail} </if>
+		  		  <if test="fPhone != null and fPhone != ''"> and f_phone = #{fPhone} </if>
+		  		  <if test="fRsRemark != null and fRsRemark != ''"> and f_rs_remark = #{fRsRemark} </if>
+		  		  <if test="fAddress != null and fAddress != ''"> and f_address = #{fAddress} </if>
+		  		  <if test="fArea != null and fArea != ''"> and f_area = #{fArea} </if>
+		  		  <if test="fNation != null and fNation != ''"> and f_nation = #{fNation} </if>
+		  		  <if test="fGuardianship != null and fGuardianship != ''"> and f_guardianship = #{fGuardianship} </if>
+		  		  <if test="fCardno != null and fCardno != ''"> and f_cardno = #{fCardno} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_family
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="fRelationship != null and fRelationship != ''"> and f_relationship = #{fRelationship} </if>
+		  		  <if test="fName != null and fName != ''"> and f_name = #{fName} </if>
+		  		  <if test="fPolitical != null and fPolitical != ''"> and f_political = #{fPolitical} </if>
+		  		  <if test="fEducation != null and fEducation != ''"> and f_education = #{fEducation} </if>
+		  		  <if test="fJobDept != null and fJobDept != ''"> and f_job_dept = #{fJobDept} </if>
+		  		  <if test="fAge != null and fAge != ''"> and f_age = #{fAge} </if>
+		  		  <if test="fEmail != null and fEmail != ''"> and f_email = #{fEmail} </if>
+		  		  <if test="fPhone != null and fPhone != ''"> and f_phone = #{fPhone} </if>
+		  		  <if test="fRsRemark != null and fRsRemark != ''"> and f_rs_remark = #{fRsRemark} </if>
+		  		  <if test="fAddress != null and fAddress != ''"> and f_address = #{fAddress} </if>
+		  		  <if test="fArea != null and fArea != ''"> and f_area = #{fArea} </if>
+		  		  <if test="fNation != null and fNation != ''"> and f_nation = #{fNation} </if>
+		  		  <if test="fGuardianship != null and fGuardianship != ''"> and f_guardianship = #{fGuardianship} </if>
+		  		  <if test="fCardno != null and fCardno != ''"> and f_cardno = #{fCardno} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuFamilyDO">
+		insert into yx_stu_family
+		(
+			`id`, 
+			`uv_code`, 
+			`s_id`, 
+			`f_relationship`, 
+			`f_name`, 
+			`f_political`, 
+			`f_education`, 
+			`f_job_dept`, 
+			`f_age`, 
+			`f_email`, 
+			`f_phone`, 
+			`f_rs_remark`, 
+			`f_address`, 
+			`f_area`, 
+			`f_nation`, 
+			`f_guardianship`, 
+			`f_cardno`
+		)
+		values
+		(
+			#{id}, 
+			#{uvCode}, 
+			#{sId}, 
+			#{fRelationship}, 
+			#{fName}, 
+			#{fPolitical}, 
+			#{fEducation}, 
+			#{fJobDept}, 
+			#{fAge}, 
+			#{fEmail}, 
+			#{fPhone}, 
+			#{fRsRemark}, 
+			#{fAddress}, 
+			#{fArea}, 
+			#{fNation}, 
+			#{fGuardianship}, 
+			#{fCardno}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuFamilyDO">
+		update yx_stu_family 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sId != null">`s_id` = #{sId}, </if>
+			<if test="fRelationship != null">`f_relationship` = #{fRelationship}, </if>
+			<if test="fName != null">`f_name` = #{fName}, </if>
+			<if test="fPolitical != null">`f_political` = #{fPolitical}, </if>
+			<if test="fEducation != null">`f_education` = #{fEducation}, </if>
+			<if test="fJobDept != null">`f_job_dept` = #{fJobDept}, </if>
+			<if test="fAge != null">`f_age` = #{fAge}, </if>
+			<if test="fEmail != null">`f_email` = #{fEmail}, </if>
+			<if test="fPhone != null">`f_phone` = #{fPhone}, </if>
+			<if test="fRsRemark != null">`f_rs_remark` = #{fRsRemark}, </if>
+			<if test="fAddress != null">`f_address` = #{fAddress}, </if>
+			<if test="fArea != null">`f_area` = #{fArea}, </if>
+			<if test="fNation != null">`f_nation` = #{fNation}, </if>
+			<if test="fGuardianship != null">`f_guardianship` = #{fGuardianship}, </if>
+			<if test="fCardno != null">`f_cardno` = #{fCardno}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_family where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_family where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

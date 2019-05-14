@@ -4,21 +4,23 @@
 <mapper namespace="com.bootdo.welcome.dao.StudentDao">
 
 	<select id="findOneById" resultType="com.bootdo.welcome.domain.StudentDO">
-		select `id`,`uv_code`,`s_code`,`s_name`,`s_sex`,`s_card`,`s_exam_num`,`s_cand_num`,`s_acad_num`,`s_enter_type` from yx_student where id = #{value}
+		select `id`,`uv_code`,`s_code`,`s_name`,`s_pinyin`,`s_sex`,`s_card`,`s_exam`,`s_cand`,`s_sh_roll`,`s_acad`,`s_enter_type` from yx_student where id = #{value}
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StudentDO">
-		select `id`,`uv_code`,`s_code`,`s_name`,`s_sex`,`s_card`,`s_exam_num`,`s_cand_num`,`s_acad_num`,`s_enter_type` from yx_student
+		select `id`,`uv_code`,`s_code`,`s_name`,`s_pinyin`,`s_sex`,`s_card`,`s_exam`,`s_cand`,`s_sh_roll`,`s_acad`,`s_enter_type` from yx_student
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
 		  		  <if test="sCode != null and sCode != ''"> and s_code = #{sCode} </if>
 		  		  <if test="sName != null and sName != ''"> and s_name = #{sName} </if>
+		  		  <if test="sPinyin != null and sPinyin != ''"> and s_pinyin = #{sPinyin} </if>
 		  		  <if test="sSex != null and sSex != ''"> and s_sex = #{sSex} </if>
 		  		  <if test="sCard != null and sCard != ''"> and s_card = #{sCard} </if>
-		  		  <if test="sExamNum != null and sExamNum != ''"> and s_exam_num = #{sExamNum} </if>
-		  		  <if test="sCandNum != null and sCandNum != ''"> and s_cand_num = #{sCandNum} </if>
-		  		  <if test="sAcadNum != null and sAcadNum != ''"> and s_acad_num = #{sAcadNum} </if>
+		  		  <if test="sExam != null and sExam != ''"> and s_exam = #{sExam} </if>
+		  		  <if test="sCand != null and sCand != ''"> and s_cand = #{sCand} </if>
+		  		  <if test="sShRoll != null and sShRoll != ''"> and s_sh_roll = #{sShRoll} </if>
+		  		  <if test="sAcad != null and sAcad != ''"> and s_acad = #{sAcad} </if>
 		  		  <if test="sEnterType != null and sEnterType != ''"> and s_enter_type = #{sEnterType} </if>
 		  		</where>
         <choose>
@@ -41,38 +43,46 @@
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
 		  		  <if test="sCode != null and sCode != ''"> and s_code = #{sCode} </if>
 		  		  <if test="sName != null and sName != ''"> and s_name = #{sName} </if>
+		  		  <if test="sPinyin != null and sPinyin != ''"> and s_pinyin = #{sPinyin} </if>
 		  		  <if test="sSex != null and sSex != ''"> and s_sex = #{sSex} </if>
 		  		  <if test="sCard != null and sCard != ''"> and s_card = #{sCard} </if>
-		  		  <if test="sExamNum != null and sExamNum != ''"> and s_exam_num = #{sExamNum} </if>
-		  		  <if test="sCandNum != null and sCandNum != ''"> and s_cand_num = #{sCandNum} </if>
-		  		  <if test="sAcadNum != null and sAcadNum != ''"> and s_acad_num = #{sAcadNum} </if>
+		  		  <if test="sExam != null and sExam != ''"> and s_exam = #{sExam} </if>
+		  		  <if test="sCand != null and sCand != ''"> and s_cand = #{sCand} </if>
+		  		  <if test="sShRoll != null and sShRoll != ''"> and s_sh_roll = #{sShRoll} </if>
+		  		  <if test="sAcad != null and sAcad != ''"> and s_acad = #{sAcad} </if>
 		  		  <if test="sEnterType != null and sEnterType != ''"> and s_enter_type = #{sEnterType} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.domain.StudentDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StudentDO">
 		insert into yx_student
 		(
+			`id`, 
 			`uv_code`, 
 			`s_code`, 
 			`s_name`, 
+			`s_pinyin`, 
 			`s_sex`, 
 			`s_card`, 
-			`s_exam_num`, 
-			`s_cand_num`, 
-			`s_acad_num`, 
+			`s_exam`, 
+			`s_cand`, 
+			`s_sh_roll`, 
+			`s_acad`, 
 			`s_enter_type`
 		)
 		values
 		(
+			#{id}, 
 			#{uvCode}, 
 			#{sCode}, 
 			#{sName}, 
+			#{sPinyin}, 
 			#{sSex}, 
 			#{sCard}, 
-			#{sExamNum}, 
-			#{sCandNum}, 
-			#{sAcadNum}, 
+			#{sExam}, 
+			#{sCand}, 
+			#{sShRoll}, 
+			#{sAcad}, 
 			#{sEnterType}
 		)
 	</insert>
@@ -83,11 +93,13 @@
 			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
 			<if test="sCode != null">`s_code` = #{sCode}, </if>
 			<if test="sName != null">`s_name` = #{sName}, </if>
+			<if test="sPinyin != null">`s_pinyin` = #{sPinyin}, </if>
 			<if test="sSex != null">`s_sex` = #{sSex}, </if>
 			<if test="sCard != null">`s_card` = #{sCard}, </if>
-			<if test="sExamNum != null">`s_exam_num` = #{sExamNum}, </if>
-			<if test="sCandNum != null">`s_cand_num` = #{sCandNum}, </if>
-			<if test="sAcadNum != null">`s_acad_num` = #{sAcadNum}, </if>
+			<if test="sExam != null">`s_exam` = #{sExam}, </if>
+			<if test="sCand != null">`s_cand` = #{sCand}, </if>
+			<if test="sShRoll != null">`s_sh_roll` = #{sShRoll}, </if>
+			<if test="sAcad != null">`s_acad` = #{sAcad}, </if>
 			<if test="sEnterType != null">`s_enter_type` = #{sEnterType}</if>
 		</set>
 		where id = #{id}

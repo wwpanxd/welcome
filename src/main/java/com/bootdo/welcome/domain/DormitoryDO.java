@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-22 11:55:53
+ * @date 2019-05-14 13:43:11
  */
 @ApiModel(value = "DormitoryDO", description = "宿舍表") 
 public class DormitoryDO implements Serializable {
@@ -53,6 +53,9 @@ public class DormitoryDO implements Serializable {
 	//归属校区ID
 	@ApiModelProperty(value = "归属校区ID")
 	private Integer bXqId;
+	//对应楼宇宿舍ID
+	@ApiModelProperty(value = "对应楼宇宿舍ID")
+	private Integer bDId;
 
 	/**
 	 * 设置：
@@ -197,5 +200,17 @@ public class DormitoryDO implements Serializable {
 	 */
 	public Integer getBXqId() {
 		return bXqId;
+	}
+	/**
+	 * 设置：对应楼宇宿舍ID
+	 */
+	public void setBDId(Integer bDId) {
+		this.bDId = bDId;
+	}
+	/**
+	 * 获取：对应楼宇宿舍ID
+	 */
+	public Integer getBDId() {
+		return bDId;
 	}
 }

@@ -6,12 +6,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 
+
 /**
  * 班级表
  * 
  * @author wwpan
  * @email wwpan.xd@163.com
- * @date 2019-04-22 11:54:52
+ * @date 2019-05-14 13:42:58
  */
 @ApiModel(value = "ClassDO", description = "班级表") 
 public class ClassDO implements Serializable {
@@ -44,6 +45,9 @@ public class ClassDO implements Serializable {
 	//班号
 	@ApiModelProperty(value = "班号")
 	private String clCode;
+	//院系表班级的ID
+	@ApiModelProperty(value = "院系表班级的ID")
+	private Long colId;
 
 	/**
 	 * 设置：
@@ -152,5 +156,17 @@ public class ClassDO implements Serializable {
 	 */
 	public String getClCode() {
 		return clCode;
+	}
+	/**
+	 * 设置：院系表班级的ID
+	 */
+	public void setColId(Long colId) {
+		this.colId = colId;
+	}
+	/**
+	 * 获取：院系表班级的ID
+	 */
+	public Long getColId() {
+		return colId;
 	}
 }

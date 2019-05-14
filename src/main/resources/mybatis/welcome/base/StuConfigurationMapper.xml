@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuConfigurationDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuConfigurationDO">
+		select `id`,`uv_code`,`c_key`,`c_value`,`c_type`,`c_order`,`c_enabled`,`c_description`,`c_must`,`c_kind`,`c_dic_code` from yx_stu_configuration where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuConfigurationDO">
+		select `id`,`uv_code`,`c_key`,`c_value`,`c_type`,`c_order`,`c_enabled`,`c_description`,`c_must`,`c_kind`,`c_dic_code` from yx_stu_configuration
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="cKey != null and cKey != ''"> and c_key = #{cKey} </if>
+		  		  <if test="cValue != null and cValue != ''"> and c_value = #{cValue} </if>
+		  		  <if test="cType != null and cType != ''"> and c_type = #{cType} </if>
+		  		  <if test="cOrder != null and cOrder != ''"> and c_order = #{cOrder} </if>
+		  		  <if test="cEnabled != null and cEnabled != ''"> and c_enabled = #{cEnabled} </if>
+		  		  <if test="cDescription != null and cDescription != ''"> and c_description = #{cDescription} </if>
+		  		  <if test="cMust != null and cMust != ''"> and c_must = #{cMust} </if>
+		  		  <if test="cKind != null and cKind != ''"> and c_kind = #{cKind} </if>
+		  		  <if test="cDicCode != null and cDicCode != ''"> and c_dic_code = #{cDicCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_configuration
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="cKey != null and cKey != ''"> and c_key = #{cKey} </if>
+		  		  <if test="cValue != null and cValue != ''"> and c_value = #{cValue} </if>
+		  		  <if test="cType != null and cType != ''"> and c_type = #{cType} </if>
+		  		  <if test="cOrder != null and cOrder != ''"> and c_order = #{cOrder} </if>
+		  		  <if test="cEnabled != null and cEnabled != ''"> and c_enabled = #{cEnabled} </if>
+		  		  <if test="cDescription != null and cDescription != ''"> and c_description = #{cDescription} </if>
+		  		  <if test="cMust != null and cMust != ''"> and c_must = #{cMust} </if>
+		  		  <if test="cKind != null and cKind != ''"> and c_kind = #{cKind} </if>
+		  		  <if test="cDicCode != null and cDicCode != ''"> and c_dic_code = #{cDicCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuConfigurationDO">
+		insert into yx_stu_configuration
+		(
+			`id`, 
+			`uv_code`, 
+			`c_key`, 
+			`c_value`, 
+			`c_type`, 
+			`c_order`, 
+			`c_enabled`, 
+			`c_description`, 
+			`c_must`, 
+			`c_kind`, 
+			`c_dic_code`
+		)
+		values
+		(
+			#{id}, 
+			#{uvCode}, 
+			#{cKey}, 
+			#{cValue}, 
+			#{cType}, 
+			#{cOrder}, 
+			#{cEnabled}, 
+			#{cDescription}, 
+			#{cMust}, 
+			#{cKind}, 
+			#{cDicCode}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuConfigurationDO">
+		update yx_stu_configuration 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="cKey != null">`c_key` = #{cKey}, </if>
+			<if test="cValue != null">`c_value` = #{cValue}, </if>
+			<if test="cType != null">`c_type` = #{cType}, </if>
+			<if test="cOrder != null">`c_order` = #{cOrder}, </if>
+			<if test="cEnabled != null">`c_enabled` = #{cEnabled}, </if>
+			<if test="cDescription != null">`c_description` = #{cDescription}, </if>
+			<if test="cMust != null">`c_must` = #{cMust}, </if>
+			<if test="cKind != null">`c_kind` = #{cKind}, </if>
+			<if test="cDicCode != null">`c_dic_code` = #{cDicCode}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_configuration where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_configuration where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

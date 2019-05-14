@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuScoreDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuScoreDO">
+		select `id`,`uv_code`,`e_subject`,`s_score`,`s_id` from yx_stu_score where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuScoreDO">
+		select `id`,`uv_code`,`e_subject`,`s_score`,`s_id` from yx_stu_score
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="eSubject != null and eSubject != ''"> and e_subject = #{eSubject} </if>
+		  		  <if test="sScore != null and sScore != ''"> and s_score = #{sScore} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_score
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="eSubject != null and eSubject != ''"> and e_subject = #{eSubject} </if>
+		  		  <if test="sScore != null and sScore != ''"> and s_score = #{sScore} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuScoreDO">
+		insert into yx_stu_score
+		(
+			`id`, 
+			`uv_code`, 
+			`e_subject`, 
+			`s_score`, 
+			`s_id`
+		)
+		values
+		(
+			#{id}, 
+			#{uvCode}, 
+			#{eSubject}, 
+			#{sScore}, 
+			#{sId}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuScoreDO">
+		update yx_stu_score 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="eSubject != null">`e_subject` = #{eSubject}, </if>
+			<if test="sScore != null">`s_score` = #{sScore}, </if>
+			<if test="sId != null">`s_id` = #{sId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_score where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_score where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

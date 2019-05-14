@@ -4,11 +4,11 @@
 <mapper namespace="com.bootdo.welcome.dao.ClassDao">
 
 	<select id="findOneById" resultType="com.bootdo.welcome.domain.ClassDO">
-		select `id`,`uv_code`,`cl_name`,`cl_zy`,`cl_yx`,`cl_xq`,`cl_nj`,`u_id`,`cl_code` from yx_class where id = #{value}
+		select `id`,`uv_code`,`cl_name`,`cl_zy`,`cl_yx`,`cl_xq`,`cl_nj`,`u_id`,`cl_code`,`col_id` from yx_class where id = #{value}
 	</select>
 
 	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.ClassDO">
-		select `id`,`uv_code`,`cl_name`,`cl_zy`,`cl_yx`,`cl_xq`,`cl_nj`,`u_id`,`cl_code` from yx_class
+		select `id`,`uv_code`,`cl_name`,`cl_zy`,`cl_yx`,`cl_xq`,`cl_nj`,`u_id`,`cl_code`,`col_id` from yx_class
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
@@ -19,6 +19,7 @@
 		  		  <if test="clNj != null and clNj != ''"> and cl_nj = #{clNj} </if>
 		  		  <if test="uId != null and uId != ''"> and u_id = #{uId} </if>
 		  		  <if test="clCode != null and clCode != ''"> and cl_code = #{clCode} </if>
+		  		  <if test="colId != null and colId != ''"> and col_id = #{colId} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -45,12 +46,14 @@
 		  		  <if test="clNj != null and clNj != ''"> and cl_nj = #{clNj} </if>
 		  		  <if test="uId != null and uId != ''"> and u_id = #{uId} </if>
 		  		  <if test="clCode != null and clCode != ''"> and cl_code = #{clCode} </if>
+		  		  <if test="colId != null and colId != ''"> and col_id = #{colId} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.welcome.domain.ClassDO" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="com.bootdo.welcome.domain.ClassDO">
 		insert into yx_class
 		(
+			`id`, 
 			`uv_code`, 
 			`cl_name`, 
 			`cl_zy`, 
@@ -58,10 +61,12 @@
 			`cl_xq`, 
 			`cl_nj`, 
 			`u_id`, 
-			`cl_code`
+			`cl_code`, 
+			`col_id`
 		)
 		values
 		(
+			#{id}, 
 			#{uvCode}, 
 			#{clName}, 
 			#{clZy}, 
@@ -69,7 +74,8 @@
 			#{clXq}, 
 			#{clNj}, 
 			#{uId}, 
-			#{clCode}
+			#{clCode}, 
+			#{colId}
 		)
 	</insert>
 	 
@@ -83,7 +89,8 @@
 			<if test="clXq != null">`cl_xq` = #{clXq}, </if>
 			<if test="clNj != null">`cl_nj` = #{clNj}, </if>
 			<if test="uId != null">`u_id` = #{uId}, </if>
-			<if test="clCode != null">`cl_code` = #{clCode}</if>
+			<if test="clCode != null">`cl_code` = #{clCode}, </if>
+			<if test="colId != null">`col_id` = #{colId}</if>
 		</set>
 		where id = #{id}
 	</update>

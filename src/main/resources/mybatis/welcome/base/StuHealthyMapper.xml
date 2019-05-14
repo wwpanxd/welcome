@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.welcome.dao.StuHealthyDao">
+
+	<select id="findOneById" resultType="com.bootdo.welcome.domain.StuHealthyDO">
+		select `id`,`uv_code`,`s_id`,`s_smoking`,`s_disease`,`s_physical`,`s_faint`,`s_genetic`,`s_status`,`s_sports`,`s_vaccine`,`s_mark` from yx_stu_healthy where id = #{value}
+	</select>
+
+	<select id="findPageListByMap" resultType="com.bootdo.welcome.domain.StuHealthyDO">
+		select `id`,`uv_code`,`s_id`,`s_smoking`,`s_disease`,`s_physical`,`s_faint`,`s_genetic`,`s_status`,`s_sports`,`s_vaccine`,`s_mark` from yx_stu_healthy
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="sSmoking != null and sSmoking != ''"> and s_smoking = #{sSmoking} </if>
+		  		  <if test="sDisease != null and sDisease != ''"> and s_disease = #{sDisease} </if>
+		  		  <if test="sPhysical != null and sPhysical != ''"> and s_physical = #{sPhysical} </if>
+		  		  <if test="sFaint != null and sFaint != ''"> and s_faint = #{sFaint} </if>
+		  		  <if test="sGenetic != null and sGenetic != ''"> and s_genetic = #{sGenetic} </if>
+		  		  <if test="sStatus != null and sStatus != ''"> and s_status = #{sStatus} </if>
+		  		  <if test="sSports != null and sSports != ''"> and s_sports = #{sSports} </if>
+		  		  <if test="sVaccine != null and sVaccine != ''"> and s_vaccine = #{sVaccine} </if>
+		  		  <if test="sMark != null and sMark != ''"> and s_mark = #{sMark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="countByMap" resultType="int">
+		select count(*) from yx_stu_healthy
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uvCode != null and uvCode != ''"> and uv_code = #{uvCode} </if>
+		  		  <if test="sId != null and sId != ''"> and s_id = #{sId} </if>
+		  		  <if test="sSmoking != null and sSmoking != ''"> and s_smoking = #{sSmoking} </if>
+		  		  <if test="sDisease != null and sDisease != ''"> and s_disease = #{sDisease} </if>
+		  		  <if test="sPhysical != null and sPhysical != ''"> and s_physical = #{sPhysical} </if>
+		  		  <if test="sFaint != null and sFaint != ''"> and s_faint = #{sFaint} </if>
+		  		  <if test="sGenetic != null and sGenetic != ''"> and s_genetic = #{sGenetic} </if>
+		  		  <if test="sStatus != null and sStatus != ''"> and s_status = #{sStatus} </if>
+		  		  <if test="sSports != null and sSports != ''"> and s_sports = #{sSports} </if>
+		  		  <if test="sVaccine != null and sVaccine != ''"> and s_vaccine = #{sVaccine} </if>
+		  		  <if test="sMark != null and sMark != ''"> and s_mark = #{sMark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.welcome.domain.StuHealthyDO">
+		insert into yx_stu_healthy
+		(
+			`id`, 
+			`uv_code`, 
+			`s_id`, 
+			`s_smoking`, 
+			`s_disease`, 
+			`s_physical`, 
+			`s_faint`, 
+			`s_genetic`, 
+			`s_status`, 
+			`s_sports`, 
+			`s_vaccine`, 
+			`s_mark`
+		)
+		values
+		(
+			#{id}, 
+			#{uvCode}, 
+			#{sId}, 
+			#{sSmoking}, 
+			#{sDisease}, 
+			#{sPhysical}, 
+			#{sFaint}, 
+			#{sGenetic}, 
+			#{sStatus}, 
+			#{sSports}, 
+			#{sVaccine}, 
+			#{sMark}
+		)
+	</insert>
+	 
+	<update id="updateById" parameterType="com.bootdo.welcome.domain.StuHealthyDO">
+		update yx_stu_healthy 
+		<set>
+			<if test="uvCode != null">`uv_code` = #{uvCode}, </if>
+			<if test="sId != null">`s_id` = #{sId}, </if>
+			<if test="sSmoking != null">`s_smoking` = #{sSmoking}, </if>
+			<if test="sDisease != null">`s_disease` = #{sDisease}, </if>
+			<if test="sPhysical != null">`s_physical` = #{sPhysical}, </if>
+			<if test="sFaint != null">`s_faint` = #{sFaint}, </if>
+			<if test="sGenetic != null">`s_genetic` = #{sGenetic}, </if>
+			<if test="sStatus != null">`s_status` = #{sStatus}, </if>
+			<if test="sSports != null">`s_sports` = #{sSports}, </if>
+			<if test="sVaccine != null">`s_vaccine` = #{sVaccine}, </if>
+			<if test="sMark != null">`s_mark` = #{sMark}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="removeById">
+		delete from yx_stu_healthy where id = #{value}
+	</delete>
+	
+	<delete id="batchRemoveByIds">
+		delete from yx_stu_healthy where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
